@@ -78,7 +78,7 @@ const Adopt = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-orange-50 to-blue-100">
+    <div className="min-h-screen bg-gradient-to-br from-pawket-light via-pawket-neutral to-white">
       {/* Header */}
       <div className="p-6">
         <Button
@@ -91,7 +91,7 @@ const Adopt = () => {
         </Button>
         
         <div className="text-center">
-          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent mb-2">
+          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pawket-primary to-pawket-accent bg-clip-text text-transparent mb-2">
             Adopt a Pet
           </h1>
           <p className="text-gray-600 text-lg">Find your perfect companion in Bangladesh</p>
@@ -102,13 +102,13 @@ const Adopt = () => {
       <div className="px-4 sm:px-6 lg:px-8 pb-8">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pets.map((pet) => (
-            <Card key={pet.id} className="bg-white/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            <Card key={pet.id} className="bg-white/80 backdrop-blur-sm border-pawket-neutral shadow-xl hover:shadow-2xl transition-shadow duration-300">
               <CardHeader className="text-center">
                 <div className="flex justify-center mb-3">
                   {pet.type === "dog" ? (
-                    <Dog size={40} className="text-orange-500" />
+                    <Dog size={40} className="text-pawket-accent" />
                   ) : (
-                    <Cat size={40} className="text-blue-500" />
+                    <Cat size={40} className="text-pawket-primary" />
                   )}
                 </div>
                 <CardTitle className="text-xl font-bold text-gray-800">
@@ -121,7 +121,7 @@ const Adopt = () => {
               
               <CardContent className="space-y-4">
                 <div className="flex items-center text-gray-600 text-sm">
-                  <MapPin size={16} className="mr-2 text-orange-500" />
+                  <MapPin size={16} className="mr-2 text-pawket-accent" />
                   {pet.location}
                 </div>
                 
@@ -135,7 +135,7 @@ const Adopt = () => {
                 
                 <Button 
                   onClick={handleContactOwner}
-                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-lg"
+                  className="w-full bg-gradient-to-r from-pawket-accent to-pawket-primary hover:from-pawket-primary hover:to-pawket-accent text-white font-semibold rounded-lg"
                 >
                   Contact Owner
                 </Button>
@@ -159,7 +159,7 @@ const Adopt = () => {
           <div className="flex justify-center pt-4">
             <Button 
               onClick={() => setShowLoginModal(false)}
-              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white"
+              className="bg-gradient-to-r from-pawket-accent to-pawket-primary hover:from-pawket-primary hover:to-pawket-accent text-white"
             >
               Understood
             </Button>

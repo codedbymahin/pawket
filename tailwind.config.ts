@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Custom Pawket colors
+				'pawket-primary': 'hsl(var(--pawket-primary))',
+				'pawket-neutral': 'hsl(var(--pawket-neutral))',
+				'pawket-accent': 'hsl(var(--pawket-accent))',
+				'pawket-light': 'hsl(var(--pawket-light))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

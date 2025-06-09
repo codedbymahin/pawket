@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -22,33 +23,33 @@ const Dashboard = () => {
       id: "adopt",
       title: "Adopt a Pet",
       description: "Find your perfect companion",
-      icon: <Dog size={32} className="text-orange-500" />,
-      bgColor: "bg-orange-50",
-      borderColor: "border-orange-200"
+      icon: <Dog size={32} className="text-pawket-accent" />,
+      bgColor: "bg-pawket-light",
+      borderColor: "border-pawket-neutral"
     },
     {
       id: "sharing",
       title: "Pet Sharing",
       description: "Share care with neighbors",
-      icon: <PawPrint size={32} className="text-blue-500" />,
-      bgColor: "bg-blue-50",
-      borderColor: "border-blue-200"
+      icon: <PawPrint size={32} className="text-pawket-primary" />,
+      bgColor: "bg-pawket-light",
+      borderColor: "border-pawket-neutral"
     },
     {
       id: "vet",
       title: "Virtual Vet",
       description: "Online veterinary care",
-      icon: <Cat size={32} className="text-green-500" />,
-      bgColor: "bg-green-50",
-      borderColor: "border-green-200"
+      icon: <Cat size={32} className="text-pawket-accent" />,
+      bgColor: "bg-pawket-light",
+      borderColor: "border-pawket-neutral"
     },
     {
       id: "shop",
       title: "Pet Shop",
       description: "Food, toys & accessories",
-      icon: <ShoppingCart size={32} className="text-purple-500" />,
-      bgColor: "bg-purple-50",
-      borderColor: "border-purple-200"
+      icon: <ShoppingCart size={32} className="text-pawket-primary" />,
+      bgColor: "bg-pawket-light",
+      borderColor: "border-pawket-neutral"
     },
     {
       id: "emergency",
@@ -69,14 +70,14 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-orange-50 to-blue-100">
+    <div className="min-h-screen bg-gradient-to-br from-pawket-light via-pawket-neutral to-white">
       {/* Header */}
       <div className="p-6 text-center">
         <div className="flex items-center justify-center space-x-3 mb-4">
-          <div className="bg-gradient-to-br from-orange-400 to-orange-500 p-2 rounded-full shadow-lg">
+          <div className="bg-gradient-to-br from-pawket-primary to-pawket-accent p-2 rounded-full shadow-lg">
             <PawPrint size={24} className="text-white" />
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pawket-primary to-pawket-accent bg-clip-text text-transparent">
             Pawket Dashboard
           </h1>
         </div>
@@ -105,7 +106,7 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent className="pt-0">
                 <Button 
-                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-lg"
+                  className="w-full bg-gradient-to-r from-pawket-accent to-pawket-primary hover:from-pawket-primary hover:to-pawket-accent text-white font-semibold rounded-lg"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleFeatureClick(feature.id);
@@ -133,7 +134,7 @@ const Dashboard = () => {
           <div className="flex justify-center pt-4">
             <Button 
               onClick={() => setShowComingSoonModal(false)}
-              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white"
+              className="bg-gradient-to-r from-pawket-accent to-pawket-primary hover:from-pawket-primary hover:to-pawket-accent text-white"
             >
               Got it!
             </Button>
