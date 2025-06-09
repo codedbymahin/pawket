@@ -67,7 +67,11 @@ export default {
 				'pawket-primary': 'hsl(var(--pawket-primary))',
 				'pawket-neutral': 'hsl(var(--pawket-neutral))',
 				'pawket-accent': 'hsl(var(--pawket-accent))',
-				'pawket-light': 'hsl(var(--pawket-light))'
+				'pawket-light': 'hsl(var(--pawket-light))',
+				// Cream colors for warm pet-friendly design
+				'cream-50': 'hsl(var(--cream-50))',
+				'cream-100': 'hsl(var(--cream-100))',
+				'cream-200': 'hsl(var(--cream-200))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

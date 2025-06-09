@@ -53,6 +53,11 @@
     --pawket-neutral: 220 9% 87%; /* #DEDEE0 */
     --pawket-accent: 50 81% 59%; /* #E9CD45 */
     --pawket-light: 0 0% 98%; /* #F9FAFB */
+    
+    /* Additional warm colors for pet-friendly design */
+    --cream-50: 40 100% 97%;
+    --cream-100: 40 46% 92%;
+    --cream-200: 40 40% 84%;
   }
 
   .dark {
