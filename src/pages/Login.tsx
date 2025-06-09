@@ -12,9 +12,8 @@ const Login = () => {
   };
 
   const handleGuestLogin = () => {
-    // Navigate to dashboard or main app area
     console.log("Logging in as guest...");
-    // navigate("/dashboard"); // Uncomment when dashboard is ready
+    navigate("/dashboard");
   };
 
   return (
