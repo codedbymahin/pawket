@@ -1,8 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { PawPrint, Dog, Cat, ShoppingCart, Emergency } from "lucide-react";
+import { PawPrint, Dog, Cat, ShoppingCart, Siren } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -55,7 +54,7 @@ const Dashboard = () => {
       id: "emergency",
       title: "Emergency",
       description: "24/7 urgent pet care",
-      icon: <Emergency size={32} className="text-red-500" />,
+      icon: <Siren size={32} className="text-red-500" />,
       bgColor: "bg-red-50",
       borderColor: "border-red-200"
     },
