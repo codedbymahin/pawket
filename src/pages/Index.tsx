@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -78,85 +77,76 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pawket-light via-white to-pawket-neutral font-sans">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 sm:px-8 lg:px-12 overflow-hidden bg-gradient-to-br from-pawket-light/80 via-white to-pawket-neutral/60">
-        {/* Enhanced decorative paw prints */}
-        <div className="absolute inset-0 opacity-8">
-          <div className="absolute top-20 left-10 animate-pulse">
-            <PawPrint size={48} className="text-pawket-accent/30 rotate-12" />
+      {/* Updated Hero Section */}
+      <section className="relative bg-gradient-to-br from-blue-50 via-pawket-light/60 to-white py-16 px-6 sm:px-8 lg:px-12">
+        {/* Decorative paw prints for background */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-8 right-12 animate-pulse">
+            <PawPrint size={32} className="text-pawket-primary/40 rotate-12" />
           </div>
-          <div className="absolute top-40 right-16 animate-pulse delay-1000">
-            <PawPrint size={40} className="text-pawket-primary/30 -rotate-12" />
+          <div className="absolute top-20 right-24 animate-pulse delay-500">
+            <PawPrint size={28} className="text-pawket-accent/40 -rotate-12" />
           </div>
-          <div className="absolute bottom-32 left-20 animate-pulse delay-500">
-            <PawPrint size={44} className="text-pawket-accent/25 rotate-45" />
-          </div>
-          <div className="absolute bottom-20 right-10 animate-pulse delay-700">
-            <PawPrint size={36} className="text-pawket-primary/25 -rotate-45" />
-          </div>
-          <div className="absolute top-1/2 left-1/4 animate-pulse delay-300">
-            <PawPrint size={32} className="text-pawket-accent/20 rotate-90" />
-          </div>
-          <div className="absolute top-1/3 right-1/3 animate-pulse delay-1200">
-            <PawPrint size={28} className="text-pawket-primary/20 -rotate-90" />
+          <div className="absolute bottom-8 right-16 animate-pulse delay-1000">
+            <PawPrint size={36} className="text-pawket-primary/30 rotate-45" />
           </div>
         </div>
 
-        {/* Main content */}
-        <div className="relative z-10 text-center max-w-5xl mx-auto space-y-10 animate-fade-in">
-          {/* App name with paw icon */}
-          <div className="flex items-center justify-center space-x-4 mb-6">
-            <div className="bg-gradient-to-br from-pawket-primary to-pawket-accent p-4 rounded-full shadow-xl border-4 border-white/30">
-              <PawPrint size={40} className="text-white" />
+        {/* Main content aligned to left */}
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="max-w-2xl space-y-8">
+            {/* App name with paw icon */}
+            <div className="flex items-center space-x-4">
+              <div className="bg-gradient-to-br from-pawket-primary to-pawket-accent p-3 rounded-full shadow-lg border-2 border-white/30">
+                <PawPrint size={32} className="text-white" />
+              </div>
+              <div className="flex items-baseline space-x-3">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#00AEEF] tracking-tight">
+                  Pawket
+                </h1>
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-light text-gray-500 italic">
+                  (Demo)
+                </span>
+              </div>
             </div>
-            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-pawket-primary via-pawket-accent to-pawket-primary bg-clip-text text-transparent tracking-tight">
-              Pawket
-            </h1>
-            <span className="text-3xl sm:text-4xl lg:text-5xl font-light text-gray-500 mt-3 italic">
-              (Demo)
-            </span>
-          </div>
 
-          {/* Tagline */}
-          <div className="space-y-3">
-            <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-700 leading-relaxed tracking-wide">
-              Bangladesh's First All-in-one Pet Solution
-            </p>
-            <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-700 italic">
-              in Your Pocket
-            </p>
-          </div>
+            {/* Tagline */}
+            <div className="space-y-2">
+              <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-700 leading-relaxed">
+                Bangladesh's First All-in-one Pet Solution
+              </p>
+              <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-700 italic">
+                in Your Pocket
+              </p>
+            </div>
 
-          {/* Description */}
-          <div className="max-w-4xl mx-auto">
-            <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed font-normal">
-              Now available in Dhaka, Mymensingh, Sylhet, and more! Pawket offers pet sharing, adoption, virtual vet care, and a full pet shop — all in one simple platform.
-            </p>
-          </div>
+            {/* Description */}
+            <div className="max-w-xl">
+              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
+                Now available in Dhaka, Mymensingh, Sylhet, and more! Pawket offers pet sharing, adoption, virtual vet care, and a full pet shop — all in one simple platform.
+              </p>
+            </div>
 
-          {/* Enhanced Get Started Button */}
-          <div className="pt-10">
-            <Button
-              onClick={handleGetStarted}
-              size="lg"
-              className="px-12 py-6 text-xl sm:text-2xl bg-gradient-to-r from-pawket-accent to-amber-400 hover:from-amber-400 hover:to-pawket-accent text-gray-800 font-bold rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 border-0 hover:rotate-1"
-            >
-              <PawPrint size={28} className="mr-3" />
-              Get Started
-            </Button>
+            {/* Get Started Button */}
+            <div className="pt-4">
+              <Button
+                onClick={handleGetStarted}
+                size="lg"
+                className="px-12 py-6 text-xl bg-gradient-to-r from-pawket-accent to-amber-400 hover:from-amber-400 hover:to-pawket-accent text-gray-800 font-bold rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 border-0"
+              >
+                <PawPrint size={24} className="mr-3" />
+                Get Started
+              </Button>
+            </div>
           </div>
         </div>
 
-        {/* Enhanced scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="bg-white/80 backdrop-blur-sm rounded-full p-3 shadow-lg">
-            <ChevronDown size={36} className="text-pawket-primary" />
+        {/* Scroll indicator */}
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="bg-white/80 backdrop-blur-sm rounded-full p-2 shadow-lg">
+            <ChevronDown size={28} className="text-pawket-primary" />
           </div>
         </div>
-
-        {/* Enhanced background decorative gradient circles */}
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-to-br from-pawket-accent/15 to-transparent rounded-full blur-3xl opacity-40 -translate-x-60 -translate-y-60"></div>
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-tl from-pawket-primary/15 to-transparent rounded-full blur-3xl opacity-40 translate-x-60 translate-y-60"></div>
       </section>
 
       {/* What We Offer Section */}
