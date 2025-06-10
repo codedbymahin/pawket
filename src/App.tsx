@@ -11,6 +11,7 @@ import Adopt from "./pages/Adopt";
 import Sharing from "./pages/Sharing";
 import Vet from "./pages/Vet";
 import Shop from "./pages/Shop";
+import LostFound from "./pages/LostFound";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/sharing" element={<Sharing />} />
           <Route path="/vet" element={<Vet />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/lost-found" element={<LostFound />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

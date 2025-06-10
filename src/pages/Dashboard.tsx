@@ -1,9 +1,8 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { PawPrint, Dog, Cat, Search, ShoppingBag, Heart, AlertTriangle, UserRound } from "lucide-react";
+import { PawPrint, Dog, Cat, Search, ShoppingBag, Heart, AlertTriangle, UserRound, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -17,6 +16,10 @@ const Dashboard = () => {
     } else {
       navigate(`/${feature}`);
     }
+  };
+
+  const handleBackToHome = () => {
+    navigate("/");
   };
 
   const features = [
@@ -117,8 +120,17 @@ const Dashboard = () => {
     <div className="min-h-screen" style={{ backgroundColor: '#FAF3E0' }}>
       {/* Header Section */}
       <div className="px-4 sm:px-6 lg:px-8 pt-6 pb-4">
-        {/* Guest Badge */}
-        <div className="flex justify-end mb-4">
+        {/* Top row with Back button and Guest badge */}
+        <div className="flex justify-between items-center mb-4">
+          <Button
+            variant="ghost"
+            onClick={handleBackToHome}
+            className="text-gray-600 hover:text-gray-800"
+          >
+            <ArrowLeft size={20} className="mr-2" />
+            Back to Home
+          </Button>
+          
           <Badge variant="outline" className="bg-white/90 backdrop-blur-sm border-gray-300 text-gray-600 shadow-sm px-4 py-2">
             👤 Guest Mode
           </Badge>
