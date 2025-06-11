@@ -11,7 +11,7 @@ const VetProfile = () => {
   const { id } = useParams();
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  // Mock vet data
+  // Complete vet data for all 6 listings
   const vetData: { [key: string]: any } = {
     "1": {
       name: "Dr. Mahmuda Islam",
@@ -53,6 +53,48 @@ const VetProfile = () => {
       qualifications: "DVM, Diploma in Veterinary Dermatology",
       specializations: ["Skin Allergies", "Fungal Infections", "Parasitic Treatment", "Grooming Advice"],
       contactMethod: "Video Call with photo sharing",
+      photo: "👩‍⚕️"
+    },
+    "4": {
+      name: "Dr. Habibur Rahman",
+      specialty: "Emergency Care",
+      location: "Sylhet",
+      experience: "10 years",
+      rating: 4.9,
+      consultation: "৳1000",
+      availability: "24/7 Emergency",
+      description: "Dr. Habibur is available for urgent pet medical emergencies around the clock. He has extensive experience in critical care and emergency procedures.",
+      qualifications: "DVM, Emergency Medicine Certification from Dhaka University",
+      specializations: ["Emergency Surgery", "Critical Care", "Trauma Treatment", "Poison Control"],
+      contactMethod: "Emergency hotline / Video consultation",
+      photo: "👨‍⚕️"
+    },
+    "5": {
+      name: "Dr. Nasir Ahmed",
+      specialty: "Pet Nutrition",
+      location: "Chittagong",
+      experience: "5 years",
+      rating: 4.6,
+      consultation: "৳500",
+      availability: "Thu-Sun 11AM-4PM",
+      description: "Dr. Nasir is an expert in pet diet and nutritional planning. He helps pet owners create balanced meal plans for optimal health and weight management.",
+      qualifications: "DVM, Diploma in Animal Nutrition from Bangladesh Agricultural University",
+      specializations: ["Diet Planning", "Weight Management", "Nutritional Supplements", "Food Allergies"],
+      contactMethod: "Video consultation with diet chart sharing",
+      photo: "👨‍⚕️"
+    },
+    "6": {
+      name: "Dr. Salma Begum",
+      specialty: "Behavioral Therapy",
+      location: "Rangpur",
+      experience: "7 years",
+      rating: 4.8,
+      consultation: "৳700",
+      availability: "Mon-Fri 3PM-7PM",
+      description: "Dr. Salma specializes in pet behavioral issues and training. She helps pet owners understand and modify problematic behaviors through positive reinforcement techniques.",
+      qualifications: "DVM, Certified Animal Behaviorist from International Association of Animal Behavior",
+      specializations: ["Behavioral Training", "Anxiety Treatment", "Aggression Management", "Socialization"],
+      contactMethod: "Video consultation with training demonstrations",
       photo: "👩‍⚕️"
     }
   };

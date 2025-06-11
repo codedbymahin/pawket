@@ -12,9 +12,9 @@ const PetProfile = () => {
   const { id, type } = useParams();
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  // Mock data for different pet types
+  // Complete pet data for all listings
   const petData: { [key: string]: any } = {
-    // Adoption pets
+    // Adoption pets (1-6)
     "adopt-1": {
       name: "Buddy",
       type: "Golden Retriever",
@@ -39,7 +39,55 @@ const PetProfile = () => {
       listingType: "Adoption",
       photo: "🐱"
     },
-    // Sharing pets
+    "adopt-3": {
+      name: "Rocky",
+      type: "German Shepherd",
+      age: "3 years",
+      location: "Mymensingh",
+      owner: "Rashed Ahmed",
+      datePosted: "3 days ago",
+      description: "Rocky is a loyal guard dog who is well-trained and great with families. He needs an experienced owner who can provide him with plenty of exercise and mental stimulation.",
+      status: "Available",
+      listingType: "Adoption",
+      photo: "🐕‍🦺"
+    },
+    "adopt-4": {
+      name: "Whiskers",
+      type: "Bengali Cat",
+      age: "6 months",
+      location: "Sylhet",
+      owner: "Nazma Begum",
+      datePosted: "4 days ago",
+      description: "Whiskers is a playful kitten who loves to explore and climb. She's very social and would do well in a home with other cats or as the center of attention.",
+      status: "Available",
+      listingType: "Adoption",
+      photo: "🐈"
+    },
+    "adopt-5": {
+      name: "Max",
+      type: "Labrador Mix",
+      age: "4 years",
+      location: "Chittagong",
+      owner: "Karim Rahman",
+      datePosted: "5 days ago",
+      description: "Max is an active and loving dog who makes a great running partner. He's house-trained, good with children, and loves outdoor activities.",
+      status: "Available",
+      listingType: "Adoption",
+      photo: "🐕"
+    },
+    "adopt-6": {
+      name: "Luna",
+      type: "Siamese Cat",
+      age: "2 years",
+      location: "Rangpur",
+      owner: "Salma Khatun",
+      datePosted: "6 days ago",
+      description: "Luna is an elegant and intelligent Siamese cat who loves attention and interaction. She's very vocal and will let you know exactly what she thinks about everything.",
+      status: "Available",
+      listingType: "Adoption",
+      photo: "🐱"
+    },
+    // Sharing pets (1-6)
     "sharing-1": {
       name: "Charlie",
       type: "Beagle",
@@ -64,7 +112,55 @@ const PetProfile = () => {
       listingType: "Sharing",
       photo: "🐱"
     },
-    // Lost & Found pets
+    "sharing-3": {
+      name: "Daisy",
+      type: "Golden Retriever Puppy",
+      age: "8 months",
+      location: "Mymensingh",
+      owner: "Sadia Rahman",
+      datePosted: "2 days ago",
+      description: "Daisy is an energetic puppy who needs someone to care for her during morning hours while her owner works early shifts. She's playful and loves attention.",
+      status: "Available",
+      listingType: "Sharing",
+      photo: "🐶"
+    },
+    "sharing-4": {
+      name: "Tiger",
+      type: "German Shepherd",
+      age: "5 years",
+      location: "Sylhet",
+      owner: "Aminul Islam",
+      datePosted: "3 days ago",
+      description: "Tiger is a well-trained German Shepherd who needs help with evening walks due to his owner's mobility issues. He's gentle and obedient.",
+      status: "Available",
+      listingType: "Sharing",
+      photo: "🐕‍🦺"
+    },
+    "sharing-5": {
+      name: "Mittens",
+      type: "Persian Mix",
+      age: "3 years",
+      location: "Chittagong",
+      owner: "Nasreen Sultana",
+      datePosted: "4 days ago",
+      description: "Mittens is a calm cat who needs daily playtime and companionship while her owner works long hours. She's affectionate and enjoys quiet company.",
+      status: "Temporarily Shared",
+      listingType: "Sharing",
+      photo: "🐱"
+    },
+    "sharing-6": {
+      name: "Bruno",
+      type: "Labrador",
+      age: "6 years",
+      location: "Comilla",
+      owner: "Rafiq Ahmed",
+      datePosted: "5 days ago",
+      description: "Bruno needs weekend care while his owner travels to the village. He's calm, house-trained, and enjoys relaxing walks around the neighborhood.",
+      status: "Available",
+      listingType: "Sharing",
+      photo: "🐕"
+    },
+    // Lost & Found pets (1-6)
     "lost-1": {
       name: "Tommy",
       type: "Golden Retriever",
@@ -88,6 +184,54 @@ const PetProfile = () => {
       status: "Found",
       listingType: "Found",
       photo: "🐱"
+    },
+    "lost-3": {
+      name: "Buddy",
+      type: "German Shepherd",
+      age: "4 years",
+      location: "Chittagong Port Area",
+      owner: "Fatima Begum",
+      datePosted: "5 days ago",
+      description: "Large brown and black German Shepherd, very protective. Missing since last Friday evening from the port area. He may be scared and hiding.",
+      status: "Lost",
+      listingType: "Lost",
+      photo: "🐕‍🦺"
+    },
+    "lost-4": {
+      name: "Whiskers",
+      type: "Street Cat",
+      age: "2 years",
+      location: "Sylhet Zindabazar",
+      owner: "Hassan Ali",
+      datePosted: "3 days ago",
+      description: "Orange tabby cat, appears to be well-cared for. Found near the market area, very friendly and seems to be looking for someone. No collar but appears domesticated.",
+      status: "Found",
+      listingType: "Found",
+      photo: "🐈"
+    },
+    "lost-5": {
+      name: "Bella",
+      type: "Labrador Mix",
+      age: "6 years",
+      location: "Uttara Sector 7",
+      owner: "Nasir Uddin",
+      datePosted: "1 week ago",
+      description: "Black and white Labrador mix, very energetic. She loves children and is missed dearly by our family. Last seen playing in Sector 7 park area.",
+      status: "Lost",
+      listingType: "Lost",
+      photo: "🐶"
+    },
+    "lost-6": {
+      name: "Shadow",
+      type: "British Shorthair",
+      age: "4 years",
+      location: "Gulshan 2",
+      owner: "Salma Rahman",
+      datePosted: "4 days ago",
+      description: "Gray British Shorthair with green eyes, indoor cat who accidentally escaped. Very timid with strangers, may be hiding in quiet places like garages or basements.",
+      status: "Lost",
+      listingType: "Lost",
+      photo: "🐾"
     }
   };
 

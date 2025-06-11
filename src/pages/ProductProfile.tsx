@@ -12,7 +12,7 @@ const ProductProfile = () => {
   const { id } = useParams();
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  // Mock product data
+  // Complete product data for all 8 shop listings
   const productData: { [key: string]: any } = {
     "1": {
       name: "Premium Dog Food",
@@ -58,6 +58,82 @@ const ProductProfile = () => {
       colors: ["Red", "Blue", "Black", "Pink"],
       deliveryNote: "Delivery within 2-3 days in major cities",
       features: ["Adjustable Size", "Comfortable Padding", "Reflective Strip", "Strong Buckle"]
+    },
+    "4": {
+      name: "Cat Wet Food Variety",
+      brand: "Whiskas",
+      category: "Food",
+      price: "৳450",
+      originalPrice: "৳500",
+      rating: 4.9,
+      description: "12-pack wet food variety for cats with different flavors including chicken, beef, and fish. Made with real meat and gravy that cats love.",
+      inStock: false,
+      image: "🥘",
+      varieties: ["Chicken", "Beef", "Fish", "Mixed"],
+      ingredients: "Real Meat, Gravy, Vitamins, Minerals",
+      deliveryNote: "Currently out of stock - expected restock in 1 week",
+      features: ["Real Meat", "High Protein", "Multiple Flavors", "Gravy Based"]
+    },
+    "5": {
+      name: "Pet Grooming Kit",
+      brand: "FurCare",
+      category: "Grooming",
+      price: "৳1,800",
+      originalPrice: "৳2,200",
+      rating: 4.5,
+      description: "Complete grooming set with brush, nail clipper, shampoo, and towel. Everything you need to keep your pet clean and well-groomed at home.",
+      inStock: true,
+      image: "✂️",
+      includes: ["Slicker Brush", "Nail Clipper", "Pet Shampoo", "Microfiber Towel", "Comb"],
+      deliveryNote: "Free delivery within Dhaka metro area",
+      features: ["Complete Kit", "Professional Quality", "Easy to Use", "Suitable for All Pets"]
+    },
+    "6": {
+      name: "Interactive Cat Toy",
+      brand: "PlayPet",
+      category: "Toys",
+      price: "৳650",
+      originalPrice: "৳750",
+      rating: 4.4,
+      description: "Electronic toy mouse with motion sensor that moves randomly to keep cats engaged and active. Helps with exercise and mental stimulation.",
+      inStock: true,
+      image: "🐭",
+      batteryLife: "30+ hours continuous play",
+      materials: "Safe, non-toxic plastic and fabric",
+      deliveryNote: "Delivery within 3-5 days nationwide",
+      features: ["Motion Sensor", "Random Movement", "Safe Materials", "Long Battery Life"]
+    },
+    "7": {
+      name: "Dog Training Treats",
+      brand: "GoodBoy",
+      category: "Food",
+      price: "৳300",
+      originalPrice: "৳350",
+      rating: 4.7,
+      description: "Healthy training treats in chicken flavor, perfect for positive reinforcement training. Small bite-sized pieces ideal for frequent rewards.",
+      inStock: true,
+      image: "🦴",
+      weight: "500g",
+      flavors: ["Chicken", "Beef", "Lamb"],
+      ingredients: "Real Chicken, Rice, Natural Preservatives",
+      deliveryNote: "Same day delivery available in Dhaka",
+      features: ["Low Calorie", "High Protein", "Small Size", "Training Perfect"]
+    },
+    "8": {
+      name: "Pet Carrier Bag",
+      brand: "TravelPet",
+      category: "Accessories",
+      price: "৳2,200",
+      originalPrice: "৳2,800",
+      rating: 4.8,
+      description: "Comfortable travel carrier for small to medium pets with mesh windows for ventilation. Perfect for vet visits, travel, and outdoor adventures.",
+      inStock: true,
+      image: "🎒",
+      sizes: ["Small (up to 5kg)", "Medium (up to 10kg)"],
+      dimensions: "Small: 40x25x25cm, Medium: 50x30x30cm",
+      colors: ["Navy Blue", "Gray", "Pink"],
+      deliveryNote: "Free delivery and assembly within Dhaka",
+      features: ["Mesh Windows", "Comfortable Padding", "Secure Zippers", "Shoulder Strap"]
     }
   };
 
@@ -181,6 +257,33 @@ const ProductProfile = () => {
                   </div>
                 )}
                 
+                {product.varieties && (
+                  <div>
+                    <h3 className="text-xl font-bold mb-3 text-gray-800">Available Varieties</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {product.varieties.map((variety: string, index: number) => (
+                        <span key={index} className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
+                          {variety}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                {product.includes && (
+                  <div>
+                    <h3 className="text-xl font-bold mb-3 text-gray-800">Kit Includes</h3>
+                    <div className="grid grid-cols-1 gap-1">
+                      {product.includes.map((item: string, index: number) => (
+                        <div key={index} className="flex items-center text-gray-700">
+                          <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
                 {product.ingredients && (
                   <div>
                     <h3 className="text-xl font-bold mb-3 text-gray-800">Ingredients</h3>
@@ -192,6 +295,20 @@ const ProductProfile = () => {
                   <div>
                     <h3 className="text-xl font-bold mb-3 text-gray-800">Dimensions</h3>
                     <p className="text-gray-700">{product.dimensions}</p>
+                  </div>
+                )}
+                
+                {product.weight && (
+                  <div>
+                    <h3 className="text-xl font-bold mb-3 text-gray-800">Weight</h3>
+                    <p className="text-gray-700">{product.weight}</p>
+                  </div>
+                )}
+                
+                {product.batteryLife && (
+                  <div>
+                    <h3 className="text-xl font-bold mb-3 text-gray-800">Battery Life</h3>
+                    <p className="text-gray-700">{product.batteryLife}</p>
                   </div>
                 )}
                 
