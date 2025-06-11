@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -227,9 +226,17 @@ const Index = () => {
           <h2 className="text-4xl sm:text-5xl font-bold text-[#00AEEF] mb-8">
             About Pawket
           </h2>
-          <p className="text-xl text-[#333333] leading-relaxed">
-            Pawket is a youth-led innovation from Bangladesh. It brings together adoption, sharing, health care, and community compassion in one digital platform — for both pet lovers and stray welfare.
-          </p>
+          <div className="space-y-4 text-xl text-[#333333] leading-relaxed">
+            <p>
+              Pawket is Bangladesh's first all-in-one pet care and sharing platform. Built for pet lovers, by a passionate teenager and his team. Whether you want to adopt, foster, share, or care for your furry friend, Pawket brings the entire pet-loving community together in one easy, safe, and supportive space.
+            </p>
+            <p>
+              From virtual vet care and lost pet recovery to finding the perfect match for your cat or dog, Pawket is the ultimate pet solution, right in your pocket.
+            </p>
+            <p className="font-semibold">
+              Pawket isn't just an app. It's a paw-some community.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -260,7 +267,7 @@ const Index = () => {
             Our Mission
           </h2>
           <p className="text-xl text-[#333333] leading-relaxed">
-            To bridge the pet care gap in Bangladesh with digital tools, community-driven features, and a heart for animals.
+            To become Bangladesh's most trusted digital home for pet lovers. Starting as a youth-led movement, growing into a nationwide solution that improves how we adopt, care, and connect through pets.
           </p>
         </div>
       </section>
@@ -271,9 +278,14 @@ const Index = () => {
           <h2 className="text-4xl sm:text-5xl font-bold text-[#333333] mb-8">
             Our Vision
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
-            A future where every pet gets love, care, and support — powered by local youth and technology.
-          </p>
+          <div className="space-y-4 text-xl text-gray-600 leading-relaxed">
+            <p>
+              A future where no pet is left behind. Pawket envisions a Bangladesh where people and pets live in harmony, supported by technology, community trust, and heartfelt care.
+            </p>
+            <p>
+              Whether it's a new friend, a lost one found, or a vet in need. Pawket will always be just a paw away.
+            </p>
+          </div>
         </div>
       </section>
 
