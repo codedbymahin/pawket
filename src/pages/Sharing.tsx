@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -78,6 +77,10 @@ const Sharing = () => {
     setShowLoginModal(true);
   };
 
+  const handleCardClick = (offerId: number) => {
+    navigate(`/pet/sharing/${offerId}`);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-orange-50 to-blue-100">
       {/* Header */}
@@ -104,50 +107,54 @@ const Sharing = () => {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sharingOffers.map((offer) => (
             <Card key={offer.id} className="bg-white/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-shadow duration-300">
-              <CardHeader className="text-center">
-                <div className="flex justify-center mb-3">
-                  <PawPrint size={40} className="text-blue-500" />
-                </div>
-                <CardTitle className="text-xl font-bold text-gray-800">
-                  {offer.petName}
-                </CardTitle>
-                <CardDescription className="text-gray-600">
-                  {offer.breed}
-                </CardDescription>
-              </CardHeader>
+              <div onClick={() => handleCardClick(offer.id)} className="cursor-pointer">
+                <CardHeader className="text-center">
+                  <div className="flex justify-center mb-3">
+                    <PawPrint size={40} className="text-blue-500" />
+                  </div>
+                  <CardTitle className="text-xl font-bold text-gray-800">
+                    {offer.petName}
+                  </CardTitle>
+                  <CardDescription className="text-gray-600">
+                    {offer.breed}
+                  </CardDescription>
+                </CardHeader>
+                
+                <CardContent className="space-y-4">
+                  <div className="flex items-center text-gray-600 text-sm">
+                    <MapPin size={16} className="mr-2 text-orange-500" />
+                    {offer.location}
+                  </div>
+                  
+                  <div className="flex items-center text-gray-600 text-sm">
+                    <Clock size={16} className="mr-2 text-blue-500" />
+                    {offer.duration}
+                  </div>
+                  
+                  <div className="flex items-center text-gray-600 text-sm">
+                    <User size={16} className="mr-2 text-green-500" />
+                    {offer.owner}
+                  </div>
+                  
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    <strong>Reason:</strong> {offer.reason}
+                  </p>
+                  
+                  <div className="text-center">
+                    <Badge 
+                      variant="outline" 
+                      className={`${offer.status === 'Available' 
+                        ? 'bg-green-50 border-green-300 text-green-600' 
+                        : 'bg-orange-50 border-orange-300 text-orange-600'
+                      } px-3 py-1`}
+                    >
+                      {offer.status}
+                    </Badge>
+                  </div>
+                </CardContent>
+              </div>
               
-              <CardContent className="space-y-4">
-                <div className="flex items-center text-gray-600 text-sm">
-                  <MapPin size={16} className="mr-2 text-orange-500" />
-                  {offer.location}
-                </div>
-                
-                <div className="flex items-center text-gray-600 text-sm">
-                  <Clock size={16} className="mr-2 text-blue-500" />
-                  {offer.duration}
-                </div>
-                
-                <div className="flex items-center text-gray-600 text-sm">
-                  <User size={16} className="mr-2 text-green-500" />
-                  {offer.owner}
-                </div>
-                
-                <p className="text-gray-700 text-sm leading-relaxed">
-                  <strong>Reason:</strong> {offer.reason}
-                </p>
-                
-                <div className="text-center">
-                  <Badge 
-                    variant="outline" 
-                    className={`${offer.status === 'Available' 
-                      ? 'bg-green-50 border-green-300 text-green-600' 
-                      : 'bg-orange-50 border-orange-300 text-orange-600'
-                    } px-3 py-1`}
-                  >
-                    {offer.status}
-                  </Badge>
-                </div>
-                
+              <CardContent className="pt-0">
                 <Button 
                   onClick={handleApplyToHelp}
                   className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-lg"

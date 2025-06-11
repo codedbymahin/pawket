@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -77,6 +76,10 @@ const Adopt = () => {
     setShowLoginModal(true);
   };
 
+  const handleCardClick = (petId: number) => {
+    navigate(`/pet/adopt/${petId}`);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pawket-light via-pawket-neutral to-white">
       {/* Header */}
@@ -103,36 +106,40 @@ const Adopt = () => {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {pets.map((pet) => (
             <Card key={pet.id} className="bg-white/80 backdrop-blur-sm border-pawket-neutral shadow-xl hover:shadow-2xl transition-shadow duration-300">
-              <CardHeader className="text-center">
-                <div className="flex justify-center mb-3">
-                  {pet.type === "dog" ? (
-                    <Dog size={40} className="text-pawket-accent" />
-                  ) : (
-                    <Cat size={40} className="text-pawket-primary" />
-                  )}
-                </div>
-                <CardTitle className="text-xl font-bold text-gray-800">
-                  {pet.name}
-                </CardTitle>
-                <CardDescription className="text-gray-600">
-                  {pet.breed} • {pet.age}
-                </CardDescription>
-              </CardHeader>
+              <div onClick={() => handleCardClick(pet.id)} className="cursor-pointer">
+                <CardHeader className="text-center">
+                  <div className="flex justify-center mb-3">
+                    {pet.type === "dog" ? (
+                      <Dog size={40} className="text-pawket-accent" />
+                    ) : (
+                      <Cat size={40} className="text-pawket-primary" />
+                    )}
+                  </div>
+                  <CardTitle className="text-xl font-bold text-gray-800">
+                    {pet.name}
+                  </CardTitle>
+                  <CardDescription className="text-gray-600">
+                    {pet.breed} • {pet.age}
+                  </CardDescription>
+                </CardHeader>
+                
+                <CardContent className="space-y-4">
+                  <div className="flex items-center text-gray-600 text-sm">
+                    <MapPin size={16} className="mr-2 text-pawket-accent" />
+                    {pet.location}
+                  </div>
+                  
+                  <p className="text-gray-700 text-sm leading-relaxed">
+                    {pet.description}
+                  </p>
+                  
+                  <div className="text-sm text-gray-600">
+                    <strong>Owner:</strong> {pet.owner}
+                  </div>
+                </CardContent>
+              </div>
               
-              <CardContent className="space-y-4">
-                <div className="flex items-center text-gray-600 text-sm">
-                  <MapPin size={16} className="mr-2 text-pawket-accent" />
-                  {pet.location}
-                </div>
-                
-                <p className="text-gray-700 text-sm leading-relaxed">
-                  {pet.description}
-                </p>
-                
-                <div className="text-sm text-gray-600">
-                  <strong>Owner:</strong> {pet.owner}
-                </div>
-                
+              <CardContent className="pt-0">
                 <Button 
                   onClick={handleContactOwner}
                   className="w-full bg-gradient-to-r from-pawket-accent to-pawket-primary hover:from-pawket-primary hover:to-pawket-accent text-white font-semibold rounded-lg"

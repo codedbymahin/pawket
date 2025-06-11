@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -105,6 +104,10 @@ const Shop = () => {
     setShowLoginModal(true);
   };
 
+  const handleCardClick = (productId: number) => {
+    navigate(`/product/${productId}`);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-orange-50 to-blue-100">
       {/* Header */}
@@ -131,45 +134,49 @@ const Shop = () => {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
             <Card key={product.id} className="bg-white/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-shadow duration-300">
-              <CardHeader className="text-center pb-3">
-                <div className="flex justify-center mb-3">
-                  <ShoppingCart size={32} className="text-purple-500" />
-                </div>
-                <CardTitle className="text-lg font-bold text-gray-800 leading-tight">
-                  {product.name}
-                </CardTitle>
-                <CardDescription className="text-gray-600 text-sm">
-                  {product.brand} • {product.category}
-                </CardDescription>
-              </CardHeader>
+              <div onClick={() => handleCardClick(product.id)} className="cursor-pointer">
+                <CardHeader className="text-center pb-3">
+                  <div className="flex justify-center mb-3">
+                    <ShoppingCart size={32} className="text-purple-500" />
+                  </div>
+                  <CardTitle className="text-lg font-bold text-gray-800 leading-tight">
+                    {product.name}
+                  </CardTitle>
+                  <CardDescription className="text-gray-600 text-sm">
+                    {product.brand} • {product.category}
+                  </CardDescription>
+                </CardHeader>
+                
+                <CardContent className="space-y-3">
+                  <div className="flex items-center justify-center text-sm">
+                    <Star size={14} className="mr-1 text-yellow-500 fill-current" />
+                    <span className="text-gray-600">{product.rating}</span>
+                  </div>
+                  
+                  <p className="text-gray-700 text-xs leading-relaxed text-center">
+                    {product.description}
+                  </p>
+                  
+                  <div className="text-center">
+                    <div className="text-xl font-bold text-green-600">
+                      {product.price}
+                    </div>
+                    <div className="text-sm text-gray-500 line-through">
+                      {product.originalPrice}
+                    </div>
+                  </div>
+                  
+                  <div className="text-center">
+                    {product.inStock ? (
+                      <span className="text-green-600 text-sm font-medium">✓ In Stock</span>
+                    ) : (
+                      <span className="text-red-500 text-sm font-medium">Out of Stock</span>
+                    )}
+                  </div>
+                </CardContent>
+              </div>
               
-              <CardContent className="space-y-3">
-                <div className="flex items-center justify-center text-sm">
-                  <Star size={14} className="mr-1 text-yellow-500 fill-current" />
-                  <span className="text-gray-600">{product.rating}</span>
-                </div>
-                
-                <p className="text-gray-700 text-xs leading-relaxed text-center">
-                  {product.description}
-                </p>
-                
-                <div className="text-center">
-                  <div className="text-xl font-bold text-green-600">
-                    {product.price}
-                  </div>
-                  <div className="text-sm text-gray-500 line-through">
-                    {product.originalPrice}
-                  </div>
-                </div>
-                
-                <div className="text-center">
-                  {product.inStock ? (
-                    <span className="text-green-600 text-sm font-medium">✓ In Stock</span>
-                  ) : (
-                    <span className="text-red-500 text-sm font-medium">Out of Stock</span>
-                  )}
-                </div>
-                
+              <CardContent className="pt-0">
                 <Button 
                   onClick={handleBuyNow}
                   disabled={!product.inStock}

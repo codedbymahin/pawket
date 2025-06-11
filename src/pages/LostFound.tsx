@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -17,6 +16,11 @@ const LostFound = () => {
 
   const handleContactClick = () => {
     setShowGuestModal(true);
+  };
+
+  const handleCardClick = (petId: number, status: string) => {
+    const type = status === 'Lost' ? 'lost' : 'lost';
+    navigate(`/pet/${type}/${petId}`);
   };
 
   const listings = [
@@ -155,51 +159,55 @@ const LostFound = () => {
                 className="rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                 style={{ backgroundColor: '#F8F9FA' }}
               >
-                <CardHeader className="pb-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="text-4xl">{pet.image}</div>
-                    <Badge 
-                      variant="outline"
-                      className={`px-3 py-1 text-xs font-semibold ${
-                        pet.status === 'Lost' 
-                          ? 'bg-red-100 text-red-700 border-red-200' 
-                          : 'bg-green-100 text-green-700 border-green-200'
-                      }`}
-                    >
-                      {pet.status}
-                    </Badge>
-                  </div>
+                <div onClick={() => handleCardClick(pet.id, pet.status)} className="cursor-pointer">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="text-4xl">{pet.image}</div>
+                      <Badge 
+                        variant="outline"
+                        className={`px-3 py-1 text-xs font-semibold ${
+                          pet.status === 'Lost' 
+                            ? 'bg-red-100 text-red-700 border-red-200' 
+                            : 'bg-green-100 text-green-700 border-green-200'
+                        }`}
+                      >
+                        {pet.status}
+                      </Badge>
+                    </div>
+                    
+                    <CardTitle className="text-xl font-bold" style={{ color: '#333333' }}>
+                      {pet.petName}
+                    </CardTitle>
+                    <CardDescription className="text-gray-600">
+                      {pet.breed} • {pet.type}
+                    </CardDescription>
+                  </CardHeader>
                   
-                  <CardTitle className="text-xl font-bold" style={{ color: '#333333' }}>
-                    {pet.petName}
-                  </CardTitle>
-                  <CardDescription className="text-gray-600">
-                    {pet.breed} • {pet.type}
-                  </CardDescription>
-                </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="space-y-3">
+                      <div className="flex items-center text-sm text-gray-600">
+                        <MapPin size={16} className="mr-2 text-blue-500" />
+                        <span>Last seen: {pet.lastSeen}</span>
+                      </div>
+                      
+                      <div className="flex items-center text-sm text-gray-600">
+                        <Clock size={16} className="mr-2 text-orange-500" />
+                        <span>{pet.date}</span>
+                      </div>
+                      
+                      <div className="flex items-center text-sm text-gray-600">
+                        <Eye size={16} className="mr-2 text-purple-500" />
+                        <span>Contact: {pet.ownerName}</span>
+                      </div>
+                    </div>
+                    
+                    <p className="text-sm text-gray-700 leading-relaxed">
+                      {pet.description}
+                    </p>
+                  </CardContent>
+                </div>
                 
-                <CardContent className="space-y-4">
-                  <div className="space-y-3">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <MapPin size={16} className="mr-2 text-blue-500" />
-                      <span>Last seen: {pet.lastSeen}</span>
-                    </div>
-                    
-                    <div className="flex items-center text-sm text-gray-600">
-                      <Clock size={16} className="mr-2 text-orange-500" />
-                      <span>{pet.date}</span>
-                    </div>
-                    
-                    <div className="flex items-center text-sm text-gray-600">
-                      <Eye size={16} className="mr-2 text-purple-500" />
-                      <span>Contact: {pet.ownerName}</span>
-                    </div>
-                  </div>
-                  
-                  <p className="text-sm text-gray-700 leading-relaxed">
-                    {pet.description}
-                  </p>
-                  
+                <CardContent className="pt-0">
                   <Button 
                     onClick={handleContactClick}
                     className="w-full text-white font-semibold py-2 rounded-2xl shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300"

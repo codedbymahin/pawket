@@ -12,6 +12,9 @@ import Sharing from "./pages/Sharing";
 import Vet from "./pages/Vet";
 import Shop from "./pages/Shop";
 import LostFound from "./pages/LostFound";
+import PetProfile from "./pages/PetProfile";
+import VetProfile from "./pages/VetProfile";
+import ProductProfile from "./pages/ProductProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +34,9 @@ const App = () => (
           <Route path="/vet" element={<Vet />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/lost-found" element={<LostFound />} />
+          <Route path="/pet/:type/:id" element={<PetProfile />} />
+          <Route path="/vet/:id" element={<VetProfile />} />
+          <Route path="/product/:id" element={<ProductProfile />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
