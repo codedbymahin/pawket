@@ -1,29 +1,40 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { PawPrint, Dog, Heart, Search, Stethoscope, ShoppingBag, AlertTriangle, Users, ChevronDown, MapPin, Clock, Shield } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { PawPrint, Dog, Heart, Search, Stethoscope, ShoppingBag, AlertTriangle, Users, ChevronDown, MapPin, Clock, Shield, Plus, Minus, Facebook, Instagram, Twitter, Github } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Index = () => {
   const navigate = useNavigate();
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const handleGetStarted = () => {
     navigate("/login");
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const features = [
     {
-      icon: <Dog size={32} className="text-pawket-primary" />,
+      icon: <Dog size={32} className="text-[#00AEEF]" />,
       title: "Pet Adoption",
       description: "Connect with loving families and help pets find homes."
     },
     {
-      icon: <PawPrint size={32} className="text-pawket-accent" />,
+      icon: <PawPrint size={32} className="text-[#FFD166]" />,
       title: "Pet Sharing",
       description: "Temporarily share your pet with other pet parents when you travel."
     },
     {
-      icon: <Search size={32} className="text-pawket-primary" />,
+      icon: <Search size={32} className="text-[#00AEEF]" />,
       title: "Lost & Found",
       description: "Report or discover lost pets in your community."
     },
@@ -33,7 +44,7 @@ const Index = () => {
       description: "Instantly consult with expert vets through online chat."
     },
     {
-      icon: <ShoppingBag size={32} className="text-pawket-accent" />,
+      icon: <ShoppingBag size={32} className="text-[#FFD166]" />,
       title: "Pet Shop",
       description: "Buy pet food, clothes, toys & accessories easily."
     }
@@ -76,35 +87,35 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pawket-light via-white to-pawket-neutral font-sans">
-      {/* Updated Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-pawket-light/60 to-white py-16 px-6 sm:px-8 lg:px-12">
+    <div className="min-h-screen bg-[#F8F9FA] font-sans">
+      {/* Updated Hero Section - Top Left Aligned */}
+      <section className="relative bg-gradient-to-br from-[#FAF3E0] to-[#F8F9FA] py-12 px-6 sm:px-8 lg:px-12">
         {/* Decorative paw prints for background */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-8 right-12 animate-pulse">
-            <PawPrint size={32} className="text-pawket-primary/40 rotate-12" />
+            <PawPrint size={32} className="text-[#00AEEF]/40 rotate-12" />
           </div>
           <div className="absolute top-20 right-24 animate-pulse delay-500">
-            <PawPrint size={28} className="text-pawket-accent/40 -rotate-12" />
+            <PawPrint size={28} className="text-[#FFD166]/40 -rotate-12" />
           </div>
           <div className="absolute bottom-8 right-16 animate-pulse delay-1000">
-            <PawPrint size={36} className="text-pawket-primary/30 rotate-45" />
+            <PawPrint size={36} className="text-[#00AEEF]/30 rotate-45" />
           </div>
         </div>
 
         {/* Main content aligned to left */}
         <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="max-w-2xl space-y-8">
-            {/* App name with paw icon */}
+          <div className="max-w-2xl space-y-6">
+            {/* Logo placeholder and app name */}
             <div className="flex items-center space-x-4">
-              <div className="bg-gradient-to-br from-pawket-primary to-pawket-accent p-3 rounded-full shadow-lg border-2 border-white/30">
-                <PawPrint size={32} className="text-white" />
+              <div className="w-16 h-16 bg-gradient-to-br from-[#00AEEF] to-[#0099CC] rounded-xl shadow-lg border-2 border-white/30 flex items-center justify-center">
+                <PawPrint size={28} className="text-white" />
               </div>
-              <div className="flex items-baseline space-x-3">
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#00AEEF] tracking-tight">
+              <div className="flex items-baseline space-x-2">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#00AEEF] tracking-tight">
                   Pawket
                 </h1>
-                <span className="text-2xl sm:text-3xl lg:text-4xl font-light text-gray-500 italic">
+                <span className="text-lg sm:text-xl lg:text-2xl font-light text-gray-500 italic">
                   (Demo)
                 </span>
               </div>
@@ -112,17 +123,17 @@ const Index = () => {
 
             {/* Tagline */}
             <div className="space-y-2">
-              <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-700 leading-relaxed">
+              <p className="text-xl sm:text-2xl font-medium text-[#333333] leading-relaxed">
                 Bangladesh's First All-in-one Pet Solution
               </p>
-              <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-700 italic">
+              <p className="text-xl sm:text-2xl font-medium text-[#333333] italic">
                 in Your Pocket
               </p>
             </div>
 
             {/* Description */}
             <div className="max-w-xl">
-              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
+              <p className="text-lg text-gray-600 leading-relaxed">
                 Now available in Dhaka, Mymensingh, Sylhet, and more! Pawket offers pet sharing, adoption, virtual vet care, and a full pet shop — all in one simple platform.
               </p>
             </div>
@@ -132,48 +143,41 @@ const Index = () => {
               <Button
                 onClick={handleGetStarted}
                 size="lg"
-                className="px-12 py-6 text-xl bg-gradient-to-r from-pawket-accent to-amber-400 hover:from-amber-400 hover:to-pawket-accent text-gray-800 font-bold rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 border-0"
+                className="px-8 py-4 text-lg bg-[#00AEEF] hover:bg-[#0099CC] text-white font-bold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0"
               >
-                <PawPrint size={24} className="mr-3" />
+                <PawPrint size={20} className="mr-2" />
                 Get Started
               </Button>
             </div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="bg-white/80 backdrop-blur-sm rounded-full p-2 shadow-lg">
-            <ChevronDown size={28} className="text-pawket-primary" />
-          </div>
-        </div>
       </section>
 
       {/* What We Offer Section */}
-      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-white to-pawket-light/30">
+      <section id="what-we-offer" className="py-16 px-6 sm:px-8 lg:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl sm:text-6xl font-bold bg-gradient-to-r from-pawket-primary to-pawket-accent bg-clip-text text-transparent mb-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl font-bold text-[#00AEEF] mb-4">
               What We Offer
             </h2>
-            <p className="text-xl sm:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl text-[#333333] max-w-3xl mx-auto leading-relaxed">
               Comprehensive pet care solutions designed for Bangladesh's unique needs
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-gradient-to-br from-white to-pawket-light/20 rounded-3xl transform hover:scale-105 hover:rotate-1">
-                <CardHeader className="text-center pb-6 pt-8">
-                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-pawket-light to-white rounded-full flex items-center justify-center shadow-xl border-4 border-white/50">
+              <Card key={index} className="hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-[#F8F9FA] rounded-2xl transform hover:scale-105">
+                <CardHeader className="text-center pb-4 pt-6">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-white rounded-full flex items-center justify-center shadow-lg">
                     {feature.icon}
                   </div>
-                  <CardTitle className="text-2xl font-bold text-gray-800 mb-2">
+                  <CardTitle className="text-xl font-bold text-[#333333] mb-2">
                     {feature.title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="pb-8">
-                  <CardDescription className="text-gray-600 text-center leading-relaxed text-lg">
+                <CardContent className="pb-6">
+                  <CardDescription className="text-gray-600 text-center leading-relaxed">
                     {feature.description}
                   </CardDescription>
                 </CardContent>
@@ -184,30 +188,30 @@ const Index = () => {
       </section>
 
       {/* Coming Soon Section */}
-      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-pawket-neutral/20 to-gray-50">
+      <section id="coming-soon" className="py-16 px-6 sm:px-8 lg:px-12 bg-[#FAF3E0]">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl sm:text-6xl font-bold text-gray-700 mb-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl font-bold text-[#333333] mb-4">
               Coming Soon
             </h2>
-            <p className="text-xl sm:text-2xl text-gray-500 leading-relaxed">
+            <p className="text-xl text-gray-600 leading-relaxed">
               Exciting features we're working on for you
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {comingSoon.map((feature, index) => (
-              <Card key={index} className="border-0 shadow-lg bg-gradient-to-br from-white to-gray-50/80 opacity-90 rounded-3xl transform hover:scale-102 transition-all duration-300">
-                <CardHeader className="text-center pb-6 pt-8">
-                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center shadow-lg">
+              <Card key={index} className="border-0 shadow-lg bg-white opacity-90 rounded-2xl transform hover:scale-102 transition-all duration-300">
+                <CardHeader className="text-center pb-4 pt-6">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center shadow-lg">
                     {feature.icon}
                   </div>
-                  <CardTitle className="text-2xl font-bold text-gray-600 mb-2">
+                  <CardTitle className="text-xl font-bold text-gray-600 mb-2">
                     {feature.title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="pb-8">
-                  <CardDescription className="text-gray-500 text-center leading-relaxed text-lg">
+                <CardContent className="pb-6">
+                  <CardDescription className="text-gray-500 text-center leading-relaxed">
                     {feature.description}
                   </CardDescription>
                 </CardContent>
@@ -218,83 +222,96 @@ const Index = () => {
       </section>
 
       {/* About Pawket Section */}
-      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-white to-pawket-light/30">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-5xl sm:text-6xl font-bold bg-gradient-to-r from-pawket-primary to-pawket-accent bg-clip-text text-transparent mb-10">
+      <section id="about-pawket" className="py-16 px-6 sm:px-8 lg:px-12 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#00AEEF] mb-8">
             About Pawket
           </h2>
-          <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed">
+          <p className="text-xl text-[#333333] leading-relaxed">
             Pawket is a youth-led innovation from Bangladesh. It brings together adoption, sharing, health care, and community compassion in one digital platform — for both pet lovers and stray welfare.
           </p>
         </div>
       </section>
 
       {/* Experience Now Section */}
-      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-pawket-primary/8 to-pawket-accent/8">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-5xl sm:text-6xl font-bold text-gray-800 mb-8">
+      <section id="experience-now" className="py-16 px-6 sm:px-8 lg:px-12 bg-[#FAF3E0]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#333333] mb-6">
             Experience Now
           </h2>
-          <p className="text-xl sm:text-2xl text-gray-600 mb-12 leading-relaxed">
+          <p className="text-xl text-gray-600 mb-8 leading-relaxed">
             Want to explore our demo? See how Pawket works, built by passionate young innovators for real pet needs.
           </p>
           <Button
             onClick={handleGetStarted}
             size="lg"
-            className="px-12 py-6 text-xl sm:text-2xl bg-gradient-to-r from-pawket-accent to-amber-400 hover:from-amber-400 hover:to-pawket-accent text-gray-800 font-bold rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 border-0 hover:rotate-1"
+            className="px-8 py-4 text-lg bg-[#00AEEF] hover:bg-[#0099CC] text-white font-bold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0"
           >
-            <PawPrint size={28} className="mr-3" />
+            <PawPrint size={20} className="mr-2" />
             Get Started
           </Button>
         </div>
       </section>
 
       {/* Mission Section */}
-      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-white to-pawket-light/30">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-5xl sm:text-6xl font-bold bg-gradient-to-r from-pawket-primary to-pawket-accent bg-clip-text text-transparent mb-10">
+      <section id="our-mission" className="py-16 px-6 sm:px-8 lg:px-12 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#00AEEF] mb-8">
             Our Mission
           </h2>
-          <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed">
+          <p className="text-xl text-[#333333] leading-relaxed">
             To bridge the pet care gap in Bangladesh with digital tools, community-driven features, and a heart for animals.
           </p>
         </div>
       </section>
 
       {/* Vision Section */}
-      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-pawket-light/40 to-gray-50">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-5xl sm:text-6xl font-bold text-gray-800 mb-10">
+      <section id="our-vision" className="py-16 px-6 sm:px-8 lg:px-12 bg-[#FAF3E0]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#333333] mb-8">
             Our Vision
           </h2>
-          <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed">
+          <p className="text-xl text-gray-600 leading-relaxed">
             A future where every pet gets love, care, and support — powered by local youth and technology.
           </p>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-white to-pawket-light/30">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl sm:text-6xl font-bold bg-gradient-to-r from-pawket-primary to-pawket-accent bg-clip-text text-transparent mb-6">
+      {/* FAQ Section - Collapsible */}
+      <section id="faq" className="py-16 px-6 sm:px-8 lg:px-12 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl font-bold text-[#00AEEF] mb-4">
               Frequently Asked Questions
             </h2>
           </div>
           
-          <div className="space-y-8">
+          <div className="space-y-4">
             {faqItems.map((item, index) => (
-              <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-3xl bg-gradient-to-br from-white to-pawket-light/20">
-                <CardHeader className="pb-4 pt-8">
-                  <CardTitle className="text-xl sm:text-2xl font-bold text-gray-800">
-                    {item.question}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pb-8">
-                  <p className="text-gray-600 leading-relaxed text-lg">
-                    {item.answer}
-                  </p>
-                </CardContent>
+              <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-2xl bg-[#F8F9FA]">
+                <Collapsible open={openFaq === index} onOpenChange={() => setOpenFaq(openFaq === index ? null : index)}>
+                  <CollapsibleTrigger asChild>
+                    <CardHeader className="cursor-pointer hover:bg-white/50 transition-colors duration-200 rounded-t-2xl">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-lg font-bold text-[#333333] text-left">
+                          {item.question}
+                        </CardTitle>
+                        {openFaq === index ? (
+                          <Minus size={20} className="text-[#00AEEF] flex-shrink-0" />
+                        ) : (
+                          <Plus size={20} className="text-[#00AEEF] flex-shrink-0" />
+                        )}
+                      </div>
+                    </CardHeader>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <CardContent className="pt-0 pb-6">
+                      <p className="text-gray-600 leading-relaxed">
+                        {item.answer}
+                      </p>
+                    </CardContent>
+                  </CollapsibleContent>
+                </Collapsible>
               </Card>
             ))}
           </div>
@@ -302,58 +319,58 @@ const Index = () => {
       </section>
 
       {/* Meet Our Team Section */}
-      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-pawket-neutral/20 to-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl sm:text-6xl font-bold text-gray-800 mb-6">
+      <section id="our-team" className="py-16 px-6 sm:px-8 lg:px-12 bg-[#FAF3E0]">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl font-bold text-[#333333] mb-4">
               Meet Our Team
             </h2>
-            <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed">
+            <p className="text-xl text-gray-600 leading-relaxed">
               The passionate minds behind Pawket
             </p>
           </div>
           
-          <div className="flex flex-col items-center space-y-16">
+          <div className="flex flex-col items-center space-y-12">
             {/* Founder */}
-            <Card className="w-full max-w-lg border-0 shadow-xl bg-gradient-to-br from-white to-pawket-light/30 rounded-3xl transform hover:scale-105 transition-all duration-300">
-              <CardHeader className="text-center pb-8 pt-10">
-                <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-pawket-primary to-pawket-accent rounded-full flex items-center justify-center shadow-xl border-4 border-white/50">
-                  <Users size={40} className="text-white" />
+            <Card className="w-full max-w-lg border-0 shadow-xl bg-white rounded-2xl transform hover:scale-105 transition-all duration-300">
+              <CardHeader className="text-center pb-6 pt-8">
+                <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-[#00AEEF] to-[#0099CC] rounded-full flex items-center justify-center shadow-lg">
+                  <Users size={32} className="text-white" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-800 mb-2">
+                <CardTitle className="text-xl font-bold text-[#333333] mb-2">
                   Md Sifat Al Mahin
                 </CardTitle>
-                <CardDescription className="text-pawket-primary font-bold text-lg">
+                <CardDescription className="text-[#00AEEF] font-bold">
                   Founder & Core Ideator of Pawket
                 </CardDescription>
               </CardHeader>
             </Card>
 
             {/* Team Members */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-5xl">
-              <Card className="border-0 shadow-xl bg-gradient-to-br from-white to-pawket-light/30 rounded-3xl transform hover:scale-105 transition-all duration-300">
-                <CardHeader className="text-center pb-8 pt-10">
-                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-pawket-accent to-pawket-primary rounded-full flex items-center justify-center shadow-xl border-4 border-white/50">
-                    <Users size={32} className="text-white" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
+              <Card className="border-0 shadow-xl bg-white rounded-2xl transform hover:scale-105 transition-all duration-300">
+                <CardHeader className="text-center pb-6 pt-8">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[#FFD166] to-[#E9CD45] rounded-full flex items-center justify-center shadow-lg">
+                    <Users size={24} className="text-white" />
                   </div>
-                  <CardTitle className="text-xl font-bold text-gray-800 mb-2">
+                  <CardTitle className="text-lg font-bold text-[#333333] mb-2">
                     Hasib Ashfaq Saad
                   </CardTitle>
-                  <CardDescription className="text-pawket-primary font-bold text-lg">
+                  <CardDescription className="text-[#00AEEF] font-bold">
                     Marketing & Outreach Lead
                   </CardDescription>
                 </CardHeader>
               </Card>
 
-              <Card className="border-0 shadow-xl bg-gradient-to-br from-white to-pawket-light/30 rounded-3xl transform hover:scale-105 transition-all duration-300">
-                <CardHeader className="text-center pb-8 pt-10">
-                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-pawket-accent to-pawket-primary rounded-full flex items-center justify-center shadow-xl border-4 border-white/50">
-                    <Users size={32} className="text-white" />
+              <Card className="border-0 shadow-xl bg-white rounded-2xl transform hover:scale-105 transition-all duration-300">
+                <CardHeader className="text-center pb-6 pt-8">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[#FFD166] to-[#E9CD45] rounded-full flex items-center justify-center shadow-lg">
+                    <Users size={24} className="text-white" />
                   </div>
-                  <CardTitle className="text-xl font-bold text-gray-800 mb-2">
+                  <CardTitle className="text-lg font-bold text-[#333333] mb-2">
                     Ebrahim Islam Asif
                   </CardTitle>
-                  <CardDescription className="text-pawket-primary font-bold text-lg">
+                  <CardDescription className="text-[#00AEEF] font-bold">
                     Logistics & Communication Lead
                   </CardDescription>
                 </CardHeader>
@@ -363,30 +380,84 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer Section */}
-      <footer className="py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-pawket-primary/10 to-pawket-accent/10">
+      {/* Footer Section - Redesigned */}
+      <footer className="py-12 px-6 sm:px-8 lg:px-12 bg-[#333333] text-white">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-10">
-            <div className="flex items-center justify-center space-x-4 mb-8">
-              <div className="bg-gradient-to-br from-pawket-primary to-pawket-accent p-3 rounded-full shadow-lg border-2 border-white/30">
-                <PawPrint size={32} className="text-white" />
+          {/* First Row: Two Columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            {/* Left Column: Follow Us */}
+            <div>
+              <h3 className="text-xl font-bold text-[#FFD166] mb-4">Follow Us</h3>
+              <div className="space-y-3">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 hover:text-[#FFD166] transition-colors">
+                  <Facebook size={20} />
+                  <span>Facebook</span>
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 hover:text-[#FFD166] transition-colors">
+                  <Instagram size={20} />
+                  <span>Instagram</span>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 hover:text-[#FFD166] transition-colors">
+                  <Twitter size={20} />
+                  <span>Twitter</span>
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 hover:text-[#FFD166] transition-colors">
+                  <Github size={20} />
+                  <span>GitHub</span>
+                </a>
               </div>
-              <h3 className="text-3xl font-bold bg-gradient-to-r from-pawket-primary to-pawket-accent bg-clip-text text-transparent">
-                Pawket
-              </h3>
-            </div>
-            
-            <div className="flex flex-wrap justify-center gap-8 mb-10 text-gray-600">
-              <span className="hover:text-pawket-primary cursor-default transition-colors text-lg font-medium">About</span>
-              <span className="hover:text-pawket-primary cursor-default transition-colors text-lg font-medium">Contact</span>
-              <span className="hover:text-pawket-primary cursor-default transition-colors text-lg font-medium">Quick Links</span>
             </div>
 
-            <Separator className="mb-10 bg-pawket-neutral" />
-            
-            <p className="text-gray-600 leading-relaxed text-lg">
-              Built with ❤️ by Team Pawket Force for a better pet ecosystem in Bangladesh.
-            </p>
+            {/* Right Column: Quick Links */}
+            <div>
+              <h3 className="text-xl font-bold text-[#FFD166] mb-4">Quick Links</h3>
+              <div className="grid grid-cols-2 gap-2">
+                <button onClick={() => scrollToSection('what-we-offer')} className="text-left hover:text-[#FFD166] transition-colors">
+                  What We Offer
+                </button>
+                <button onClick={() => scrollToSection('coming-soon')} className="text-left hover:text-[#FFD166] transition-colors">
+                  Coming Soon
+                </button>
+                <button onClick={() => scrollToSection('about-pawket')} className="text-left hover:text-[#FFD166] transition-colors">
+                  About Pawket
+                </button>
+                <button onClick={() => scrollToSection('experience-now')} className="text-left hover:text-[#FFD166] transition-colors">
+                  Experience Now
+                </button>
+                <button onClick={() => scrollToSection('our-mission')} className="text-left hover:text-[#FFD166] transition-colors">
+                  Our Mission
+                </button>
+                <button onClick={() => scrollToSection('our-vision')} className="text-left hover:text-[#FFD166] transition-colors">
+                  Our Vision
+                </button>
+                <button onClick={() => scrollToSection('faq')} className="text-left hover:text-[#FFD166] transition-colors">
+                  FAQ
+                </button>
+                <button onClick={() => scrollToSection('our-team')} className="text-left hover:text-[#FFD166] transition-colors">
+                  Our Team
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <Separator className="mb-8 bg-gray-600" />
+
+          {/* Second Row: Contact Us */}
+          <div className="text-center mb-8">
+            <h3 className="text-xl font-bold text-[#FFD166] mb-4">Contact Us</h3>
+            <div className="space-y-2 text-gray-300">
+              <p className="flex items-center justify-center space-x-2">
+                <MapPin size={16} />
+                <span>81/1, Beli Road, Ward #2, Ishwarganj, Mymensingh</span>
+              </p>
+              <p>Phone: 01875184943</p>
+              <p>Email: itsmemahin.bd@outlook.com</p>
+            </div>
+          </div>
+
+          {/* Final Footer Line */}
+          <div className="text-center text-sm text-gray-400">
+            <p>© 2025 All Rights Reserved by Team Pawket Force.</p>
           </div>
         </div>
       </footer>
