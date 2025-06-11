@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { PawPrint, Dog, Cat, Search, ShoppingBag, Heart, AlertTriangle, UserRound, ArrowLeft } from "lucide-react";
+import { PawPrint, Dog, Cat, Search, ShoppingBag, Heart, AlertTriangle, UserRound, ArrowLeft, Lightbulb } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -146,7 +146,7 @@ const Dashboard = () => {
               className="text-3xl sm:text-4xl lg:text-5xl font-bold"
               style={{ color: '#00AEEF' }}
             >
-              🐾 Pawket Dashboard
+              Pawket Dashboard
             </h1>
           </div>
           
@@ -230,6 +230,51 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* New Section: Pet Care Tip & Why Pawket */}
+      <div className="px-4 sm:px-6 lg:px-8 pb-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Pet Care Tip */}
+            <Card className="bg-gradient-to-br from-blue-50 to-sky-50 border-blue-200 border-2 rounded-3xl overflow-hidden backdrop-blur-sm bg-opacity-90">
+              <CardHeader className="text-center pb-4">
+                <div className="flex justify-center mb-3">
+                  <div className="bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 p-3 rounded-full shadow-lg">
+                    <Lightbulb size={24} className="text-white" />
+                  </div>
+                </div>
+                <CardTitle className="text-lg font-bold" style={{ color: '#333333' }}>
+                  🐶 Pet Care Tip
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="pt-0 pb-6">
+                <p className="text-gray-700 text-sm leading-relaxed text-center">
+                  Never leave your pet in a parked car — even with windows down, it can overheat quickly.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Why Pawket */}
+            <Card className="bg-gradient-to-br from-teal-50 to-emerald-50 border-teal-200 border-2 rounded-3xl overflow-hidden backdrop-blur-sm bg-opacity-90">
+              <CardHeader className="text-center pb-4">
+                <div className="flex justify-center mb-3">
+                  <div className="bg-gradient-to-br from-teal-400 via-teal-500 to-emerald-500 p-3 rounded-full shadow-lg">
+                    <Heart size={24} className="text-white" />
+                  </div>
+                </div>
+                <CardTitle className="text-lg font-bold" style={{ color: '#333333' }}>
+                  💙 Why Pawket?
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="pt-0 pb-6">
+                <p className="text-gray-700 text-sm leading-relaxed text-center">
+                  We're building a kinder pet community in Bangladesh — where sharing, adoption, and care come together in one safe, digital space.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

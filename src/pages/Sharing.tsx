@@ -2,7 +2,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ArrowLeft, PawPrint, MapPin, Clock } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ArrowLeft, PawPrint, MapPin, Clock, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -13,69 +14,63 @@ const Sharing = () => {
   const sharingOffers = [
     {
       id: 1,
-      title: "Weekend Dog Walking",
       petName: "Charlie",
       breed: "Beagle",
       location: "Banani, Dhaka",
-      duration: "2-3 hours daily",
-      description: "Looking for someone to walk my energetic beagle on weekends",
+      duration: "Weekend trip",
+      reason: "Owner traveling for work",
       owner: "Rashida Akter",
-      compensation: "৳500/weekend"
+      status: "Available"
     },
     {
       id: 2,
-      title: "Cat Sitting During Travel",
       petName: "Fluffy",
       breed: "British Shorthair",
       location: "Uttara, Dhaka",
       duration: "3 days",
-      description: "Need someone to feed and care for my cat while I'm away",
+      reason: "Family emergency",
       owner: "Mohammad Ali",
-      compensation: "৳1000/3 days"
+      status: "Available"
     },
     {
       id: 3,
-      title: "Morning Puppy Care",
       petName: "Daisy",
       breed: "Golden Retriever Puppy",
       location: "Mymensingh",
       duration: "2 hours morning",
-      description: "Need help with morning feeding and playtime for my puppy",
+      reason: "Owner works early shifts",
       owner: "Sadia Rahman",
-      compensation: "৳300/day"
+      status: "Available"
     },
     {
       id: 4,
-      title: "Evening Dog Exercise",
       petName: "Tiger",
       breed: "German Shepherd",
       location: "Sylhet",
-      duration: "1 hour evening",
-      description: "Need someone to exercise my dog in the evening",
+      duration: "Evening walks",
+      reason: "Owner has mobility issues",
       owner: "Aminul Islam",
-      compensation: "৳400/session"
+      status: "Available"
     },
     {
       id: 5,
-      title: "Cat Playtime Companion",
       petName: "Mittens",
       breed: "Persian Mix",
       location: "Chittagong",
-      duration: "1 hour daily",
-      description: "My cat needs daily interactive play sessions",
+      duration: "Daily playtime",
+      reason: "Owner working long hours",
       owner: "Nasreen Sultana",
-      compensation: "৳250/session"
+      status: "Temporarily Shared"
     },
     {
       id: 6,
-      title: "Weekend Pet Sitting",
       petName: "Bruno",
       breed: "Labrador",
       location: "Comilla",
       duration: "Full weekend",
-      description: "Need someone to take care of my dog over the weekend",
+      reason: "Owner traveling to village",
       owner: "Rafiq Ahmed",
-      compensation: "৳1500/weekend"
+      status: "Available"
     }
   ];
 
@@ -114,10 +109,10 @@ const Sharing = () => {
                   <PawPrint size={40} className="text-blue-500" />
                 </div>
                 <CardTitle className="text-xl font-bold text-gray-800">
-                  {offer.title}
+                  {offer.petName}
                 </CardTitle>
                 <CardDescription className="text-gray-600">
-                  {offer.petName} • {offer.breed}
+                  {offer.breed}
                 </CardDescription>
               </CardHeader>
               
@@ -132,23 +127,33 @@ const Sharing = () => {
                   {offer.duration}
                 </div>
                 
-                <p className="text-gray-700 text-sm leading-relaxed">
-                  {offer.description}
-                </p>
-                
-                <div className="text-sm text-gray-600">
-                  <strong>Owner:</strong> {offer.owner}
+                <div className="flex items-center text-gray-600 text-sm">
+                  <User size={16} className="mr-2 text-green-500" />
+                  {offer.owner}
                 </div>
                 
-                <div className="text-lg font-bold text-green-600 text-center bg-green-50 p-2 rounded-lg">
-                  {offer.compensation}
+                <p className="text-gray-700 text-sm leading-relaxed">
+                  <strong>Reason:</strong> {offer.reason}
+                </p>
+                
+                <div className="text-center">
+                  <Badge 
+                    variant="outline" 
+                    className={`${offer.status === 'Available' 
+                      ? 'bg-green-50 border-green-300 text-green-600' 
+                      : 'bg-orange-50 border-orange-300 text-orange-600'
+                    } px-3 py-1`}
+                  >
+                    {offer.status}
+                  </Badge>
                 </div>
                 
                 <Button 
                   onClick={handleApplyToHelp}
                   className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-lg"
+                  disabled={offer.status === 'Temporarily Shared'}
                 >
-                  Apply to Help
+                  {offer.status === 'Available' ? 'Apply to Help' : 'Currently Shared'}
                 </Button>
               </CardContent>
             </Card>
