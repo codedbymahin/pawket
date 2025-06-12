@@ -4,21 +4,11 @@ import { Separator } from "@/components/ui/separator";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { PawPrint, Dog, Heart, Search, Stethoscope, ShoppingBag, AlertTriangle, Users, ChevronDown, MapPin, Clock, Shield, Plus, Minus, Facebook, Instagram, Twitter, Github } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import LogoUpload from "@/components/LogoUpload";
+import { useState } from "react";
 
 const Index = () => {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [logoUrl, setLogoUrl] = useState<string | null>(null);
-
-  // Load logo URL from localStorage on component mount
-  useEffect(() => {
-    const savedLogoUrl = localStorage.getItem('pawket-logo-url');
-    if (savedLogoUrl) {
-      setLogoUrl(savedLogoUrl);
-    }
-  }, []);
 
   const handleGetStarted = () => {
     navigate("/login");
@@ -117,11 +107,9 @@ const Index = () => {
           <div className="max-w-2xl space-y-6">
             {/* Logo placeholder and app name */}
             <div className="flex items-center space-x-4">
-              <LogoUpload 
-                logoUrl={logoUrl}
-                onLogoUpdate={setLogoUrl}
-                size="lg"
-              />
+              <div className="w-16 h-16 bg-gradient-to-br from-[#00AEEF] to-[#0099CC] rounded-xl shadow-lg border-2 border-white/30 flex items-center justify-center">
+                <PawPrint size={28} className="text-white" />
+              </div>
               <div className="flex items-baseline space-x-2">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#00AEEF] tracking-tight">
                   Pawket
@@ -132,7 +120,7 @@ const Index = () => {
               </div>
             </div>
 
-            {/* ... keep existing code (tagline, description, and button) */}
+            {/* Tagline */}
             <div className="space-y-2">
               <p className="text-xl sm:text-2xl font-medium text-[#333333] leading-relaxed">
                 Bangladesh's First All-in-one Pet Solution
@@ -142,12 +130,14 @@ const Index = () => {
               </p>
             </div>
 
+            {/* Description */}
             <div className="max-w-xl">
               <p className="text-lg text-gray-600 leading-relaxed">
                 Now available in Dhaka, Mymensingh, Sylhet, and more! Pawket offers pet sharing, adoption, virtual vet care, and a full pet shop — all in one simple platform.
               </p>
             </div>
 
+            {/* Get Started Button */}
             <div className="pt-4">
               <Button
                 onClick={handleGetStarted}
@@ -162,7 +152,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ... keep existing code (all other sections remain the same) */}
+      {/* What We Offer Section */}
       <section id="what-we-offer" className="py-16 px-6 sm:px-8 lg:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -196,6 +186,7 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Coming Soon Section */}
       <section id="coming-soon" className="py-16 px-6 sm:px-8 lg:px-12 bg-[#FAF3E0]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -229,6 +220,7 @@ const Index = () => {
         </div>
       </section>
 
+      {/* About Pawket Section */}
       <section id="about-pawket" className="py-16 px-6 sm:px-8 lg:px-12 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-[#00AEEF] mb-8">
@@ -248,6 +240,7 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Experience Now Section */}
       <section id="experience-now" className="py-16 px-6 sm:px-8 lg:px-12 bg-[#FAF3E0]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-[#333333] mb-6">
@@ -267,6 +260,7 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Mission Section */}
       <section id="our-mission" className="py-16 px-6 sm:px-8 lg:px-12 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-[#00AEEF] mb-8">
@@ -278,6 +272,7 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Vision Section */}
       <section id="our-vision" className="py-16 px-6 sm:px-8 lg:px-12 bg-[#FAF3E0]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-[#333333] mb-8">
@@ -294,6 +289,7 @@ const Index = () => {
         </div>
       </section>
 
+      {/* FAQ Section - Collapsible */}
       <section id="faq" className="py-16 px-6 sm:px-8 lg:px-12 bg-white">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
@@ -334,6 +330,7 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Meet Our Team Section */}
       <section id="our-team" className="py-16 px-6 sm:px-8 lg:px-12 bg-[#FAF3E0]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
@@ -346,6 +343,7 @@ const Index = () => {
           </div>
           
           <div className="flex flex-col items-center space-y-12">
+            {/* Founder */}
             <Card className="w-full max-w-lg border-0 shadow-xl bg-white rounded-2xl transform hover:scale-105 transition-all duration-300">
               <CardHeader className="text-center pb-6 pt-8">
                 <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-[#00AEEF] to-[#0099CC] rounded-full flex items-center justify-center shadow-lg">
@@ -360,6 +358,7 @@ const Index = () => {
               </CardHeader>
             </Card>
 
+            {/* Team Members */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
               <Card className="border-0 shadow-xl bg-white rounded-2xl transform hover:scale-105 transition-all duration-300">
                 <CardHeader className="text-center pb-6 pt-8">
@@ -393,9 +392,12 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Footer Section - Redesigned */}
       <footer className="py-12 px-6 sm:px-8 lg:px-12 bg-[#333333] text-white">
         <div className="max-w-6xl mx-auto">
+          {/* First Row: Two Columns */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            {/* Left Column: Follow Us */}
             <div>
               <h3 className="text-xl font-bold text-[#FFD166] mb-4">Follow Us</h3>
               <div className="space-y-3">
@@ -418,6 +420,7 @@ const Index = () => {
               </div>
             </div>
 
+            {/* Right Column: Quick Links */}
             <div>
               <h3 className="text-xl font-bold text-[#FFD166] mb-4">Quick Links</h3>
               <div className="grid grid-cols-2 gap-2">
@@ -451,6 +454,7 @@ const Index = () => {
 
           <Separator className="mb-8 bg-gray-600" />
 
+          {/* Second Row: Contact Us */}
           <div className="text-center mb-8">
             <h3 className="text-xl font-bold text-[#FFD166] mb-4">Contact Us</h3>
             <div className="space-y-2 text-gray-300">
@@ -463,6 +467,7 @@ const Index = () => {
             </div>
           </div>
 
+          {/* Final Footer Line */}
           <div className="text-center text-sm text-gray-400">
             <p>© 2025 All Rights Reserved by Team Pawket Force.</p>
           </div>
