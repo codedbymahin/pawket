@@ -1,8 +1,9 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { PawPrint, Dog, Heart, Search, Stethoscope, ShoppingBag, AlertTriangle, Users, ChevronDown, MapPin, Clock, Shield, Plus, Minus, Facebook, Instagram, Twitter, Github, HelpCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
@@ -11,6 +12,11 @@ const Index = () => {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+  const [typewriterText, setTypewriterText] = useState<string>("");
+  const [currentFaqAnswer, setCurrentFaqAnswer] = useState<string>("");
+  const [isTyping, setIsTyping] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
+  const [showNewsletterModal, setShowNewsletterModal] = useState<boolean>(false);
   
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
 
@@ -45,6 +51,27 @@ const Index = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Typewriter effect for FAQ answers
+  useEffect(() => {
+    if (currentFaqAnswer && openFaq !== null) {
+      setIsTyping(true);
+      setTypewriterText("");
+      
+      let i = 0;
+      const typeInterval = setInterval(() => {
+        if (i < currentFaqAnswer.length) {
+          setTypewriterText(prev => prev + currentFaqAnswer.charAt(i));
+          i++;
+        } else {
+          setIsTyping(false);
+          clearInterval(typeInterval);
+        }
+      }, 30); // Typing speed
+
+      return () => clearInterval(typeInterval);
+    }
+  }, [currentFaqAnswer, openFaq]);
+
   const setSectionRef = (sectionId: string) => (el: HTMLElement | null) => {
     sectionRefs.current[sectionId] = el;
   };
@@ -57,6 +84,24 @@ const Index = () => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleFaqToggle = (index: number, answer: string) => {
+    if (openFaq === index) {
+      setOpenFaq(null);
+      setCurrentFaqAnswer("");
+    } else {
+      setOpenFaq(index);
+      setCurrentFaqAnswer(answer);
+    }
+  };
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) {
+      setShowNewsletterModal(true);
+      setEmail("");
     }
   };
 
@@ -146,10 +191,8 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Main content aligned to left */}
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="max-w-2xl space-y-8">
-            {/* Logo placeholder and app name */}
             <div className="flex items-center space-x-4">
               <div className="w-16 h-16 bg-gradient-to-br from-[#00AEEF] to-[#0099CC] rounded-xl shadow-lg border-2 border-white/30 flex items-center justify-center">
                 <PawPrint size={28} className="text-white" />
@@ -164,7 +207,6 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Tagline */}
             <div className="space-y-3">
               <p className="text-xl sm:text-2xl font-semibold text-[#333333] leading-relaxed font-['Nunito',sans-serif]">
                 Bangladesh's First All-in-one Pet Solution
@@ -174,14 +216,12 @@ const Index = () => {
               </p>
             </div>
 
-            {/* Description */}
             <div className="max-w-xl">
               <p className="text-lg text-gray-600 leading-relaxed font-['Nunito',sans-serif]">
                 Now available in Dhaka, Mymensingh, Sylhet, and more! Pawket offers pet sharing, adoption, virtual vet care, and a full pet shop — all in one simple platform.
               </p>
             </div>
 
-            {/* Get Started Button with enhanced styling */}
             <div className="pt-6">
               <Button
                 onClick={handleGetStarted}
@@ -199,10 +239,10 @@ const Index = () => {
       {/* What We Offer Section with enhanced cards and animations */}
       <section 
         id="what-we-offer" 
-        className={`py-20 px-6 sm:px-8 lg:px-12 bg-white transition-all duration-500 ease-out ${
+        className={`py-20 px-6 sm:px-8 lg:px-12 bg-white transition-all duration-700 ease-in-out ${
           visibleSections.has('what-we-offer') 
             ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 translate-y-5'
+            : 'opacity-0 translate-y-8'
         }`}
         data-section="what-we-offer"
         ref={setSectionRef('what-we-offer')}
@@ -219,7 +259,17 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className={`hover:shadow-2xl transition-all duration-300 border-0 shadow-lg ${feature.bgColor} rounded-2xl transform hover:scale-105 hover:-translate-y-2`}>
+              <Card 
+                key={index} 
+                className={`hover:shadow-2xl transition-all duration-700 ease-in-out border-0 shadow-lg ${feature.bgColor} rounded-2xl transform hover:scale-105 hover:-translate-y-2 ${
+                  visibleSections.has('what-we-offer') 
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-8'
+                }`}
+                style={{ 
+                  transitionDelay: visibleSections.has('what-we-offer') ? `${index * 100}ms` : '0ms' 
+                }}
+              >
                 <CardHeader className="text-center pb-6 pt-8 px-8">
                   <div className="w-20 h-20 mx-auto mb-6 bg-white rounded-full flex items-center justify-center shadow-lg">
                     {feature.icon}
@@ -242,10 +292,10 @@ const Index = () => {
       {/* Coming Soon Section with alternating animations */}
       <section 
         id="coming-soon" 
-        className={`py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-[#f8f9fa] to-[#e9ecef] transition-all duration-500 ease-out ${
+        className={`py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-[#f8f9fa] to-[#e9ecef] transition-all duration-700 ease-in-out ${
           visibleSections.has('coming-soon') 
             ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 translate-y-5'
+            : 'opacity-0 translate-y-8'
         }`}
         data-section="coming-soon"
         ref={setSectionRef('coming-soon')}
@@ -264,20 +314,19 @@ const Index = () => {
             {comingSoon.map((feature, index) => (
               <Card 
                 key={index} 
-                className={`relative border-0 shadow-lg bg-white/70 backdrop-blur-sm rounded-2xl transform hover:scale-102 transition-all duration-500 opacity-85 ${
+                className={`relative border-0 shadow-lg bg-white/70 backdrop-blur-sm rounded-2xl transform hover:scale-102 transition-all duration-700 opacity-85 ${
                   visibleSections.has('coming-soon') 
                     ? index === 0 
                       ? 'translate-x-0 opacity-85' 
                       : 'translate-x-0 opacity-85'
                     : index === 0 
-                      ? '-translate-x-10 opacity-0' 
-                      : 'translate-x-10 opacity-0'
+                      ? '-translate-x-12 opacity-0' 
+                      : 'translate-x-12 opacity-0'
                 }`}
                 style={{ 
                   transitionDelay: visibleSections.has('coming-soon') ? `${index * 100}ms` : '0ms' 
                 }}
               >
-                {/* Coming Soon Badge */}
                 <div className="absolute top-4 right-4 bg-gradient-to-r from-[#FFD166] to-[#FFA500] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
                   Coming Soon
                 </div>
@@ -300,7 +349,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* About Pawket Section with background and watermarks */}
       <section 
         id="about-pawket" 
         className={`relative py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-blue-50 to-indigo-50 transition-all duration-500 ease-out ${
@@ -311,7 +359,6 @@ const Index = () => {
         data-section="about-pawket"
         ref={setSectionRef('about-pawket')}
       >
-        {/* Subtle paw print watermarks */}
         <div className="absolute inset-0 opacity-5">
           <PawPrint size={120} className="absolute top-10 left-10 text-[#00AEEF] rotate-12" />
           <PawPrint size={80} className="absolute bottom-20 right-20 text-[#FFD166] -rotate-12" />
@@ -334,7 +381,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Experience Now Section */}
       <section 
         id="experience-now" 
         className={`py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-green-50 to-emerald-50 transition-all duration-500 ease-out ${
@@ -363,7 +409,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Mission Section */}
       <section 
         id="our-mission" 
         className={`py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-purple-50 to-pink-50 transition-all duration-500 ease-out ${
@@ -384,7 +429,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Vision Section */}
       <section 
         id="our-vision" 
         className={`py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-yellow-50 to-orange-50 transition-all duration-500 ease-out ${
@@ -410,7 +454,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* FAQ Section with enhanced styling */}
+      {/* FAQ Section with enhanced styling and typewriter effect */}
       <section 
         id="faq" 
         className={`py-20 px-6 sm:px-8 lg:px-12 bg-gray-50 transition-all duration-500 ease-out ${
@@ -431,7 +475,7 @@ const Index = () => {
           <div className="space-y-6">
             {faqItems.map((item, index) => (
               <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl bg-white">
-                <Collapsible open={openFaq === index} onOpenChange={() => setOpenFaq(openFaq === index ? null : index)}>
+                <Collapsible open={openFaq === index} onOpenChange={() => handleFaqToggle(index, item.answer)}>
                   <CollapsibleTrigger asChild>
                     <CardHeader className="cursor-pointer hover:bg-blue-50/50 transition-colors duration-200 rounded-t-2xl">
                       <div className="flex items-center justify-between">
@@ -452,7 +496,8 @@ const Index = () => {
                   <CollapsibleContent className="transition-all duration-300 ease-in-out">
                     <CardContent className="pt-0 pb-6 pl-11">
                       <p className="text-gray-600 leading-relaxed font-['Nunito',sans-serif]">
-                        {item.answer}
+                        {openFaq === index ? (typewriterText || item.answer) : item.answer}
+                        {openFaq === index && isTyping && <span className="animate-pulse">|</span>}
                       </p>
                     </CardContent>
                   </CollapsibleContent>
@@ -463,7 +508,56 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Meet Our Team Section with enhanced styling */}
+      {/* Newsletter Section */}
+      <section 
+        id="newsletter" 
+        className={`py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-indigo-50 to-purple-50 transition-all duration-500 ease-out ${
+          visibleSections.has('newsletter') 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-5'
+        }`}
+        data-section="newsletter"
+        ref={setSectionRef('newsletter')}
+      >
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl sm:text-5xl font-bold text-[#00AEEF] mb-6 font-['Nunito',sans-serif]">
+            Subscribe to our newsletter
+          </h2>
+          <div className="space-y-4 mb-10">
+            <p className="text-xl text-[#333333] leading-relaxed font-['Nunito',sans-serif]">
+              Get the latest pet care tips, feature updates, and early access news delivered straight to your inbox.
+            </p>
+            <p className="text-lg text-gray-600 leading-relaxed font-['Nunito',sans-serif]">
+              Join thousands of pet lovers who trust Pawket for expert advice and community updates.
+            </p>
+          </div>
+          
+          <form onSubmit={handleNewsletterSubmit} className="max-w-lg mx-auto">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Input
+                type="email"
+                placeholder="Enter your email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="flex-1 px-6 py-4 text-lg rounded-2xl border-2 border-transparent bg-white shadow-lg focus:border-[#00AEEF] focus:ring-2 focus:ring-[#00AEEF]/20 transition-all duration-300 font-['Nunito',sans-serif] animate-gradient-border"
+                style={{
+                  background: 'linear-gradient(white, white) padding-box, linear-gradient(45deg, #00AEEF, #FFD166, #00AEEF) border-box',
+                  animation: 'gradientBorder 3s linear infinite'
+                }}
+              />
+              <Button
+                type="submit"
+                size="lg"
+                className="px-8 py-4 text-lg bg-[#00AEEF] hover:bg-[#0099CC] text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 hover:glow transition-all duration-300 border-0 font-['Nunito',sans-serif]"
+              >
+                Subscribe
+              </Button>
+            </div>
+          </form>
+        </div>
+      </section>
+
       <section 
         id="our-team" 
         className={`py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-indigo-50 to-blue-50 transition-all duration-500 ease-out ${
@@ -485,7 +579,6 @@ const Index = () => {
           </div>
           
           <div className="flex flex-col items-center space-y-12">
-            {/* Founder with special highlighting */}
             <Card className="w-full max-w-lg border-0 shadow-2xl bg-white rounded-3xl transform hover:scale-105 transition-all duration-300">
               <CardHeader className="text-center pb-8 pt-10">
                 <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-[#00AEEF] to-[#0099CC] rounded-full flex items-center justify-center shadow-xl">
@@ -500,7 +593,6 @@ const Index = () => {
               </CardHeader>
             </Card>
 
-            {/* Team Members with enhanced cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
               <Card className="border-0 shadow-xl bg-white rounded-3xl transform hover:scale-105 transition-all duration-300 hover:shadow-2xl">
                 <CardHeader className="text-center pb-8 pt-10">
@@ -544,13 +636,10 @@ const Index = () => {
         data-section="footer"
         ref={setSectionRef('footer')}
       >
-        {/* Top border wave divider */}
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00AEEF] via-[#FFD166] to-[#00AEEF]"></div>
         
         <div className="max-w-6xl mx-auto">
-          {/* First Row: Two Columns */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
-            {/* Left Column: Follow Us */}
             <div>
               <h3 className="text-2xl font-bold text-[#FFD166] mb-6 font-['Nunito',sans-serif]">Follow Us</h3>
               <div className="space-y-4">
@@ -573,7 +662,6 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Right Column: Quick Links */}
             <div>
               <h3 className="text-2xl font-bold text-[#FFD166] mb-6 font-['Nunito',sans-serif]">Quick Links</h3>
               <div className="grid grid-cols-2 gap-3">
@@ -607,7 +695,6 @@ const Index = () => {
 
           <Separator className="mb-10 bg-gray-600" />
 
-          {/* Second Row: Contact Us */}
           <div className="text-center mb-10">
             <h3 className="text-2xl font-bold text-[#FFD166] mb-6 font-['Nunito',sans-serif]">Contact Us</h3>
             <div className="space-y-3 text-gray-300 font-['Nunito',sans-serif]">
@@ -620,12 +707,37 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Final Footer Line */}
           <div className="text-center text-sm text-gray-400 font-['Nunito',sans-serif]">
             <p>© 2025 All Rights Reserved by Team Pawket Force.</p>
           </div>
         </div>
       </footer>
+
+      {/* Newsletter Success Modal */}
+      <Dialog open={showNewsletterModal} onOpenChange={setShowNewsletterModal}>
+        <DialogContent className="sm:max-w-md rounded-3xl bg-white border-0 shadow-2xl">
+          <DialogHeader className="text-center">
+            <DialogTitle className="text-2xl font-bold text-[#00AEEF] mb-4 font-['Nunito',sans-serif]">
+              You're Now Subscribed!
+            </DialogTitle>
+            <DialogDescription className="text-gray-600 leading-relaxed font-['Nunito',sans-serif]">
+              <div className="space-y-4">
+                <p>Thanks for joining the Pawket family.</p>
+                <p>You'll now receive the latest pet care tips, feature updates, and early access news — all with a touch of love.</p>
+                <p className="font-semibold text-[#00AEEF]">Stay pawsome!</p>
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-center pt-4">
+            <Button 
+              onClick={() => setShowNewsletterModal(false)}
+              className="text-white rounded-2xl px-8 py-3 bg-[#00AEEF] hover:bg-[#0099CC] font-['Nunito',sans-serif] transform hover:scale-105 transition-all duration-300"
+            >
+              Got it!
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
