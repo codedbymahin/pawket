@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -81,68 +82,70 @@ const Adopt = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pawket-light via-pawket-neutral to-white">
-      {/* Header */}
-      <div className="p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-50 to-cyan-50">
+      {/* Enhanced Header */}
+      <div className="bg-gradient-to-br from-blue-100 to-cyan-100 p-8">
         <Button
           variant="ghost"
           onClick={() => navigate("/dashboard")}
-          className="mb-4 text-gray-600 hover:text-gray-800"
+          className="mb-6 text-gray-600 hover:text-gray-800 hover:bg-white/60 rounded-xl transition-all duration-300"
         >
           <ArrowLeft size={20} className="mr-2" />
           Back to Dashboard
         </Button>
         
         <div className="text-center">
-          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pawket-primary to-pawket-accent bg-clip-text text-transparent mb-2">
-            Adopt a Pet
+          <h1 className="text-4xl sm:text-5xl font-bold font-poppins bg-gradient-to-r from-pawket-primary to-pawket-accent bg-clip-text text-transparent mb-4">
+            Available Pets for Adoption
           </h1>
-          <p className="text-gray-600 text-lg">Find your perfect companion in Bangladesh</p>
+          <p className="text-gray-600 text-xl font-nunito">Find your perfect companion in Bangladesh</p>
         </div>
       </div>
 
-      {/* Pet Listings */}
-      <div className="px-4 sm:px-6 lg:px-8 pb-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Enhanced Pet Listings */}
+      <div className="px-4 sm:px-6 lg:px-8 pb-24 pt-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {pets.map((pet) => (
-            <Card key={pet.id} className="bg-white/80 backdrop-blur-sm border-pawket-neutral shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            <Card key={pet.id} className="bg-white/90 backdrop-blur-sm border-2 border-blue-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 rounded-3xl">
               <div onClick={() => handleCardClick(pet.id)} className="cursor-pointer">
-                <CardHeader className="text-center">
-                  <div className="flex justify-center mb-3">
-                    {pet.type === "dog" ? (
-                      <Dog size={40} className="text-pawket-accent" />
-                    ) : (
-                      <Cat size={40} className="text-pawket-primary" />
-                    )}
+                <CardHeader className="text-center px-8 pt-8">
+                  <div className="flex justify-center mb-4">
+                    <div className="p-4 rounded-full shadow-lg bg-gradient-to-br from-blue-400 to-cyan-500">
+                      {pet.type === "dog" ? (
+                        <Dog size={48} className="text-white" />
+                      ) : (
+                        <Cat size={48} className="text-white" />
+                      )}
+                    </div>
                   </div>
-                  <CardTitle className="text-xl font-bold text-gray-800">
+                  <CardTitle className="text-2xl font-bold text-gray-800 font-poppins">
                     {pet.name}
                   </CardTitle>
-                  <CardDescription className="text-gray-600">
+                  <CardDescription className="text-gray-600 text-base font-nunito">
                     {pet.breed} • {pet.age}
                   </CardDescription>
                 </CardHeader>
                 
-                <CardContent className="space-y-4">
-                  <div className="flex items-center text-gray-600 text-sm">
-                    <MapPin size={16} className="mr-2 text-pawket-accent" />
-                    {pet.location}
+                <CardContent className="space-y-4 px-8">
+                  <div className="flex items-center text-gray-600 text-base">
+                    <MapPin size={18} className="mr-3 text-cyan-500" />
+                    <span className="font-nunito">{pet.location}</span>
                   </div>
                   
-                  <p className="text-gray-700 text-sm leading-relaxed">
+                  <p className="text-gray-700 text-sm leading-relaxed font-nunito">
                     {pet.description}
                   </p>
                   
-                  <div className="text-sm text-gray-600">
+                  <div className="text-sm text-gray-600 font-nunito">
                     <strong>Owner:</strong> {pet.owner}
                   </div>
                 </CardContent>
               </div>
               
-              <CardContent className="pt-0">
+              <CardContent className="pt-0 pb-8 px-8">
                 <Button 
                   onClick={handleContactOwner}
-                  className="w-full bg-gradient-to-r from-pawket-accent to-pawket-primary hover:from-pawket-primary hover:to-pawket-accent text-white font-semibold rounded-lg"
+                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold rounded-2xl py-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-poppins"
                 >
                   Contact Owner
                 </Button>
@@ -154,19 +157,19 @@ const Adopt = () => {
 
       {/* Login Required Modal */}
       <Dialog open={showLoginModal} onOpenChange={setShowLoginModal}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md rounded-3xl">
           <DialogHeader>
-            <DialogTitle className="text-center text-xl font-bold">
+            <DialogTitle className="text-center text-xl font-bold font-poppins">
               ⚠️ Login Required
             </DialogTitle>
-            <DialogDescription className="text-center text-gray-600 pt-4 leading-relaxed">
+            <DialogDescription className="text-center text-gray-600 pt-4 leading-relaxed font-nunito">
               Login required to access this feature. Guest access is view-only. (Only early access users approved by the Pawket Team can log in and use these services.)
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-center pt-4">
             <Button 
               onClick={() => setShowLoginModal(false)}
-              className="bg-gradient-to-r from-pawket-accent to-pawket-primary hover:from-pawket-primary hover:to-pawket-accent text-white"
+              className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white rounded-2xl px-8 font-poppins hover:scale-105 transition-transform duration-300"
             >
               Understood
             </Button>

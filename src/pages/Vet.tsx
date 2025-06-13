@@ -1,7 +1,8 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ArrowLeft, Cat, MapPin, Star, Clock } from "lucide-react";
+import { ArrowLeft, UserRound, MapPin, Star, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -87,74 +88,76 @@ const Vet = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-orange-50 to-blue-100">
-      {/* Header */}
-      <div className="p-6">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
+      {/* Enhanced Header */}
+      <div className="bg-gradient-to-br from-green-100 to-emerald-100 p-8">
         <Button
           variant="ghost"
           onClick={() => navigate("/dashboard")}
-          className="mb-4 text-gray-600 hover:text-gray-800"
+          className="mb-6 text-gray-600 hover:text-gray-800 hover:bg-white/60 rounded-xl transition-all duration-300"
         >
           <ArrowLeft size={20} className="mr-2" />
           Back to Dashboard
         </Button>
         
         <div className="text-center">
-          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent mb-2">
-            Virtual Vet
+          <h1 className="text-4xl sm:text-5xl font-bold font-poppins bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-4">
+            Professional Veterinarians
           </h1>
-          <p className="text-gray-600 text-lg">Professional veterinary care from home</p>
+          <p className="text-gray-600 text-xl font-nunito">Professional veterinary care from home</p>
         </div>
       </div>
 
-      {/* Vet Listings */}
-      <div className="px-4 sm:px-6 lg:px-8 pb-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Enhanced Vet Listings */}
+      <div className="px-4 sm:px-6 lg:px-8 pb-24 pt-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {vets.map((vet) => (
-            <Card key={vet.id} className="bg-white/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            <Card key={vet.id} className="bg-white/90 backdrop-blur-sm border-2 border-green-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 rounded-3xl">
               <div onClick={() => handleCardClick(vet.id)} className="cursor-pointer">
-                <CardHeader className="text-center">
-                  <div className="flex justify-center mb-3">
-                    <Cat size={40} className="text-green-500" />
+                <CardHeader className="text-center px-8 pt-8">
+                  <div className="flex justify-center mb-4">
+                    <div className="p-4 rounded-full shadow-lg bg-gradient-to-br from-green-400 to-emerald-500">
+                      <UserRound size={48} className="text-white" />
+                    </div>
                   </div>
-                  <CardTitle className="text-xl font-bold text-gray-800">
+                  <CardTitle className="text-2xl font-bold text-gray-800 font-poppins">
                     {vet.name}
                   </CardTitle>
-                  <CardDescription className="text-gray-600">
+                  <CardDescription className="text-gray-600 text-base font-nunito">
                     {vet.specialty}
                   </CardDescription>
                 </CardHeader>
                 
-                <CardContent className="space-y-3">
-                  <div className="flex items-center text-gray-600 text-sm">
-                    <MapPin size={16} className="mr-2 text-orange-500" />
-                    {vet.location}
+                <CardContent className="space-y-4 px-8">
+                  <div className="flex items-center text-gray-600 text-base">
+                    <MapPin size={18} className="mr-3 text-emerald-500" />
+                    <span className="font-nunito">{vet.location}</span>
                   </div>
                   
-                  <div className="flex items-center text-gray-600 text-sm">
-                    <Clock size={16} className="mr-2 text-blue-500" />
-                    {vet.availability}
+                  <div className="flex items-center text-gray-600 text-base">
+                    <Clock size={18} className="mr-3 text-green-500" />
+                    <span className="font-nunito">{vet.availability}</span>
                   </div>
                   
-                  <div className="flex items-center text-gray-600 text-sm">
-                    <Star size={16} className="mr-2 text-yellow-500 fill-current" />
-                    {vet.rating} • {vet.experience} experience
+                  <div className="flex items-center text-gray-600 text-base">
+                    <Star size={18} className="mr-3 text-yellow-500 fill-current" />
+                    <span className="font-nunito">{vet.rating} • {vet.experience} experience</span>
                   </div>
                   
-                  <p className="text-gray-700 text-sm leading-relaxed">
+                  <p className="text-gray-700 text-sm leading-relaxed font-nunito">
                     {vet.description}
                   </p>
                   
-                  <div className="text-lg font-bold text-green-600 text-center bg-green-50 p-2 rounded-lg">
+                  <div className="text-lg font-bold text-green-600 text-center bg-green-50 p-3 rounded-2xl font-poppins">
                     Consultation: {vet.consultation}
                   </div>
                 </CardContent>
               </div>
               
-              <CardContent className="pt-0">
+              <CardContent className="pt-0 pb-8 px-8">
                 <Button 
                   onClick={handleBookAppointment}
-                  className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold rounded-lg"
+                  className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-semibold rounded-2xl py-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-poppins"
                 >
                   Book Appointment
                 </Button>
@@ -166,19 +169,19 @@ const Vet = () => {
 
       {/* Login Required Modal */}
       <Dialog open={showLoginModal} onOpenChange={setShowLoginModal}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md rounded-3xl">
           <DialogHeader>
-            <DialogTitle className="text-center text-xl font-bold">
+            <DialogTitle className="text-center text-xl font-bold font-poppins">
               ⚠️ Login Required
             </DialogTitle>
-            <DialogDescription className="text-center text-gray-600 pt-4 leading-relaxed">
+            <DialogDescription className="text-center text-gray-600 pt-4 leading-relaxed font-nunito">
               Login required to access this feature. Guest access is view-only. (Only early access users approved by the Pawket Team can log in and use these services.)
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-center pt-4">
             <Button 
               onClick={() => setShowLoginModal(false)}
-              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white"
+              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white rounded-2xl px-8 font-poppins hover:scale-105 transition-transform duration-300"
             >
               Understood
             </Button>

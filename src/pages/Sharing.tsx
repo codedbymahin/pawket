@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -82,61 +83,63 @@ const Sharing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-orange-50 to-blue-100">
-      {/* Header */}
-      <div className="p-6">
+    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-emerald-50 to-green-50">
+      {/* Enhanced Header */}
+      <div className="bg-gradient-to-br from-teal-100 to-emerald-100 p-8">
         <Button
           variant="ghost"
           onClick={() => navigate("/dashboard")}
-          className="mb-4 text-gray-600 hover:text-gray-800"
+          className="mb-6 text-gray-600 hover:text-gray-800 hover:bg-white/60 rounded-xl transition-all duration-300"
         >
           <ArrowLeft size={20} className="mr-2" />
           Back to Dashboard
         </Button>
         
         <div className="text-center">
-          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent mb-2">
-            Pet Sharing
+          <h1 className="text-4xl sm:text-5xl font-bold font-poppins bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent mb-4">
+            Pet Sharing Opportunities
           </h1>
-          <p className="text-gray-600 text-lg">Help neighbors care for their beloved pets</p>
+          <p className="text-gray-600 text-xl font-nunito">Help neighbors care for their beloved pets</p>
         </div>
       </div>
 
-      {/* Sharing Listings */}
-      <div className="px-4 sm:px-6 lg:px-8 pb-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Enhanced Sharing Listings */}
+      <div className="px-4 sm:px-6 lg:px-8 pb-24 pt-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {sharingOffers.map((offer) => (
-            <Card key={offer.id} className="bg-white/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            <Card key={offer.id} className="bg-white/90 backdrop-blur-sm border-2 border-teal-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 rounded-3xl">
               <div onClick={() => handleCardClick(offer.id)} className="cursor-pointer">
-                <CardHeader className="text-center">
-                  <div className="flex justify-center mb-3">
-                    <PawPrint size={40} className="text-blue-500" />
+                <CardHeader className="text-center px-8 pt-8">
+                  <div className="flex justify-center mb-4">
+                    <div className="p-4 rounded-full shadow-lg bg-gradient-to-br from-teal-400 to-emerald-500">
+                      <PawPrint size={48} className="text-white" />
+                    </div>
                   </div>
-                  <CardTitle className="text-xl font-bold text-gray-800">
+                  <CardTitle className="text-2xl font-bold text-gray-800 font-poppins">
                     {offer.petName}
                   </CardTitle>
-                  <CardDescription className="text-gray-600">
+                  <CardDescription className="text-gray-600 text-base font-nunito">
                     {offer.breed}
                   </CardDescription>
                 </CardHeader>
                 
-                <CardContent className="space-y-4">
-                  <div className="flex items-center text-gray-600 text-sm">
-                    <MapPin size={16} className="mr-2 text-orange-500" />
-                    {offer.location}
+                <CardContent className="space-y-4 px-8">
+                  <div className="flex items-center text-gray-600 text-base">
+                    <MapPin size={18} className="mr-3 text-emerald-500" />
+                    <span className="font-nunito">{offer.location}</span>
                   </div>
                   
-                  <div className="flex items-center text-gray-600 text-sm">
-                    <Clock size={16} className="mr-2 text-blue-500" />
-                    {offer.duration}
+                  <div className="flex items-center text-gray-600 text-base">
+                    <Clock size={18} className="mr-3 text-teal-500" />
+                    <span className="font-nunito">{offer.duration}</span>
                   </div>
                   
-                  <div className="flex items-center text-gray-600 text-sm">
-                    <User size={16} className="mr-2 text-green-500" />
-                    {offer.owner}
+                  <div className="flex items-center text-gray-600 text-base">
+                    <User size={18} className="mr-3 text-green-500" />
+                    <span className="font-nunito">{offer.owner}</span>
                   </div>
                   
-                  <p className="text-gray-700 text-sm leading-relaxed">
+                  <p className="text-gray-700 text-sm leading-relaxed font-nunito">
                     <strong>Reason:</strong> {offer.reason}
                   </p>
                   
@@ -146,7 +149,7 @@ const Sharing = () => {
                       className={`${offer.status === 'Available' 
                         ? 'bg-green-50 border-green-300 text-green-600' 
                         : 'bg-orange-50 border-orange-300 text-orange-600'
-                      } px-3 py-1`}
+                      } px-4 py-2 rounded-full font-nunito`}
                     >
                       {offer.status}
                     </Badge>
@@ -154,10 +157,10 @@ const Sharing = () => {
                 </CardContent>
               </div>
               
-              <CardContent className="pt-0">
+              <CardContent className="pt-0 pb-8 px-8">
                 <Button 
                   onClick={handleApplyToHelp}
-                  className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-lg"
+                  className="w-full bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-semibold rounded-2xl py-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-poppins"
                   disabled={offer.status === 'Temporarily Shared'}
                 >
                   {offer.status === 'Available' ? 'Apply to Help' : 'Currently Shared'}
@@ -170,19 +173,19 @@ const Sharing = () => {
 
       {/* Login Required Modal */}
       <Dialog open={showLoginModal} onOpenChange={setShowLoginModal}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md rounded-3xl">
           <DialogHeader>
-            <DialogTitle className="text-center text-xl font-bold">
+            <DialogTitle className="text-center text-xl font-bold font-poppins">
               ⚠️ Login Required
             </DialogTitle>
-            <DialogDescription className="text-center text-gray-600 pt-4 leading-relaxed">
+            <DialogDescription className="text-center text-gray-600 pt-4 leading-relaxed font-nunito">
               Login required to access this feature. Guest access is view-only. (Only early access users approved by the Pawket Team can log in and use these services.)
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-center pt-4">
             <Button 
               onClick={() => setShowLoginModal(false)}
-              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white"
+              className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white rounded-2xl px-8 font-poppins hover:scale-105 transition-transform duration-300"
             >
               Understood
             </Button>

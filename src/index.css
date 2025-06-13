@@ -115,9 +115,51 @@
   box-shadow: 0 0 20px rgba(0, 174, 239, 0.4);
 }
 
+/* Font utilities */
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-nunito {
+  font-family: 'Nunito', sans-serif;
+}
+
 /* Smooth transitions for all interactive elements */
 * {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+/* Enhanced animation classes */
+.animate-typewriter {
+  overflow: hidden;
+  border-right: 2px solid;
+  white-space: nowrap;
+  animation: typing 2s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: currentColor; }
+}
+
+/* RGB border animation */
+@keyframes rgb-border {
+  0% { border-color: rgb(255, 0, 0); }
+  16% { border-color: rgb(255, 165, 0); }
+  33% { border-color: rgb(255, 255, 0); }
+  50% { border-color: rgb(0, 255, 0); }
+  66% { border-color: rgb(0, 0, 255); }
+  83% { border-color: rgb(75, 0, 130); }
+  100% { border-color: rgb(255, 0, 0); }
+}
+
+.animate-rgb-border {
+  animation: rgb-border 3s linear infinite;
 }

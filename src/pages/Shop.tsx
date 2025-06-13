@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -109,78 +110,80 @@ const Shop = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-orange-50 to-blue-100">
-      {/* Header */}
-      <div className="p-6">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-amber-50">
+      {/* Enhanced Header */}
+      <div className="bg-gradient-to-br from-orange-100 to-yellow-100 p-8">
         <Button
           variant="ghost"
           onClick={() => navigate("/dashboard")}
-          className="mb-4 text-gray-600 hover:text-gray-800"
+          className="mb-6 text-gray-600 hover:text-gray-800 hover:bg-white/60 rounded-xl transition-all duration-300"
         >
           <ArrowLeft size={20} className="mr-2" />
           Back to Dashboard
         </Button>
         
         <div className="text-center">
-          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent mb-2">
-            Pet Shop
+          <h1 className="text-4xl sm:text-5xl font-bold font-poppins bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-4">
+            Pet Store Products
           </h1>
-          <p className="text-gray-600 text-lg">Everything your pet needs, delivered to your door</p>
+          <p className="text-gray-600 text-xl font-nunito">Everything your pet needs, delivered to your door</p>
         </div>
       </div>
 
-      {/* Product Listings */}
-      <div className="px-4 sm:px-6 lg:px-8 pb-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Enhanced Product Listings */}
+      <div className="px-4 sm:px-6 lg:px-8 pb-24 pt-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product) => (
-            <Card key={product.id} className="bg-white/80 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            <Card key={product.id} className="bg-white/90 backdrop-blur-sm border-2 border-orange-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 rounded-3xl">
               <div onClick={() => handleCardClick(product.id)} className="cursor-pointer">
-                <CardHeader className="text-center pb-3">
-                  <div className="flex justify-center mb-3">
-                    <ShoppingCart size={32} className="text-purple-500" />
+                <CardHeader className="text-center pb-4 px-6 pt-6">
+                  <div className="flex justify-center mb-4">
+                    <div className="p-3 rounded-full shadow-lg bg-gradient-to-br from-orange-400 to-amber-500">
+                      <ShoppingCart size={36} className="text-white" />
+                    </div>
                   </div>
-                  <CardTitle className="text-lg font-bold text-gray-800 leading-tight">
+                  <CardTitle className="text-lg font-bold text-gray-800 leading-tight font-poppins">
                     {product.name}
                   </CardTitle>
-                  <CardDescription className="text-gray-600 text-sm">
+                  <CardDescription className="text-gray-600 text-sm font-nunito">
                     {product.brand} • {product.category}
                   </CardDescription>
                 </CardHeader>
                 
-                <CardContent className="space-y-3">
+                <CardContent className="space-y-3 px-6">
                   <div className="flex items-center justify-center text-sm">
-                    <Star size={14} className="mr-1 text-yellow-500 fill-current" />
-                    <span className="text-gray-600">{product.rating}</span>
+                    <Star size={16} className="mr-1 text-yellow-500 fill-current" />
+                    <span className="text-gray-600 font-nunito">{product.rating}</span>
                   </div>
                   
-                  <p className="text-gray-700 text-xs leading-relaxed text-center">
+                  <p className="text-gray-700 text-xs leading-relaxed text-center font-nunito">
                     {product.description}
                   </p>
                   
                   <div className="text-center">
-                    <div className="text-xl font-bold text-green-600">
+                    <div className="text-2xl font-bold text-green-600 font-poppins">
                       {product.price}
                     </div>
-                    <div className="text-sm text-gray-500 line-through">
+                    <div className="text-sm text-gray-500 line-through font-nunito">
                       {product.originalPrice}
                     </div>
                   </div>
                   
                   <div className="text-center">
                     {product.inStock ? (
-                      <span className="text-green-600 text-sm font-medium">✓ In Stock</span>
+                      <span className="text-green-600 text-sm font-medium font-nunito">✓ In Stock</span>
                     ) : (
-                      <span className="text-red-500 text-sm font-medium">Out of Stock</span>
+                      <span className="text-red-500 text-sm font-medium font-nunito">Out of Stock</span>
                     )}
                   </div>
                 </CardContent>
               </div>
               
-              <CardContent className="pt-0">
+              <CardContent className="pt-0 pb-6 px-6">
                 <Button 
                   onClick={handleBuyNow}
                   disabled={!product.inStock}
-                  className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold rounded-lg disabled:opacity-50"
+                  className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold rounded-2xl py-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50 font-poppins"
                 >
                   {product.inStock ? "Buy Now" : "Sold Out"}
                 </Button>
@@ -192,19 +195,19 @@ const Shop = () => {
 
       {/* Login Required Modal */}
       <Dialog open={showLoginModal} onOpenChange={setShowLoginModal}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md rounded-3xl">
           <DialogHeader>
-            <DialogTitle className="text-center text-xl font-bold">
+            <DialogTitle className="text-center text-xl font-bold font-poppins">
               ⚠️ Login Required
             </DialogTitle>
-            <DialogDescription className="text-center text-gray-600 pt-4 leading-relaxed">
+            <DialogDescription className="text-center text-gray-600 pt-4 leading-relaxed font-nunito">
               Login required to access this feature. Guest access is view-only. (Only early access users approved by the Pawket Team can log in and use these services.)
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-center pt-4">
             <Button 
               onClick={() => setShowLoginModal(false)}
-              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white"
+              className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white rounded-2xl px-8 font-poppins hover:scale-105 transition-transform duration-300"
             >
               Understood
             </Button>
