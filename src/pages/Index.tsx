@@ -5,11 +5,49 @@ import { Separator } from "@/components/ui/separator";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { PawPrint, Dog, Heart, Search, Stethoscope, ShoppingBag, AlertTriangle, Users, ChevronDown, MapPin, Clock, Shield, Plus, Minus, Facebook, Instagram, Twitter, Github, HelpCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const Index = () => {
   const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+  
+  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const sectionId = entry.target.getAttribute('data-section');
+          if (sectionId) {
+            setVisibleSections(prev => {
+              const newSet = new Set(prev);
+              if (entry.isIntersecting) {
+                newSet.add(sectionId);
+              } else {
+                newSet.delete(sectionId);
+              }
+              return newSet;
+            });
+          }
+        });
+      },
+      { 
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    Object.values(sectionRefs.current).forEach(ref => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const setSectionRef = (sectionId: string) => (el: HTMLElement | null) => {
+    sectionRefs.current[sectionId] = el;
+  };
 
   const handleGetStarted = () => {
     navigate("/login");
@@ -148,7 +186,7 @@ const Index = () => {
               <Button
                 onClick={handleGetStarted}
                 size="lg"
-                className="px-10 py-5 text-xl bg-[#00AEEF] hover:bg-[#0099CC] text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 border-0 hover:glow"
+                className="px-12 py-6 text-xl bg-[#00AEEF] hover:bg-[#0099CC] text-white font-bold rounded-3xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 border-0"
               >
                 <PawPrint size={22} className="mr-3" />
                 Get Started
@@ -158,8 +196,17 @@ const Index = () => {
         </div>
       </section>
 
-      {/* What We Offer Section with enhanced cards */}
-      <section id="what-we-offer" className="py-20 px-6 sm:px-8 lg:px-12 bg-white">
+      {/* What We Offer Section with enhanced cards and animations */}
+      <section 
+        id="what-we-offer" 
+        className={`py-20 px-6 sm:px-8 lg:px-12 bg-white transition-all duration-500 ease-out ${
+          visibleSections.has('what-we-offer') 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-5'
+        }`}
+        data-section="what-we-offer"
+        ref={setSectionRef('what-we-offer')}
+      >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-bold text-[#00AEEF] mb-6 font-['Nunito',sans-serif]">
@@ -172,7 +219,7 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className={`hover:shadow-2xl transition-all duration-300 border-0 shadow-md ${feature.bgColor} rounded-3xl transform hover:scale-105 hover:-translate-y-2`}>
+              <Card key={index} className={`hover:shadow-2xl transition-all duration-300 border-0 shadow-lg ${feature.bgColor} rounded-2xl transform hover:scale-105 hover:-translate-y-2`}>
                 <CardHeader className="text-center pb-6 pt-8 px-8">
                   <div className="w-20 h-20 mx-auto mb-6 bg-white rounded-full flex items-center justify-center shadow-lg">
                     {feature.icon}
@@ -192,8 +239,17 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Coming Soon Section with enhanced styling */}
-      <section id="coming-soon" className="py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-[#f8f9fa] to-[#e9ecef]">
+      {/* Coming Soon Section with alternating animations */}
+      <section 
+        id="coming-soon" 
+        className={`py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-[#f8f9fa] to-[#e9ecef] transition-all duration-500 ease-out ${
+          visibleSections.has('coming-soon') 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-5'
+        }`}
+        data-section="coming-soon"
+        ref={setSectionRef('coming-soon')}
+      >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-bold text-[#333333] mb-6 font-['Nunito',sans-serif]">
@@ -206,7 +262,21 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {comingSoon.map((feature, index) => (
-              <Card key={index} className="relative border-0 shadow-lg bg-white/70 backdrop-blur-sm rounded-3xl transform hover:scale-102 transition-all duration-300 opacity-85">
+              <Card 
+                key={index} 
+                className={`relative border-0 shadow-lg bg-white/70 backdrop-blur-sm rounded-2xl transform hover:scale-102 transition-all duration-500 opacity-85 ${
+                  visibleSections.has('coming-soon') 
+                    ? index === 0 
+                      ? 'translate-x-0 opacity-85' 
+                      : 'translate-x-0 opacity-85'
+                    : index === 0 
+                      ? '-translate-x-10 opacity-0' 
+                      : 'translate-x-10 opacity-0'
+                }`}
+                style={{ 
+                  transitionDelay: visibleSections.has('coming-soon') ? `${index * 100}ms` : '0ms' 
+                }}
+              >
                 {/* Coming Soon Badge */}
                 <div className="absolute top-4 right-4 bg-gradient-to-r from-[#FFD166] to-[#FFA500] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
                   Coming Soon
@@ -231,7 +301,16 @@ const Index = () => {
       </section>
 
       {/* About Pawket Section with background and watermarks */}
-      <section id="about-pawket" className="relative py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-blue-50 to-indigo-50">
+      <section 
+        id="about-pawket" 
+        className={`relative py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-blue-50 to-indigo-50 transition-all duration-500 ease-out ${
+          visibleSections.has('about-pawket') 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-5'
+        }`}
+        data-section="about-pawket"
+        ref={setSectionRef('about-pawket')}
+      >
         {/* Subtle paw print watermarks */}
         <div className="absolute inset-0 opacity-5">
           <PawPrint size={120} className="absolute top-10 left-10 text-[#00AEEF] rotate-12" />
@@ -256,7 +335,16 @@ const Index = () => {
       </section>
 
       {/* Experience Now Section */}
-      <section id="experience-now" className="py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-green-50 to-emerald-50">
+      <section 
+        id="experience-now" 
+        className={`py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-green-50 to-emerald-50 transition-all duration-500 ease-out ${
+          visibleSections.has('experience-now') 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-5'
+        }`}
+        data-section="experience-now"
+        ref={setSectionRef('experience-now')}
+      >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-[#333333] mb-8 font-['Nunito',sans-serif]">
             Experience Now
@@ -267,7 +355,7 @@ const Index = () => {
           <Button
             onClick={handleGetStarted}
             size="lg"
-            className="px-10 py-5 text-xl bg-[#00AEEF] hover:bg-[#0099CC] text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 border-0"
+            className="px-12 py-6 text-xl bg-[#00AEEF] hover:bg-[#0099CC] text-white font-bold rounded-3xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 border-0"
           >
             <PawPrint size={22} className="mr-3" />
             Get Started
@@ -276,7 +364,16 @@ const Index = () => {
       </section>
 
       {/* Mission Section */}
-      <section id="our-mission" className="py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-purple-50 to-pink-50">
+      <section 
+        id="our-mission" 
+        className={`py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-purple-50 to-pink-50 transition-all duration-500 ease-out ${
+          visibleSections.has('our-mission') 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-5'
+        }`}
+        data-section="our-mission"
+        ref={setSectionRef('our-mission')}
+      >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-[#00AEEF] mb-10 font-['Nunito',sans-serif]">
             Our Mission
@@ -288,7 +385,16 @@ const Index = () => {
       </section>
 
       {/* Vision Section */}
-      <section id="our-vision" className="py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-yellow-50 to-orange-50">
+      <section 
+        id="our-vision" 
+        className={`py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-yellow-50 to-orange-50 transition-all duration-500 ease-out ${
+          visibleSections.has('our-vision') 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-5'
+        }`}
+        data-section="our-vision"
+        ref={setSectionRef('our-vision')}
+      >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-[#333333] mb-10 font-['Nunito',sans-serif]">
             Our Vision
@@ -305,7 +411,16 @@ const Index = () => {
       </section>
 
       {/* FAQ Section with enhanced styling */}
-      <section id="faq" className="py-20 px-6 sm:px-8 lg:px-12 bg-gray-50">
+      <section 
+        id="faq" 
+        className={`py-20 px-6 sm:px-8 lg:px-12 bg-gray-50 transition-all duration-500 ease-out ${
+          visibleSections.has('faq') 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-5'
+        }`}
+        data-section="faq"
+        ref={setSectionRef('faq')}
+      >
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-bold text-[#00AEEF] mb-6 font-['Nunito',sans-serif]">
@@ -349,7 +464,16 @@ const Index = () => {
       </section>
 
       {/* Meet Our Team Section with enhanced styling */}
-      <section id="our-team" className="py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-indigo-50 to-blue-50">
+      <section 
+        id="our-team" 
+        className={`py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-indigo-50 to-blue-50 transition-all duration-500 ease-out ${
+          visibleSections.has('our-team') 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-5'
+        }`}
+        data-section="our-team"
+        ref={setSectionRef('our-team')}
+      >
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-bold text-[#333333] mb-6 font-['Nunito',sans-serif]">
@@ -411,7 +535,15 @@ const Index = () => {
       </section>
 
       {/* Footer Section with enhanced dark styling */}
-      <footer className="relative py-16 px-6 sm:px-8 lg:px-12 bg-[#1a1a1a] text-white">
+      <footer 
+        className={`relative py-16 px-6 sm:px-8 lg:px-12 bg-[#1a1a1a] text-white transition-all duration-500 ease-out ${
+          visibleSections.has('footer') 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-5'
+        }`}
+        data-section="footer"
+        ref={setSectionRef('footer')}
+      >
         {/* Top border wave divider */}
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00AEEF] via-[#FFD166] to-[#00AEEF]"></div>
         
