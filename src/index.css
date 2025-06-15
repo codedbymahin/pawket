@@ -117,6 +117,17 @@
   }
 }
 
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
 .animate-gradient-border {
   background-size: 200% 200%;
   animation: gradientBorder 3s ease infinite;
@@ -128,6 +139,33 @@
 
 .hover\:glow:hover {
   box-shadow: 0 0 20px rgba(0, 174, 239, 0.4);
+}
+
+/* Enhanced Animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 174, 239, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 174, 239, 0.6);
+  }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-bounce-gentle {
+  animation: bounce-gentle 2s ease-in-out infinite;
 }
 
 /* ... keep existing code (font utilities, smooth transitions, typewriter animations, rgb border) */

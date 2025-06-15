@@ -1,7 +1,9 @@
+
 import * as React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Heart } from "lucide-react";
+import EnhancedButton from "@/components/EnhancedButton";
 
 type ItemCardDetail = {
   icon: React.ElementType;
@@ -77,20 +79,50 @@ const ItemCard: React.FC<ItemCardProps> = ({
   buttonDisabled = false,
 }) => {
   const styles = categoryStyles[category];
+  const [isFavorited, setIsFavorited] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
 
   const handleButtonClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     onButtonClick();
   };
 
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsFavorited(!isFavorited);
+  };
+
   return (
-    <Card className={`bg-white/90 backdrop-blur-sm border-2 ${styles.border} shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 rounded-3xl flex flex-col`}>
+    <Card 
+      className={`bg-white/90 backdrop-blur-sm border-2 ${styles.border} shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 rounded-3xl flex flex-col relative overflow-hidden ${
+        isHovered ? 'shadow-[0_0_30px_rgba(0,174,239,0.3)]' : ''
+      }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Favorite button */}
+      <button
+        onClick={handleFavoriteClick}
+        className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:scale-110 transition-all duration-200"
+      >
+        <Heart
+          size={20}
+          className={`transition-all duration-200 ${
+            isFavorited
+              ? 'text-red-500 fill-current scale-110'
+              : 'text-gray-400 hover:text-red-400'
+          }`}
+        />
+      </button>
+
       <div onClick={() => onClick(id)} className="cursor-pointer flex-grow">
         <CardHeader className="text-center px-8 pt-8">
           <div className="flex justify-center mb-4">
             {image ? image : (
               icon && (
-                <div className={`p-4 rounded-full shadow-lg ${styles.iconBg}`}>
+                <div className={`p-4 rounded-full shadow-lg ${styles.iconBg} transform transition-all duration-300 ${
+                  isHovered ? 'scale-110 rotate-6' : ''
+                }`}>
                   {icon}
                 </div>
               )
@@ -154,13 +186,13 @@ const ItemCard: React.FC<ItemCardProps> = ({
       </div>
       
       <CardContent className="pt-4 pb-8 px-8">
-        <Button 
+        <EnhancedButton 
           onClick={handleButtonClick}
           className={`w-full ${styles.buttonBg} text-white font-semibold rounded-2xl py-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-poppins`}
           disabled={buttonDisabled}
         >
           {buttonText}
-        </Button>
+        </EnhancedButton>
       </CardContent>
     </Card>
   );

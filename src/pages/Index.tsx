@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertTriangle, Heart, PawPrint } from "lucide-react";
@@ -11,7 +12,7 @@ import FeaturesSection from "@/components/FeaturesSection";
 import TeamSection from "@/components/TeamSection";
 import StatsSection from "@/components/StatsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
-import FloatingElements from "@/components/FloatingElements";
+import EnhancedFloatingElements from "@/components/EnhancedFloatingElements";
 import FAQSection from "@/components/FAQSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import NewsletterModal from "@/components/NewsletterModal";
@@ -61,7 +62,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#fdfcfb] to-[#f3f6f9] font-sans relative">
-      <FloatingElements />
+      <EnhancedFloatingElements />
       <HeroSection />
       <CountdownSection />
       <FeaturesSection visibleSections={visibleSections} setSectionRef={setSectionRef} />
@@ -268,7 +269,7 @@ const Index = () => {
           href="https://forms.gle/WhBDKy8DLKqM7XxK8"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block font-poppins bg-[#00AEEF] hover:bg-[#0099CC] text-white px-7 py-3 rounded-2xl font-semibold shadow transition-all"
+          className="inline-block font-poppins bg-[#00AEEF] hover:bg-[#0099CC] text-white px-7 py-3 rounded-2xl font-semibold shadow transition-all transform hover:scale-105"
         >
           Help us build Pawket with your voice — Take the Survey
         </a>
