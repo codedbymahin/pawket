@@ -8,13 +8,12 @@ interface PawketLogoProps {
 }
 
 /**
- * To use your official logo, place "pawket-logo.svg" in your project's public/ folder.
- * Then, change the src below from the placeholder to "/pawket-logo.svg".
+ * The official Pawket logo.
+ * If you upload a new logo, update the src below!
  */
 const PawketLogo: React.FC<PawketLogoProps> = ({ className = "", style = {}, size = 60 }) => (
   <img
-    src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=200&q=80"
-    // src="/pawket-logo.svg" // Uncomment this line and remove the placeholder above when the SVG is available in /public
+    src="/lovable-uploads/8f8dcaea-e929-473f-bee3-022fc7733e3e.png"
     alt="Pawket Logo"
     width={size}
     height={size}
@@ -32,3 +31,4 @@ const PawketLogo: React.FC<PawketLogoProps> = ({ className = "", style = {}, siz
 );
 
 export default PawketLogo;
+
