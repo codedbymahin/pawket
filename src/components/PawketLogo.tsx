@@ -1,18 +1,20 @@
 
 import React from "react";
 
-// Replace below with your official logo image, adjust the import as needed
-import pawketLogo from "/pawket-logo.svg";
-
 interface PawketLogoProps {
   className?: string;
   style?: React.CSSProperties;
   size?: number;
 }
 
+/**
+ * To use your official logo, place "pawket-logo.svg" in your project's public/ folder.
+ * Then, change the src below from the placeholder to "/pawket-logo.svg".
+ */
 const PawketLogo: React.FC<PawketLogoProps> = ({ className = "", style = {}, size = 60 }) => (
   <img
-    src={pawketLogo}
+    src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=200&q=80"
+    // src="/pawket-logo.svg" // Uncomment this line and remove the placeholder above when the SVG is available in /public
     alt="Pawket Logo"
     width={size}
     height={size}
@@ -30,4 +32,3 @@ const PawketLogo: React.FC<PawketLogoProps> = ({ className = "", style = {}, siz
 );
 
 export default PawketLogo;
-
