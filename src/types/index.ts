@@ -8,6 +8,10 @@ export interface Pet {
   description: string;
   owner: string;
   type: "dog" | "cat";
+  datePosted?: string;
+  status?: "Available" | "Lost" | "Found";
+  listingType?: "Adoption" | "Lost & Found";
+  photo?: string;
 }
 
 export interface SharingOffer {
@@ -19,6 +23,12 @@ export interface SharingOffer {
   reason: string;
   owner: string;
   status: "Available" | "Temporarily Shared";
+  age?: string;
+  type?: "dog" | "cat";
+  datePosted?: string;
+  photo?: string;
+  description?: string;
+  listingType?: "Sharing";
 }
 
 export interface Veterinarian {
@@ -31,6 +41,10 @@ export interface Veterinarian {
   consultation: string;
   availability: string;
   description: string;
+  qualifications?: string;
+  specializations?: string[];
+  contactMethod?: string;
+  photo?: string;
 }
 
 export interface Product {
@@ -44,4 +58,28 @@ export interface Product {
   description: string;
   inStock: boolean;
   features: string[];
+  image?: string;
+  sizes?: string[];
+  colors?: string[];
+  varieties?: string[];
+  includes?: string[];
+  ingredients?: string;
+  dimensions?: string;
+  weight?: string;
+  batteryLife?: string;
+  deliveryNote?: string;
+}
+
+export interface LostFoundListing {
+  id: number;
+  petName: string;
+  type: string;
+  status: "Lost" | "Found";
+  breed: string;
+  lastSeen: string;
+  date: string;
+  ownerName: string;
+  description: string;
+  contactInfo: string;
+  image: string;
 }

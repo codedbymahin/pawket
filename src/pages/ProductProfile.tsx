@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -6,136 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Star, Truck, Package } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
+import { productData } from "@/data/profileData";
 
 const ProductProfile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [showLoginModal, setShowLoginModal] = useState(false);
-
-  // Complete product data for all 8 shop listings
-  const productData: { [key: string]: any } = {
-    "1": {
-      name: "Premium Dog Food",
-      brand: "Pedigree",
-      category: "Food",
-      price: "৳2,500",
-      originalPrice: "৳3,000",
-      rating: 4.8,
-      description: "High-quality nutritious dry food specially formulated for adult dogs. Contains real chicken, vegetables, and essential vitamins for optimal health and energy.",
-      inStock: true,
-      image: "🥫",
-      sizes: ["5kg", "10kg", "15kg"],
-      ingredients: "Chicken, Rice, Corn, Vitamins A, D, E, Omega-3 Fatty Acids",
-      deliveryNote: "Free delivery within Dhaka. Outside Dhaka: ৳100 shipping charge",
-      features: ["Real Chicken", "Balanced Nutrition", "Shiny Coat", "Strong Bones"]
-    },
-    "2": {
-      name: "Cat Litter Box",
-      brand: "Pet Zone",
-      category: "Accessories",
-      price: "৳1,200",
-      originalPrice: "৳1,500",
-      rating: 4.6,
-      description: "Easy-clean litter box with removable cover and included scoop. Perfect size for cats of all sizes with odor control design.",
-      inStock: true,
-      image: "📦",
-      colors: ["Blue", "Pink", "Gray"],
-      dimensions: "50cm x 35cm x 15cm",
-      deliveryNote: "Available for pickup in Dhaka only",
-      features: ["Odor Control", "Easy Clean", "Durable Plastic", "Non-slip Base"]
-    },
-    "3": {
-      name: "Dog Collar & Leash Set",
-      brand: "Pawsome",
-      category: "Accessories",
-      price: "৳800",
-      originalPrice: "৳1,000",
-      rating: 4.7,
-      description: "Adjustable collar with matching leash set. Made from durable nylon with comfortable padding. Available in multiple colors and sizes.",
-      inStock: true,
-      image: "🦮",
-      sizes: ["Small", "Medium", "Large"],
-      colors: ["Red", "Blue", "Black", "Pink"],
-      deliveryNote: "Delivery within 2-3 days in major cities",
-      features: ["Adjustable Size", "Comfortable Padding", "Reflective Strip", "Strong Buckle"]
-    },
-    "4": {
-      name: "Cat Wet Food Variety",
-      brand: "Whiskas",
-      category: "Food",
-      price: "৳450",
-      originalPrice: "৳500",
-      rating: 4.9,
-      description: "12-pack wet food variety for cats with different flavors including chicken, beef, and fish. Made with real meat and gravy that cats love.",
-      inStock: false,
-      image: "🥘",
-      varieties: ["Chicken", "Beef", "Fish", "Mixed"],
-      ingredients: "Real Meat, Gravy, Vitamins, Minerals",
-      deliveryNote: "Currently out of stock - expected restock in 1 week",
-      features: ["Real Meat", "High Protein", "Multiple Flavors", "Gravy Based"]
-    },
-    "5": {
-      name: "Pet Grooming Kit",
-      brand: "FurCare",
-      category: "Grooming",
-      price: "৳1,800",
-      originalPrice: "৳2,200",
-      rating: 4.5,
-      description: "Complete grooming set with brush, nail clipper, shampoo, and towel. Everything you need to keep your pet clean and well-groomed at home.",
-      inStock: true,
-      image: "✂️",
-      includes: ["Slicker Brush", "Nail Clipper", "Pet Shampoo", "Microfiber Towel", "Comb"],
-      deliveryNote: "Free delivery within Dhaka metro area",
-      features: ["Complete Kit", "Professional Quality", "Easy to Use", "Suitable for All Pets"]
-    },
-    "6": {
-      name: "Interactive Cat Toy",
-      brand: "PlayPet",
-      category: "Toys",
-      price: "৳650",
-      originalPrice: "৳750",
-      rating: 4.4,
-      description: "Electronic toy mouse with motion sensor that moves randomly to keep cats engaged and active. Helps with exercise and mental stimulation.",
-      inStock: true,
-      image: "🐭",
-      batteryLife: "30+ hours continuous play",
-      materials: "Safe, non-toxic plastic and fabric",
-      deliveryNote: "Delivery within 3-5 days nationwide",
-      features: ["Motion Sensor", "Random Movement", "Safe Materials", "Long Battery Life"]
-    },
-    "7": {
-      name: "Dog Training Treats",
-      brand: "GoodBoy",
-      category: "Food",
-      price: "৳300",
-      originalPrice: "৳350",
-      rating: 4.7,
-      description: "Healthy training treats in chicken flavor, perfect for positive reinforcement training. Small bite-sized pieces ideal for frequent rewards.",
-      inStock: true,
-      image: "🦴",
-      weight: "500g",
-      flavors: ["Chicken", "Beef", "Lamb"],
-      ingredients: "Real Chicken, Rice, Natural Preservatives",
-      deliveryNote: "Same day delivery available in Dhaka",
-      features: ["Low Calorie", "High Protein", "Small Size", "Training Perfect"]
-    },
-    "8": {
-      name: "Pet Carrier Bag",
-      brand: "TravelPet",
-      category: "Accessories",
-      price: "৳2,200",
-      originalPrice: "৳2,800",
-      rating: 4.8,
-      description: "Comfortable travel carrier for small to medium pets with mesh windows for ventilation. Perfect for vet visits, travel, and outdoor adventures.",
-      inStock: true,
-      image: "🎒",
-      sizes: ["Small (up to 5kg)", "Medium (up to 10kg)"],
-      dimensions: "Small: 40x25x25cm, Medium: 50x30x30cm",
-      colors: ["Navy Blue", "Gray", "Pink"],
-      deliveryNote: "Free delivery and assembly within Dhaka",
-      features: ["Mesh Windows", "Comfortable Padding", "Secure Zippers", "Shoulder Strap"]
-    }
-  };
 
   const product = productData[id || ""];
 

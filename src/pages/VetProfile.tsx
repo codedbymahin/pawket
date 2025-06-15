@@ -1,103 +1,15 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ArrowLeft, MapPin, Clock, Star, GraduationCap, Stethoscope } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
+import { vetData } from "@/data/profileData";
 
 const VetProfile = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [showLoginModal, setShowLoginModal] = useState(false);
-
-  // Complete vet data for all 6 listings
-  const vetData: { [key: string]: any } = {
-    "1": {
-      name: "Dr. Mahmuda Islam",
-      specialty: "General Pet Care",
-      location: "Dhanmondi, Dhaka",
-      experience: "8 years",
-      rating: 4.9,
-      consultation: "৳800",
-      availability: "Mon-Fri 9AM-6PM",
-      description: "Dr. Mahmuda is an experienced veterinarian who has been caring for pets in Dhaka for over 8 years. She specializes in general pet care, vaccinations, and preventive medicine.",
-      qualifications: "DVM from Bangladesh Agricultural University, Certified in Small Animal Medicine",
-      specializations: ["General Health Checkups", "Vaccinations", "Preventive Care", "Pet Nutrition"],
-      contactMethod: "Video Call / Phone Consultation",
-      photo: "👩‍⚕️"
-    },
-    "2": {
-      name: "Dr. Rafiqul Alam",
-      specialty: "Pet Surgery",
-      location: "Gulshan, Dhaka",
-      experience: "12 years",
-      rating: 4.8,
-      consultation: "৳1200",
-      availability: "Tue-Sat 10AM-5PM",
-      description: "Dr. Rafiqul is a highly skilled veterinary surgeon with over a decade of experience in advanced pet surgical procedures. He has saved countless pets through his expertise.",
-      qualifications: "DVM, MS in Veterinary Surgery from Chittagong Veterinary College",
-      specializations: ["Advanced Surgery", "Orthopedic Surgery", "Emergency Surgery", "Tumor Removal"],
-      contactMethod: "In-person consultation preferred, Video call available",
-      photo: "👨‍⚕️"
-    },
-    "3": {
-      name: "Dr. Fatema Khatun",
-      specialty: "Pet Dermatology",
-      location: "Mymensingh",
-      experience: "6 years",
-      rating: 4.7,
-      consultation: "৳600",
-      availability: "Mon-Wed-Fri 2PM-8PM",
-      description: "Dr. Fatema specializes in pet skin conditions and allergies. She has helped hundreds of pets overcome skin problems and live comfortable lives.",
-      qualifications: "DVM, Diploma in Veterinary Dermatology",
-      specializations: ["Skin Allergies", "Fungal Infections", "Parasitic Treatment", "Grooming Advice"],
-      contactMethod: "Video Call with photo sharing",
-      photo: "👩‍⚕️"
-    },
-    "4": {
-      name: "Dr. Habibur Rahman",
-      specialty: "Emergency Care",
-      location: "Sylhet",
-      experience: "10 years",
-      rating: 4.9,
-      consultation: "৳1000",
-      availability: "24/7 Emergency",
-      description: "Dr. Habibur is available for urgent pet medical emergencies around the clock. He has extensive experience in critical care and emergency procedures.",
-      qualifications: "DVM, Emergency Medicine Certification from Dhaka University",
-      specializations: ["Emergency Surgery", "Critical Care", "Trauma Treatment", "Poison Control"],
-      contactMethod: "Emergency hotline / Video consultation",
-      photo: "👨‍⚕️"
-    },
-    "5": {
-      name: "Dr. Nasir Ahmed",
-      specialty: "Pet Nutrition",
-      location: "Chittagong",
-      experience: "5 years",
-      rating: 4.6,
-      consultation: "৳500",
-      availability: "Thu-Sun 11AM-4PM",
-      description: "Dr. Nasir is an expert in pet diet and nutritional planning. He helps pet owners create balanced meal plans for optimal health and weight management.",
-      qualifications: "DVM, Diploma in Animal Nutrition from Bangladesh Agricultural University",
-      specializations: ["Diet Planning", "Weight Management", "Nutritional Supplements", "Food Allergies"],
-      contactMethod: "Video consultation with diet chart sharing",
-      photo: "👨‍⚕️"
-    },
-    "6": {
-      name: "Dr. Salma Begum",
-      specialty: "Behavioral Therapy",
-      location: "Rangpur",
-      experience: "7 years",
-      rating: 4.8,
-      consultation: "৳700",
-      availability: "Mon-Fri 3PM-7PM",
-      description: "Dr. Salma specializes in pet behavioral issues and training. She helps pet owners understand and modify problematic behaviors through positive reinforcement techniques.",
-      qualifications: "DVM, Certified Animal Behaviorist from International Association of Animal Behavior",
-      specializations: ["Behavioral Training", "Anxiety Treatment", "Aggression Management", "Socialization"],
-      contactMethod: "Video consultation with training demonstrations",
-      photo: "👩‍⚕️"
-    }
-  };
 
   const vet = vetData[id || ""];
 

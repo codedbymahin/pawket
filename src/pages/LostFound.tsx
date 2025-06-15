@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -6,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, MapPin, Clock, Phone, Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { lostFoundListings as listings } from "@/data/profileData";
 
 const LostFound = () => {
   const navigate = useNavigate();
@@ -20,90 +20,10 @@ const LostFound = () => {
   };
 
   const handleCardClick = (petId: number, status: string) => {
-    const type = status === 'Lost' ? 'lost' : 'lost';
+    // The profile page uses 'lost' for both lost and found pets.
+    const type = 'lost';
     navigate(`/pet/${type}/${petId}`);
   };
-
-  const listings = [
-    {
-      id: 1,
-      petName: "Tommy",
-      type: "Dog",
-      status: "Lost",
-      breed: "Golden Retriever",
-      lastSeen: "Mirpur DOHS",
-      date: "2 days ago",
-      ownerName: "Rashida Khan",
-      description: "Very friendly dog, responds to his name. He was wearing a red collar when he went missing.",
-      contactInfo: "01712345678",
-      image: "🐕"
-    },
-    {
-      id: 2,
-      petName: "Mitu",
-      type: "Cat",
-      status: "Found",
-      breed: "Persian",
-      lastSeen: "Dhanmondi 27",
-      date: "1 day ago",
-      ownerName: "Karim Ahmed",
-      description: "Beautiful white cat with blue eyes. Found near the lake area, very calm and well-fed.",
-      contactInfo: "01823456789",
-      image: "🐱"
-    },
-    {
-      id: 3,
-      petName: "Buddy",
-      type: "Dog",
-      status: "Lost",
-      breed: "German Shepherd",
-      lastSeen: "Chittagong Port Area",
-      date: "5 days ago",
-      ownerName: "Fatima Begum",
-      description: "Large brown and black dog, very protective. Missing since last Friday evening.",
-      contactInfo: "01934567890",
-      image: "🐕‍🦺"
-    },
-    {
-      id: 4,
-      petName: "Whiskers",
-      type: "Cat",
-      status: "Found",
-      breed: "Street Cat",
-      lastSeen: "Sylhet Zindabazar",
-      date: "3 days ago",
-      ownerName: "Hassan Ali",
-      description: "Orange tabby cat, appears to be well-cared for. Found near the market area.",
-      contactInfo: "01645678901",
-      image: "🐈"
-    },
-    {
-      id: 5,
-      petName: "Bella",
-      type: "Dog",
-      status: "Lost",
-      breed: "Labrador Mix",
-      lastSeen: "Uttara Sector 7",
-      date: "1 week ago",
-      ownerName: "Nasir Uddin",
-      description: "Black and white dog, very energetic. She loves children and is missed dearly by our family.",
-      contactInfo: "01756789012",
-      image: "🐶"
-    },
-    {
-      id: 6,
-      petName: "Shadow",
-      type: "Cat",
-      status: "Lost",
-      breed: "British Shorthair",
-      lastSeen: "Gulshan 2",
-      date: "4 days ago",
-      ownerName: "Salma Rahman",
-      description: "Gray cat with green eyes, indoor cat who accidentally escaped. Very timid with strangers.",
-      contactInfo: "01867890123",
-      image: "🐾"
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50">
