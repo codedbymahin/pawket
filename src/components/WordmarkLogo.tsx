@@ -11,7 +11,7 @@ const WordmarkLogo: React.FC<WordmarkLogoProps> = ({
   style = {},
 }) => (
   <img
-    src="/lovable-uploads/bb8cbefb-bd4a-4a47-ae81-d34237223b24.png"
+    src="/lovable-uploads/924e1000-1a42-4f7e-85c3-182041c94f44.png"
     alt="Pawket Wordmark"
     style={{
       display: "inline-block",
@@ -25,4 +25,3 @@ const WordmarkLogo: React.FC<WordmarkLogoProps> = ({
 );
 
 export default WordmarkLogo;
-
