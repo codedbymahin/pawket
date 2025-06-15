@@ -27,7 +27,7 @@ const CountdownSection: React.FC = () => {
       <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#00AEEF] mb-2 flex items-center justify-center gap-2">
         <span role="img" aria-label="hourglass">⏳</span> Pawket Mobile App Launching In:
       </div>
-      <div className="font-poppins flex flex-wrap justify-center items-center gap-1 sm:gap-2 md:gap-4 text-base sm:text-2xl md:text-3xl font-semibold my-6 max-w-full w-full min-w-0 mx-auto">
+      <div className="font-poppins flex flex-wrap justify-center items-center gap-1 sm:gap-2 md:gap-4 text-base sm:text-2xl md:text-3xl font-semibold my-6 max-w-full w-full min-w-0 mx-auto overflow-x-auto">
         <span className="bg-white rounded-xl shadow px-2 sm:px-3 md:px-4 py-2 sm:py-2 w-16 sm:w-20 md:w-24 text-center flex-shrink-0 min-w-0">
           {String(time.days).padStart(2, "0")}
           <span className="block text-xs sm:text-sm font-normal text-gray-400">Days</span>
@@ -64,3 +64,4 @@ const CountdownSection: React.FC = () => {
 };
 
 export default CountdownSection;
+

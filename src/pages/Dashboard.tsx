@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PetCareTips from "@/components/PetCareTips";
 import PawkoChatbot from "@/components/PawkoChatbot";
+import PawketLogo from "@/components/PawketLogo";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -141,8 +142,8 @@ const Dashboard = () => {
         {/* Welcome Header with enhanced styling */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-4 mb-6">
-            <div className="p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300" style={{ background: 'linear-gradient(135deg, #00AEEF, #0099CC)' }}>
-              <PawPrint size={36} className="text-white" />
+            <div className="p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white">
+              <PawketLogo size={50} />
             </div>
             <h1 
               className="text-4xl sm:text-5xl lg:text-6xl font-bold font-poppins"

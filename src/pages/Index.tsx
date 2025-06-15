@@ -10,6 +10,7 @@ import { useState, useEffect, useRef } from "react";
 import PawkoChatbot from "@/components/PawkoChatbot";
 import CountdownSection from "@/components/CountdownSection";
 import HelpSection from "@/components/HelpSection";
+import PawketLogo from "@/components/PawketLogo";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -198,8 +199,9 @@ const Index = () => {
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="max-w-2xl space-y-8">
             <div className="flex items-center space-x-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#00AEEF] to-[#0099CC] rounded-xl shadow-lg border-2 border-white/30 flex items-center justify-center">
-                <PawPrint size={28} className="text-white" />
+              {/* Logo */}
+              <div className="w-16 h-16 flex items-center justify-center bg-white rounded-xl shadow-lg border-2 border-white/30">
+                <PawketLogo size={56} />
               </div>
               <div className="flex items-baseline space-x-2">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#00AEEF] tracking-tight font-['Nunito',sans-serif]">
