@@ -1,12 +1,16 @@
 
-import React, { useState, useRef, useCallback } from "react";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Lightbulb, Megaphone, Truck } from "lucide-react";
-import { useMotionPreference, useOptimizedMouseTracking } from "@/hooks/usePerformance";
+import React, { useState, useRef } from "react";
 
-/** Memoized decorative mini paw SVG */
-const PawPrintTiny = React.memo<React.SVGProps<SVGSVGElement>>((props) => (
+/** Decorative mini paw SVG */
+const PawPrintTiny: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg viewBox="0 0 24 24" fill="currentColor" width={16} height={16} {...props}>
     <circle cx="12" cy="14" r="4" />
     <circle cx="7" cy="9" r="2" />
@@ -14,10 +18,10 @@ const PawPrintTiny = React.memo<React.SVGProps<SVGSVGElement>>((props) => (
     <circle cx="6" cy="14" r="1" />
     <circle cx="18" cy="14" r="1" />
   </svg>
-));
+);
 
-/** Memoized enhanced crown for the founder */
-const CrownIcon = React.memo<{ className?: string }>(({ className }) => (
+/** Enhanced crown for the founder */
+const CrownIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg
     className={className}
     width="40"
@@ -31,20 +35,20 @@ const CrownIcon = React.memo<{ className?: string }>(({ className }) => (
     <circle cx="24" cy="10" r="5" fill="#00AEEF" />
     <path d="M8 20 L24 12 L40 20 L31 38 L17 38 Z" fill="#0099CC" stroke="#0077AA" strokeWidth="2" />
   </svg>
-));
+);
 
-/** Optimized spotlight effect */
-const SpotlightOverlay = React.memo<{ mousePos: { x: number; y: number } }>(({ mousePos }) => (
+/** Spotlight effect for founder card */
+const SpotlightOverlay: React.FC<{ mousePos: { x: number; y: number } }> = ({ mousePos }) => (
   <div 
     className="absolute inset-0 opacity-20 rounded-3xl pointer-events-none transition-opacity duration-300"
     style={{
       background: `radial-gradient(circle 400px at ${mousePos.x}px ${mousePos.y}px, rgba(0,174,239,0.3) 0%, transparent 70%)`
     }}
   />
-));
+);
 
-/** Memoized role-based background patterns */
-const RolePattern = React.memo<{ role: string }>(({ role }) => {
+/** Role-based background patterns */
+const RolePattern: React.FC<{ role: string }> = ({ role }) => {
   if (role.includes("Marketing")) {
     return (
       <div className="absolute inset-0 opacity-5 pointer-events-none">
@@ -66,7 +70,7 @@ const RolePattern = React.memo<{ role: string }>(({ role }) => {
   }
   
   return null;
-});
+};
 
 const TEAM = [
   {
@@ -106,16 +110,13 @@ interface TeamSectionProps {
   setSectionRef: (sectionId: string) => (el: HTMLElement | null) => void;
 }
 
-const OptimizedTeamSection = React.memo(({ visibleSections, setSectionRef }: TeamSectionProps) => {
+const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const { mousePos, updateMousePos } = useOptimizedMouseTracking();
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const founderCardRef = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = useMotionPreference();
 
-  // Optimized mouse movement handler with better performance
-  const handleMouseMove = useCallback((e: React.MouseEvent, cardIndex: number) => {
-    if (prefersReducedMotion) return;
-
+  // Handle mouse movement for 3D tilt effect
+  const handleMouseMove = (e: React.MouseEvent, cardIndex: number) => {
     const card = e.currentTarget as HTMLElement;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -127,27 +128,28 @@ const OptimizedTeamSection = React.memo(({ visibleSections, setSectionRef }: Tea
     const rotateX = (y - centerY) / 10;
     const rotateY = (centerX - x) / 10;
     
-    // Use transform3d for better GPU acceleration
-    card.style.transform = `translate3d(0, 0, 0) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-    card.style.willChange = 'transform';
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
     
     // Update spotlight position for founder card
-    if (cardIndex === 0) {
-      updateMousePos(e);
+    if (cardIndex === 0 && founderCardRef.current) {
+      const founderRect = founderCardRef.current.getBoundingClientRect();
+      setMousePos({
+        x: e.clientX - founderRect.left,
+        y: e.clientY - founderRect.top
+      });
     }
-  }, [prefersReducedMotion, updateMousePos]);
+  };
 
-  const handleMouseLeave = useCallback((e: React.MouseEvent) => {
+  const handleMouseLeave = (e: React.MouseEvent) => {
     const card = e.currentTarget as HTMLElement;
-    card.style.transform = 'translate3d(0, 0, 0) perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-    card.style.willChange = 'auto';
-  }, []);
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+  };
 
-  // Memoized card appearance animation
-  const cardAppear = useCallback((idx: number) =>
+  // Stagger cards animation based on index
+  const cardAppear = (idx: number) =>
     visibleSections.has("our-team")
       ? `opacity-100 translate-y-0 scale-100`
-      : "opacity-0 translate-y-8 scale-95", [visibleSections]);
+      : "opacity-0 translate-y-8 scale-95";
 
   const FounderIcon = TEAM[0].icon;
 
@@ -162,23 +164,18 @@ const OptimizedTeamSection = React.memo(({ visibleSections, setSectionRef }: Tea
       data-section="our-team"
       ref={setSectionRef("our-team")}
       style={{ overflow: "hidden" }}
-      aria-label="Meet Our Team section"
     >
-      {/* Optimized decorative floating paw prints */}
-      {!prefersReducedMotion && (
-        <>
-          <PawPrintTiny className="absolute top-7 left-12 text-[#00AEEF]/30 animate-[pulse_2.6s_ease-in-out_infinite]" />
-          <PawPrintTiny className="absolute bottom-10 right-32 text-[#FFD166]/30 animate-[pulse_3.2s_ease-in-out_infinite]" />
-          <PawPrintTiny className="absolute top-1/3 right-10 text-[#00897B]/20 animate-[pulse_3s_ease-in-out_infinite]" />
-          <PawPrintTiny className="absolute top-1/4 left-1/4 text-[#FF8C42]/15 animate-[pulse_2.8s_ease-in-out_infinite]" />
-        </>
-      )}
+      {/* Enhanced decorative floating paw prints */}
+      <PawPrintTiny className="absolute top-7 left-12 text-[#00AEEF]/30 animate-[pulse_2.6s_ease-in-out_infinite]" />
+      <PawPrintTiny className="absolute bottom-10 right-32 text-[#FFD166]/30 animate-[pulse_3.2s_ease-in-out_infinite]" />
+      <PawPrintTiny className="absolute top-1/3 right-10 text-[#00897B]/20 animate-[pulse_3s_ease-in-out_infinite]" />
+      <PawPrintTiny className="absolute top-1/4 left-1/4 text-[#FF8C42]/15 animate-[pulse_2.8s_ease-in-out_infinite]" />
 
       <div className="max-w-5xl mx-auto relative">
         <div className="text-center mb-20">
           <h2 
             className={`text-4xl sm:text-5xl font-bold text-[#26356A] mb-6 font-nunito tracking-tight transition-all duration-1000 ${
-              visibleSections.has("our-team") && !prefersReducedMotion ? "animate-typewriter" : ""
+              visibleSections.has("our-team") ? "animate-typewriter" : ""
             }`}
           >
             Meet Our Team
@@ -196,7 +193,7 @@ const OptimizedTeamSection = React.memo(({ visibleSections, setSectionRef }: Tea
               className={`relative z-10 w-full max-w-xl lg:max-w-2xl border-0 shadow-[0_8px_32px_4px_rgba(33,150,243,0.14)] 
                           backdrop-blur-sm bg-white/90 rounded-3xl transition-all duration-500 transform-gpu
                           hover:shadow-[0_20px_60px_8px_rgba(0,174,239,0.2)] cursor-pointer
-                          ${TEAM[0].border} group ${prefersReducedMotion ? '' : 'animate-breathe'}
+                          ${TEAM[0].border} group animate-breathe
                           ${cardAppear(0)}
                           ${visibleSections.has("our-team") ? "animate-fade-in" : ""}`}
               style={{
@@ -205,17 +202,13 @@ const OptimizedTeamSection = React.memo(({ visibleSections, setSectionRef }: Tea
                 borderStyle: "solid",
                 transitionDelay: "0ms",
                 background: "linear-gradient(120deg, #e0f7fa 0%, #ffffff 57%, #e7f3ff 100%)",
-                willChange: 'transform',
               }}
               onMouseMove={(e) => handleMouseMove(e, 0)}
               onMouseLeave={handleMouseLeave}
               onMouseEnter={() => setHoveredCard(0)}
-              role="article"
-              aria-label="Founder profile card"
-              tabIndex={0}
             >
               {/* Spotlight effect */}
-              {hoveredCard === 0 && !prefersReducedMotion && <SpotlightOverlay mousePos={mousePos} />}
+              {hoveredCard === 0 && <SpotlightOverlay mousePos={mousePos} />}
               
               {/* Founder Badge */}
               <div className="absolute -top-2 -right-2 z-30">
@@ -227,11 +220,14 @@ const OptimizedTeamSection = React.memo(({ visibleSections, setSectionRef }: Tea
               </div>
               
               {/* Enhanced floating crown */}
-              {!prefersReducedMotion && (
-                <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-20 animate-[crown-float_4s_ease-in-out_infinite] pointer-events-none">
-                  <CrownIcon className="drop-shadow-2xl filter brightness-110" />
-                </div>
-              )}
+              <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-20 animate-[crown-float_4s_ease-in-out_infinite] pointer-events-none">
+                <CrownIcon className="drop-shadow-2xl filter brightness-110" />
+              </div>
+              
+              {/* Blue particles */}
+              <div className="absolute top-4 left-8 w-2 h-2 rounded-full bg-[#00AEEF]/60 animate-[blue-float_3s_ease-in-out_infinite]" />
+              <div className="absolute top-12 right-12 w-1.5 h-1.5 rounded-full bg-[#00AEEF]/40 animate-[blue-float_4s_ease-in-out_infinite]" style={{ animationDelay: '1s' }} />
+              <div className="absolute bottom-8 left-16 w-1 h-1 rounded-full bg-[#0099CC]/50 animate-[blue-float_2.5s_ease-in-out_infinite]" style={{ animationDelay: '2s' }} />
               
               <CardHeader className="text-center pb-8 pt-16">
                 {/* Enhanced animated avatar */}
@@ -239,17 +235,17 @@ const OptimizedTeamSection = React.memo(({ visibleSections, setSectionRef }: Tea
                   className={`w-28 h-28 mx-auto mb-5 rounded-full flex items-center justify-center shadow-xl 
                     bg-gradient-to-br ${TEAM[0].iconColor} border-4 border-white ring-4 ring-blue-200/50 
                     transition-all duration-500 group-hover:shadow-[0_0_40px_8px_rgba(0,174,239,0.4)] 
-                    group-hover:ring-blue-300/70 ${prefersReducedMotion ? '' : 'group-hover:scale-110'}`}
+                    group-hover:ring-blue-300/70 group-hover:scale-110`}
                 >
                   <FounderIcon
                     size={44}
                     className={`text-white drop-shadow-sm transition-all duration-500 
-                      ${hoveredCard === 0 && !prefersReducedMotion ? "animate-[icon-glow_1s_ease-in-out_infinite] scale-110" : !prefersReducedMotion ? "animate-[icon-wiggle_3s_ease-in-out_infinite]" : ""}`}
+                      ${hoveredCard === 0 ? "animate-[icon-glow_1s_ease-in-out_infinite] scale-110" : "animate-[icon-wiggle_3s_ease-in-out_infinite]"}`}
                   />
                 </div>
                 <CardTitle
                   className={`text-2xl md:text-3xl font-bold ${TEAM[0].text} mb-3 font-nunito 
-                    transition-all duration-300 group-hover:text-[#00AEEF] ${prefersReducedMotion ? '' : 'group-hover:scale-105'}`}
+                    transition-all duration-300 group-hover:text-[#00AEEF] group-hover:scale-105`}
                 >
                   {TEAM[0].name}
                 </CardTitle>
@@ -270,7 +266,7 @@ const OptimizedTeamSection = React.memo(({ visibleSections, setSectionRef }: Tea
               <Card
                 key={member.name}
                 className={`relative group border-0 shadow-md backdrop-blur-sm bg-white/95 rounded-3xl 
-                transform transition-all duration-500 cursor-pointer ${prefersReducedMotion ? '' : 'animate-breathe'}
+                transform transition-all duration-500 cursor-pointer animate-breathe
                 hover:shadow-[0_15px_40px_5px_rgba(0,0,0,0.1)] hover:backdrop-blur-md
                 ${member.border} 
                 ${cardAppear(cardIndex)}
@@ -284,41 +280,33 @@ const OptimizedTeamSection = React.memo(({ visibleSections, setSectionRef }: Tea
                   borderWidth: "2.5px",
                   borderStyle: "solid",
                   transitionDelay: `${cardIndex * 100}ms`,
-                  willChange: 'transform',
                 }}
                 onMouseMove={(e) => handleMouseMove(e, cardIndex)}
                 onMouseLeave={handleMouseLeave}
                 onMouseEnter={() => setHoveredCard(cardIndex)}
-                role="article"
-                aria-label={`${member.name} profile card`}
-                tabIndex={0}
               >
                 {/* Role-based background pattern */}
                 <RolePattern role={member.role} />
                 
                 {/* Interactive decorative paws */}
-                {!prefersReducedMotion && (
-                  <>
-                    <PawPrintTiny className={`absolute top-2 left-3 text-[#FFD166]/30 rotate-12 transition-all duration-300 
-                      ${hoveredCard === cardIndex ? "opacity-100 scale-110" : "opacity-70"}`} />
-                    <PawPrintTiny className={`absolute bottom-2 right-4 text-[#00AEEF]/30 -rotate-12 transition-all duration-300 
-                      ${hoveredCard === cardIndex ? "opacity-100 scale-110" : "opacity-60"}`} />
-                  </>
-                )}
+                <PawPrintTiny className={`absolute top-2 left-3 text-[#FFD166]/30 rotate-12 transition-all duration-300 
+                  ${hoveredCard === cardIndex ? "opacity-100 scale-110" : "opacity-70"}`} />
+                <PawPrintTiny className={`absolute bottom-2 right-4 text-[#00AEEF]/30 -rotate-12 transition-all duration-300 
+                  ${hoveredCard === cardIndex ? "opacity-100 scale-110" : "opacity-60"}`} />
                 
                 <CardHeader className="text-center pb-8 pt-12">
                   <div
                     className={`w-20 h-20 mx-auto mb-5 rounded-full flex items-center justify-center shadow-lg 
                       bg-gradient-to-br ${member.iconColor} transition-all duration-500 
-                      group-hover:shadow-xl ${prefersReducedMotion ? '' : 'group-hover:scale-110'}`}
+                      group-hover:shadow-xl group-hover:scale-110`}
                   >
                     <Icon
                       size={32}
                       className={`text-white drop-shadow transition-all duration-500 
-                        ${hoveredCard === cardIndex && !prefersReducedMotion ? "animate-[icon-glow_1s_ease-in-out_infinite] scale-110" : !prefersReducedMotion ? "animate-[icon-wiggle_3s_ease-in-out_infinite]" : ""}`}
+                        ${hoveredCard === cardIndex ? "animate-[icon-glow_1s_ease-in-out_infinite] scale-110" : "animate-[icon-wiggle_3s_ease-in-out_infinite]"}`}
                     />
                   </div>
-                  <CardTitle className={`text-xl font-bold ${member.text} mb-3 font-nunito transition-colors duration-300 ${prefersReducedMotion ? '' : 'group-hover:scale-105'}`}>
+                  <CardTitle className={`text-xl font-bold ${member.text} mb-3 font-nunito transition-colors duration-300 group-hover:scale-105`}>
                     {member.name}
                   </CardTitle>
                   <div
@@ -327,7 +315,7 @@ const OptimizedTeamSection = React.memo(({ visibleSections, setSectionRef }: Tea
                         ? "bg-gradient-to-r from-[#FFD166] to-[#FF8C42]"
                         : "bg-gradient-to-r from-[#C8E6C9] to-[#00897B]"
                     } text-white px-4 py-2 rounded-full text-base font-bold shadow-md font-nunito tracking-wide 
-                    transition-all duration-300 hover:shadow-lg ${prefersReducedMotion ? '' : 'hover:scale-105'}`}
+                    transition-all duration-300 hover:shadow-lg hover:scale-105`}
                   >
                     {member.role}
                   </div>
@@ -338,56 +326,52 @@ const OptimizedTeamSection = React.memo(({ visibleSections, setSectionRef }: Tea
         </div>
       </div>
 
-      {/* Enhanced Custom Keyframes for Animations - Only if motion is not reduced */}
-      {!prefersReducedMotion && (
-        <style>{`
-          @keyframes icon-wiggle {
-            0%, 90%, 100% { transform: rotate(0deg); }
-            30% { transform: rotate(-8deg); }
-            60% { transform: rotate(6deg); }
-          }
-          
-          @keyframes icon-glow {
-            0%, 100% { filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); }
-            50% { filter: drop-shadow(0 0 15px rgba(255,255,255,0.8)); }
-          }
-          
-          @keyframes crown-float {
-            0%, 100% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
-            50% { transform: translateX(-50%) translateY(-8px) rotate(2deg); }
-          }
-          
-          @keyframes blue-float {
-            0%, 100% { transform: translateY(0px) scale(1); opacity: 0.6; }
-            50% { transform: translateY(-10px) scale(1.2); opacity: 1; }
-          }
-          
-          @keyframes breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.005); }
-          }
-          
-          @keyframes typewriter {
-            from { width: 0; }
-            to { width: 100%; }
-          }
-          
-          .animate-breathe {
-            animation: breathe 4s ease-in-out infinite;
-          }
-          
-          .animate-typewriter {
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 2px solid #26356A;
-            animation: typewriter 2s steps(15) 1s forwards;
-          }
-        `}</style>
-      )}
+      {/* Enhanced Custom Keyframes for Animations */}
+      <style>{`
+        @keyframes icon-wiggle {
+          0%, 90%, 100% { transform: rotate(0deg); }
+          30% { transform: rotate(-8deg); }
+          60% { transform: rotate(6deg); }
+        }
+        
+        @keyframes icon-glow {
+          0%, 100% { filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); }
+          50% { filter: drop-shadow(0 0 15px rgba(255,255,255,0.8)); }
+        }
+        
+        @keyframes crown-float {
+          0%, 100% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
+          50% { transform: translateX(-50%) translateY(-8px) rotate(2deg); }
+        }
+        
+        @keyframes blue-float {
+          0%, 100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+          50% { transform: translateY(-10px) scale(1.2); opacity: 1; }
+        }
+        
+        @keyframes breathe {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.005); }
+        }
+        
+        @keyframes typewriter {
+          from { width: 0; }
+          to { width: 100%; }
+        }
+        
+        .animate-breathe {
+          animation: breathe 4s ease-in-out infinite;
+        }
+        
+        .animate-typewriter {
+          overflow: hidden;
+          white-space: nowrap;
+          border-right: 2px solid #26356A;
+          animation: typewriter 2s steps(15) 1s forwards;
+        }
+      `}</style>
     </section>
   );
-});
+};
 
-OptimizedTeamSection.displayName = 'OptimizedTeamSection';
-
-export default OptimizedTeamSection;
+export default TeamSection;
