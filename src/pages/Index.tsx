@@ -4,8 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import PawketLogo from "@/components/PawketLogo";
-import { Dog, Heart, Search, Stethoscope, ShoppingBag, AlertTriangle, Users, Minus, Plus, HelpCircle, Facebook, Instagram, Twitter, Github, MapPin } from "lucide-react";
+import { PawPrint, Dog, Heart, Search, Stethoscope, ShoppingBag, AlertTriangle, Users, Minus, Plus, HelpCircle, Facebook, Instagram, Twitter, Github, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import PawkoChatbot from "@/components/PawkoChatbot";
@@ -117,7 +116,7 @@ const Index = () => {
       bgColor: "bg-blue-50"
     },
     {
-      icon: <PawketLogo size={32} className="text-[#FFD166]" />, // replaced PawPrint with PawketLogo for consistency
+      icon: <PawPrint size={32} className="text-[#FFD166]" />,
       title: "Pet Sharing",
       description: "Temporarily share your pet with other pet parents when you travel.",
       bgColor: "bg-amber-50"
@@ -186,13 +185,13 @@ const Index = () => {
         {/* Decorative paw prints for background */}
         <div className="absolute inset-0 opacity-3">
           <div className="absolute top-8 right-12 animate-pulse">
-            <PawketLogo size={32} className="text-[#00AEEF]/20 rotate-12" />
+            <PawPrint size={32} className="text-[#00AEEF]/20 rotate-12" />
           </div>
           <div className="absolute top-20 right-24 animate-pulse delay-500">
-            <PawketLogo size={28} className="text-[#FFD166]/20 -rotate-12" />
+            <PawPrint size={28} className="text-[#FFD166]/20 -rotate-12" />
           </div>
           <div className="absolute bottom-8 right-16 animate-pulse delay-1000">
-            <PawketLogo size={36} className="text-[#00AEEF]/15 rotate-45" />
+            <PawPrint size={36} className="text-[#00AEEF]/15 rotate-45" />
           </div>
         </div>
 
@@ -200,7 +199,7 @@ const Index = () => {
           <div className="max-w-2xl space-y-8">
             <div className="flex items-center space-x-4">
               <div className="w-16 h-16 bg-gradient-to-br from-[#00AEEF] to-[#0099CC] rounded-xl shadow-lg border-2 border-white/30 flex items-center justify-center">
-                <PawketLogo size={44} className="mx-auto" />
+                <PawPrint size={28} className="text-white" />
               </div>
               <div className="flex items-baseline space-x-2">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#00AEEF] tracking-tight font-['Nunito',sans-serif]">
@@ -233,7 +232,7 @@ const Index = () => {
                 size="lg"
                 className="px-12 py-6 text-xl bg-[#00AEEF] hover:bg-[#0099CC] text-white font-bold rounded-3xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 border-0"
               >
-                <PawketLogo size={22} className="mr-3" />
+                <PawPrint size={22} className="mr-3" />
                 Get Started
               </Button>
             </div>
@@ -368,8 +367,8 @@ const Index = () => {
         ref={setSectionRef('about-pawket')}
       >
         <div className="absolute inset-0 opacity-5">
-          <PawketLogo size={120} className="absolute top-10 left-10 text-[#00AEEF] rotate-12" />
-          <PawketLogo size={80} className="absolute bottom-20 right-20 text-[#FFD166] -rotate-12" />
+          <PawPrint size={120} className="absolute top-10 left-10 text-[#00AEEF] rotate-12" />
+          <PawPrint size={80} className="absolute bottom-20 right-20 text-[#FFD166] -rotate-12" />
         </div>
         <div className="relative max-w-4xl mx-auto text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-[#00AEEF] mb-10 font-['Nunito',sans-serif]">
@@ -411,7 +410,7 @@ const Index = () => {
             size="lg"
             className="px-12 py-6 text-xl bg-[#00AEEF] hover:bg-[#0099CC] text-white font-bold rounded-3xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 border-0"
           >
-            <PawketLogo size={22} className="mr-3" />
+            <PawPrint size={22} className="mr-3" />
             Get Started
           </Button>
         </div>
