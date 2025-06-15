@@ -11,6 +11,7 @@ import PawkoChatbot from "@/components/PawkoChatbot";
 import CountdownSection from "@/components/CountdownSection";
 import HelpSection from "@/components/HelpSection";
 import PawketLogo from "@/components/PawketLogo";
+import WordmarkLogo from "@/components/WordmarkLogo";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -204,9 +205,8 @@ const Index = () => {
                 <PawketLogo size={56} />
               </div>
               <div className="flex items-baseline space-x-2">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#00AEEF] tracking-tight font-['Nunito',sans-serif]">
-                  Pawket
-                </h1>
+                {/* Swap text with wordmark */}
+                <WordmarkLogo height={56} className="h-14 sm:h-16 lg:h-20" />
                 <span className="text-lg sm:text-xl lg:text-2xl font-light text-gray-500 italic">
                   (Demo)
                 </span>
