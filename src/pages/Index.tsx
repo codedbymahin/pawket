@@ -521,7 +521,7 @@ const Index = () => {
                   <CollapsibleContent className="transition-all duration-300 ease-in-out">
                     <CardContent className="pt-0 pb-6 pl-11">
                       <p className="text-gray-600 leading-relaxed font-['Nunito',sans-serif]">
-                        {openFaq === index ? (typewriterText || item.answer) : item.answer}
+                        {openFaq === index ? typewriterText : item.answer}
                         {openFaq === index && isTyping && <span className="animate-pulse">|</span>}
                       </p>
                     </CardContent>
