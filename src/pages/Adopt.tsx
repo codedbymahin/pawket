@@ -1,11 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ArrowLeft, Dog, Cat, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ImageGallery from "@/components/ImageGallery";
+import LoginRequiredModal from "@/components/LoginRequiredModal";
 
 const Adopt = () => {
   const navigate = useNavigate();
@@ -162,26 +161,11 @@ const Adopt = () => {
       </div>
 
       {/* Login Required Modal */}
-      <Dialog open={showLoginModal} onOpenChange={setShowLoginModal}>
-        <DialogContent className="sm:max-w-md rounded-3xl">
-          <DialogHeader>
-            <DialogTitle className="text-center text-xl font-bold font-poppins">
-              ⚠️ Login Required
-            </DialogTitle>
-            <DialogDescription className="text-center text-gray-600 pt-4 leading-relaxed font-nunito">
-              Login required to access this feature. Guest access is view-only. (Only early access users approved by the Pawket Team can log in and use these services.)
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex justify-center pt-4">
-            <Button 
-              onClick={() => setShowLoginModal(false)}
-              className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white rounded-2xl px-8 font-poppins hover:scale-105 transition-transform duration-300"
-            >
-              Understood
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <LoginRequiredModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        buttonClassName="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600"
+      />
     </div>
   );
 };
