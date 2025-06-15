@@ -180,10 +180,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#fdfcfb] to-[#f3f6f9] font-sans">
 
-      {/* Countdown Timer Section (App Launch) */}
-      <CountdownSection />
-
-      {/* Updated Hero Section with gradient background */}
+      {/* Hero Section with gradient background */}
       <section className="relative bg-gradient-to-br from-[#fdfcfb] via-[#f7f8fc] to-[#f3f6f9] py-16 px-6 sm:px-8 lg:px-12">
         {/* Decorative paw prints for background */}
         <div className="absolute inset-0 opacity-3">
@@ -242,6 +239,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Countdown Timer Section (App Launch) - now immediately after hero */}
+      <CountdownSection />
 
       {/* What We Offer Section with enhanced cards and animations */}
       <section 
