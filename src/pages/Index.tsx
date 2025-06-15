@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { PawketLogo } from "@/components/PawketLogo";
+import PawketLogo from "@/components/PawketLogo";
 import { Dog, Heart, Search, Stethoscope, ShoppingBag, AlertTriangle, Users, Minus, Plus, HelpCircle, Facebook, Instagram, Twitter, Github, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
