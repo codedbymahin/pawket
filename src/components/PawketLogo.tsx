@@ -1,5 +1,6 @@
 
 import React from "react";
+import logo from "../assets/pawket-logo.png";
 
 interface PawketLogoProps {
   size?: number | string;
@@ -8,7 +9,7 @@ interface PawketLogoProps {
 
 const PawketLogo: React.FC<PawketLogoProps> = ({ size = 60, className }) => (
   <img
-    src={require("../assets/pawket-logo.png")}
+    src={logo}
     alt="Pawket Logo"
     style={{
       width: typeof size === "number" ? `${size}px` : size,
@@ -23,3 +24,4 @@ const PawketLogo: React.FC<PawketLogoProps> = ({ size = 60, className }) => (
 );
 
 export default PawketLogo;
+
