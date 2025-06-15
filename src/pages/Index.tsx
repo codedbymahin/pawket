@@ -4,12 +4,15 @@ import { Separator } from "@/components/ui/separator";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { PawPrint, Dog, Heart, Search, Stethoscope, ShoppingBag, AlertTriangle, Users, Minus, Plus, HelpCircle, Facebook, Instagram, Twitter, Github, MapPin, GraduationCap } from "lucide-react";
+import { PawPrint, AlertTriangle, Heart, Minus, Plus, HelpCircle, Facebook, Instagram, Twitter, Github, MapPin, GraduationCap, Dog, Search, Stethoscope, ShoppingBag, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import PawkoChatbot from "@/components/PawkoChatbot";
 import CountdownSection from "@/components/CountdownSection";
 import HelpSection from "@/components/HelpSection";
+import HeroSection from "@/components/HeroSection";
+import FeaturesSection from "@/components/FeaturesSection";
+import TeamSection from "@/components/TeamSection";
 import PawketLogo from "@/components/PawketLogo";
 
 const Index = () => {
@@ -109,51 +112,6 @@ const Index = () => {
     }
   };
 
-  const features = [
-    {
-      icon: <Dog size={32} className="text-[#00AEEF]" />,
-      title: "Pet Adoption",
-      description: "Connect with loving families and help pets find homes.",
-      bgColor: "bg-blue-50",
-      path: "/adopt",
-    },
-    {
-      icon: <PawPrint size={32} className="text-[#FFD166]" />,
-      title: "Pet Sharing",
-      description: "Temporarily share your pet with other pet parents when you travel.",
-      bgColor: "bg-amber-50",
-      path: "/sharing",
-    },
-    {
-      icon: <Search size={32} className="text-[#00AEEF]" />,
-      title: "Lost & Found",
-      description: "Report or discover lost pets in your community.",
-      bgColor: "bg-green-50",
-      path: "/lost-found",
-    },
-    {
-      icon: <Stethoscope size={32} className="text-green-500" />,
-      title: "Virtual Vet",
-      description: "Instantly consult with expert vets through online chat.",
-      bgColor: "bg-emerald-50",
-      path: "/vet",
-    },
-    {
-      icon: <ShoppingBag size={32} className="text-[#FFD166]" />,
-      title: "Pet Shop",
-      description: "Buy pet food, clothes, toys & accessories easily.",
-      bgColor: "bg-purple-50",
-      path: "/shop",
-    },
-    {
-      icon: <GraduationCap size={32} className="text-purple-500" />,
-      title: "Pawket Academy",
-      description: "Learn essential pet care with our expert guides.",
-      bgColor: "bg-indigo-50",
-      path: "/academy",
-    },
-  ];
-
   const comingSoon = [
     {
       icon: <AlertTriangle size={32} className="text-red-400" />,
@@ -193,125 +151,16 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#fdfcfb] to-[#f3f6f9] font-sans">
 
-      {/* Hero Section with gradient background */}
-      <section className="relative bg-gradient-to-br from-[#fdfcfb] via-[#f7f8fc] to-[#f3f6f9] py-16 px-6 sm:px-8 lg:px-12">
-        {/* Decorative paw prints for background */}
-        <div className="absolute inset-0 opacity-3">
-          <div className="absolute top-8 right-12 animate-pulse">
-            <PawPrint size={32} className="text-[#00AEEF]/20 rotate-12" />
-          </div>
-          <div className="absolute top-20 right-24 animate-pulse delay-500">
-            <PawPrint size={28} className="text-[#FFD166]/20 -rotate-12" />
-          </div>
-          <div className="absolute bottom-8 right-16 animate-pulse delay-1000">
-            <PawPrint size={36} className="text-[#00AEEF]/15 rotate-45" />
-          </div>
-        </div>
+      {/* Hero Section */}
+      <HeroSection />
 
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="max-w-2xl space-y-8">
-            <div className="flex items-center space-x-4">
-              {/* Logo */}
-              <div className="w-16 h-16 flex items-center justify-center bg-white rounded-xl shadow-lg border-2 border-white/30">
-                <PawketLogo size={56} />
-              </div>
-              <div className="flex items-baseline space-x-2">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#00AEEF] tracking-tight font-['Nunito',sans-serif]">
-                  Pawket
-                </h1>
-                <span className="text-lg sm:text-xl lg:text-2xl font-light text-gray-500 italic">
-                  (Demo)
-                </span>
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              <p className="text-xl sm:text-2xl font-semibold text-[#333333] leading-relaxed font-['Nunito',sans-serif]">
-                Bangladesh's First All-in-one Pet Solution
-              </p>
-              <p className="text-xl sm:text-2xl font-semibold text-[#333333] italic font-['Nunito',sans-serif]">
-                in Your Pocket
-              </p>
-            </div>
-
-            <div className="max-w-xl">
-              <p className="text-lg text-gray-600 leading-relaxed font-['Nunito',sans-serif]">
-                Now available in Dhaka, Mymensingh, Sylhet, and more! Pawket offers pet sharing, adoption, virtual vet care, and a full pet shop — all in one simple platform.
-              </p>
-            </div>
-
-            <div className="pt-6">
-              <Button
-                onClick={handleGetStarted}
-                size="lg"
-                className="px-12 py-6 text-xl bg-[#00AEEF] hover:bg-[#0099CC] text-white font-bold rounded-3xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 border-0"
-              >
-                <PawPrint size={22} className="mr-3" />
-                Get Started
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Countdown Timer Section (App Launch) - now immediately after hero */}
+      {/* Countdown Timer Section */}
       <CountdownSection />
 
-      {/* What We Offer Section with enhanced cards and animations */}
-      <section 
-        id="what-we-offer" 
-        className={`py-20 px-6 sm:px-8 lg:px-12 bg-white transition-all duration-700 ease-in-out ${
-          visibleSections.has('what-we-offer') 
-            ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 translate-y-8'
-        }`}
-        data-section="what-we-offer"
-        ref={setSectionRef('what-we-offer')}
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold text-[#00AEEF] mb-6 font-['Nunito',sans-serif]">
-              What We Offer
-            </h2>
-            <p className="text-xl text-[#333333] max-w-3xl mx-auto leading-relaxed font-['Nunito',sans-serif]">
-              Comprehensive pet care solutions designed for Bangladesh's unique needs
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <Card 
-                key={index}
-                onClick={() => navigate(feature.path)}
-                className={`cursor-pointer hover:shadow-2xl transition-all duration-700 ease-in-out border-0 shadow-lg ${feature.bgColor} rounded-2xl transform hover:scale-105 hover:-translate-y-2 ${
-                  visibleSections.has('what-we-offer') 
-                    ? 'opacity-100 translate-y-0' 
-                    : 'opacity-0 translate-y-8'
-                }`}
-                style={{ 
-                  transitionDelay: visibleSections.has('what-we-offer') ? `${index * 100}ms` : '0ms' 
-                }}
-              >
-                <CardHeader className="text-center pb-6 pt-8 px-8">
-                  <div className="w-20 h-20 mx-auto mb-6 bg-white rounded-full flex items-center justify-center shadow-lg">
-                    {feature.icon}
-                  </div>
-                  <CardTitle className="text-xl font-bold text-[#333333] mb-3 font-['Nunito',sans-serif]">
-                    {feature.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pb-8 px-8">
-                  <CardDescription className="text-gray-600 text-center leading-relaxed font-['Nunito',sans-serif]">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* What We Offer Section */}
+      <FeaturesSection visibleSections={visibleSections} setSectionRef={setSectionRef} />
 
-      {/* Coming Soon Section with alternating animations */}
+      {/* Coming Soon Section */}
       <section 
         id="coming-soon" 
         className={`py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-[#f8f9fa] to-[#e9ecef] transition-all duration-700 ease-in-out ${
@@ -371,6 +220,8 @@ const Index = () => {
         </div>
       </section>
 
+      {/* About, Mission, Vision sections remain unchanged */}
+      
       <section 
         id="about-pawket" 
         className={`relative py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-blue-50 to-indigo-50 transition-all duration-500 ease-out ${
@@ -479,7 +330,7 @@ const Index = () => {
       {/* Help Section */}
       <HelpSection />
 
-      {/* FAQ Section with enhanced styling and typewriter effect */}
+      {/* FAQ Section */}
       <section 
         id="faq" 
         className={`py-20 px-6 sm:px-8 lg:px-12 bg-gray-50 transition-all duration-500 ease-out ${
@@ -583,7 +434,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Survey CTA in footer */}
+      {/* Survey CTA */}
       <section className="text-center my-10">
         <a
           href="https://forms.gle/WhBDKy8DLKqM7XxK8"
@@ -595,75 +446,10 @@ const Index = () => {
         </a>
       </section>
 
-      <section 
-        id="our-team" 
-        className={`py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-br from-indigo-50 to-blue-50 transition-all duration-500 ease-out ${
-          visibleSections.has('our-team') 
-            ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 translate-y-5'
-        }`}
-        data-section="our-team"
-        ref={setSectionRef('our-team')}
-      >
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold text-[#333333] mb-6 font-['Nunito',sans-serif]">
-              Meet Our Team
-            </h2>
-            <p className="text-xl text-gray-600 leading-relaxed font-['Nunito',sans-serif]">
-              The passionate minds behind Pawket
-            </p>
-          </div>
-          
-          <div className="flex flex-col items-center space-y-12">
-            <Card className="w-full max-w-lg border-0 shadow-2xl bg-white rounded-3xl transform hover:scale-105 transition-all duration-300">
-              <CardHeader className="text-center pb-8 pt-10">
-                <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-[#00AEEF] to-[#0099CC] rounded-full flex items-center justify-center shadow-xl">
-                  <Users size={36} className="text-white" />
-                </div>
-                <CardTitle className="text-2xl font-bold text-[#333333] mb-3 font-['Nunito',sans-serif]">
-                  Md Sifat Al Mahin
-                </CardTitle>
-                <div className="inline-block bg-gradient-to-r from-[#00AEEF] to-[#0099CC] text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                  Founder & Core Ideator of Pawket
-                </div>
-              </CardHeader>
-            </Card>
+      {/* Team Section */}
+      <TeamSection visibleSections={visibleSections} setSectionRef={setSectionRef} />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
-              <Card className="border-0 shadow-xl bg-white rounded-3xl transform hover:scale-105 transition-all duration-300 hover:shadow-2xl">
-                <CardHeader className="text-center pb-8 pt-10">
-                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#FFD166] to-[#E9CD45] rounded-full flex items-center justify-center shadow-lg">
-                    <Users size={28} className="text-white" />
-                  </div>
-                  <CardTitle className="text-xl font-bold text-[#333333] mb-3 font-['Nunito',sans-serif]">
-                    Hasib Ashfaq Saad
-                  </CardTitle>
-                  <div className="inline-block bg-gradient-to-r from-[#FFD166] to-[#E9CD45] text-white px-3 py-1 rounded-full text-sm font-bold shadow-md">
-                    Marketing & Outreach Lead
-                  </div>
-                </CardHeader>
-              </Card>
-
-              <Card className="border-0 shadow-xl bg-white rounded-3xl transform hover:scale-105 transition-all duration-300 hover:shadow-2xl">
-                <CardHeader className="text-center pb-8 pt-10">
-                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#FFD166] to-[#E9CD45] rounded-full flex items-center justify-center shadow-lg">
-                    <Users size={28} className="text-white" />
-                  </div>
-                  <CardTitle className="text-xl font-bold text-[#333333] mb-3 font-['Nunito',sans-serif]">
-                    Ebrahim Islam Asif
-                  </CardTitle>
-                  <div className="inline-block bg-gradient-to-r from-[#FFD166] to-[#E9CD45] text-white px-3 py-1 rounded-full text-sm font-bold shadow-md">
-                    Logistics & Communication Lead
-                  </div>
-                </CardHeader>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer Section with enhanced dark styling */}
+      {/* Footer Section */}
       <footer 
         className={`relative py-16 px-6 sm:px-8 lg:px-12 bg-[#1a1a1a] text-white transition-all duration-500 ease-out ${
           visibleSections.has('footer') 
