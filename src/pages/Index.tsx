@@ -486,7 +486,7 @@ const Index = () => {
                   <Facebook size={22} />
                   <span className="font-['Nunito',sans-serif]">Facebook</span>
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 hover:text-[#FFD166] transition-all duration-300 hover:translate-x-2">
+                <a href="https://www.instagram.com/pawketbd" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 hover:text-[#FFD166] transition-all duration-300 hover:translate-x-2">
                   <Instagram size={22} />
                   <span className="font-['Nunito',sans-serif]">Instagram</span>
                 </a>
