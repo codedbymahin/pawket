@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap');
@@ -108,11 +107,11 @@
 
 @keyframes float {
   0%, 100% { 
-    transform: translateY(0px) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotate(0deg);
     opacity: 0.3;
   }
   50% { 
-    transform: translateY(-20px) rotate(180deg);
+    transform: translate3d(0, -20px, 0) rotate(180deg);
     opacity: 0.1;
   }
 }
@@ -135,6 +134,7 @@
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 .hover\:glow:hover {
@@ -168,4 +168,53 @@
   animation: bounce-gentle 2s ease-in-out infinite;
 }
 
-/* ... keep existing code (font utilities, smooth transitions, typewriter animations, rgb border) */
+/* Font Utilities */
+.font-inter {
+  font-family: 'Inter', sans-serif;
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Smooth Transitions */
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Typewriter Animation */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { color: transparent }
+  50% { color: #2d3748; }
+}
+
+.typewriter {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid #2d3748; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .1em; /* Adjust as needed */
+  animation: 
+    typewriter 4s steps(40, end) forwards,
+    blink-caret .75s step-end infinite;
+}
+
+/* RGB Border Animation */
+@keyframes rgbBorder {
+  0% { border-color: rgba(255, 0, 0, 0.75); }
+  25% { border-color: rgba(0, 255, 0, 0.75); }
+  50% { border-color: rgba(0, 0, 255, 0.75); }
+  75% { border-color: rgba(255, 255, 0, 0.75); }
+  100% { border-color: rgba(255, 0, 0, 0.75); }
+}
+
+.animate-rgb-border {
+  animation: rgbBorder 5s linear infinite;
+}

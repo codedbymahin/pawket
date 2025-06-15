@@ -1,9 +1,9 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lightbulb } from "lucide-react";
 
-const PetCareTips = () => {
+const PetCareTipsComponent = () => {
   const tips = [
     "Never leave your pet in a parked car — even with windows down, it can overheat quickly.",
     "Keep fresh water available at all times for your pet's health.",
@@ -56,4 +56,5 @@ const PetCareTips = () => {
   );
 };
 
+const PetCareTips = memo(PetCareTipsComponent);
 export default PetCareTips;

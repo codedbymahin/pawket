@@ -1,4 +1,3 @@
-
 import { Heart, PawPrint, Star, Sparkles } from "lucide-react";
 
 const EnhancedFloatingElements = () => {
@@ -8,9 +7,6 @@ const EnhancedFloatingElements = () => {
     { icon: <Star size={18} className="text-[#FFD166]/20" />, delay: "4s", duration: "9s" },
     { icon: <Sparkles size={14} className="text-purple-400/20" />, delay: "1s", duration: "11s" },
     { icon: <PawPrint size={22} className="text-green-400/15" />, delay: "3s", duration: "7s" },
-    { icon: <Heart size={20} className="text-pink-400/20" />, delay: "5s", duration: "12s" },
-    { icon: <Star size={16} className="text-yellow-400/25" />, delay: "6s", duration: "8s" },
-    { icon: <Sparkles size={18} className="text-cyan-400/15" />, delay: "7s", duration: "10s" },
   ];
 
   return (

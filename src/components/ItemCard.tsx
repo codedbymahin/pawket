@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -198,4 +197,4 @@ const ItemCard: React.FC<ItemCardProps> = ({
   );
 };
 
-export default ItemCard;
+export default React.memo(ItemCard);
