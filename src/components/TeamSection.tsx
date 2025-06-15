@@ -82,6 +82,9 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
       ? `opacity-100 translate-y-0 scale-100`
       : "opacity-0 translate-y-8 scale-95";
 
+  // Grab founder icon component
+  const FounderIcon = TEAM[0].icon;
+
   return (
     <section
       id="our-team"
@@ -148,7 +151,7 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
                       "0 0 0 7px rgba(255, 215, 0, 0.07), 0 4px 32px 0 rgba(70,170,255,0.11)",
                   }}
                 >
-                  <TEAM[0].icon
+                  <FounderIcon
                     size={44}
                     className="text-white drop-shadow-sm animate-[wiggle_2s_ease-in-out_infinite] group-hover:scale-110 transition-transform"
                   />
@@ -171,57 +174,60 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
 
         {/* Team grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-4xl mx-auto">
-          {TEAM.slice(1).map((member, idx) => (
-            <Card
-              key={member.name}
-              className={`relative group border-0 shadow-md bg-white/95 rounded-3xl 
+          {TEAM.slice(1).map((member, idx) => {
+            const Icon = member.icon;
+            return (
+              <Card
+                key={member.name}
+                className={`relative group border-0 shadow-md bg-white/95 rounded-3xl 
                 transform transition-all duration-500 hover:scale-105 hover:shadow-2xl 
                 ${member.border} 
                 ${cardAppear(idx + 1)}
                 ${visibleSections.has("our-team") ? "animate-fade-in" : ""}
               `}
-              style={{
-                background:
-                  member.cardBg.indexOf("gradient") !== -1
-                    ? undefined
-                    : `linear-gradient(115deg, #fffbe6 60%, #fff7ec 90%)`,
-                borderImage:
-                  member.role.includes("Marketing")
-                    ? "linear-gradient(90deg, #FFD166 60%, #FF8C42 100%) 1"
-                    : "linear-gradient(110deg, #C8E6C9 35%, #00897B 90%) 1",
-                borderWidth: "2.5px",
-                borderStyle: "solid",
-                transitionDelay: `${(idx + 1) * 100}ms`,
-                minHeight: "auto",
-              }}
-            >
-              {/* Decorative paw for fun */}
-              <PawPrintTiny className="absolute top-2 left-3 text-[#FFD166]/30 rotate-12 opacity-70 group-hover:opacity-100 transition-opacity" />
-              <PawPrintTiny className="absolute bottom-2 right-4 text-[#00AEEF]/30 -rotate-12 opacity-60 group-hover:opacity-100 transition-opacity" />
-              <CardHeader className="text-center pb-8 pt-12">
-                <div
-                  className={`w-20 h-20 mx-auto mb-5 rounded-full flex items-center justify-center shadow-lg bg-gradient-to-br ${member.iconColor} transition-all duration-500 group-hover:shadow-xl`}
-                >
-                  <member.icon
-                    size={32}
-                    className="text-white drop-shadow animate-[wiggle_2.5s_ease-in-out_infinite] group-hover:scale-110 group-hover:animate-pulse transition-transform"
-                  />
-                </div>
-                <CardTitle className={`text-xl font-bold ${member.text} mb-3 font-nunito`}>
-                  {member.name}
-                </CardTitle>
-                <div
-                  className={`inline-block ${
+                style={{
+                  background:
+                    member.cardBg.indexOf("gradient") !== -1
+                      ? undefined
+                      : `linear-gradient(115deg, #fffbe6 60%, #fff7ec 90%)`,
+                  borderImage:
                     member.role.includes("Marketing")
-                      ? "bg-gradient-to-r from-[#FFD166] to-[#FF8C42]"
-                      : "bg-gradient-to-r from-[#C8E6C9] to-[#00897B]"
-                  } text-white px-4 py-2 rounded-full text-base font-bold shadow-md font-nunito tracking-wide`}
-                >
-                  {member.role}
-                </div>
-              </CardHeader>
-            </Card>
-          ))}
+                      ? "linear-gradient(90deg, #FFD166 60%, #FF8C42 100%) 1"
+                      : "linear-gradient(110deg, #C8E6C9 35%, #00897B 90%) 1",
+                  borderWidth: "2.5px",
+                  borderStyle: "solid",
+                  transitionDelay: `${(idx + 1) * 100}ms`,
+                  minHeight: "auto",
+                }}
+              >
+                {/* Decorative paw for fun */}
+                <PawPrintTiny className="absolute top-2 left-3 text-[#FFD166]/30 rotate-12 opacity-70 group-hover:opacity-100 transition-opacity" />
+                <PawPrintTiny className="absolute bottom-2 right-4 text-[#00AEEF]/30 -rotate-12 opacity-60 group-hover:opacity-100 transition-opacity" />
+                <CardHeader className="text-center pb-8 pt-12">
+                  <div
+                    className={`w-20 h-20 mx-auto mb-5 rounded-full flex items-center justify-center shadow-lg bg-gradient-to-br ${member.iconColor} transition-all duration-500 group-hover:shadow-xl`}
+                  >
+                    <Icon
+                      size={32}
+                      className="text-white drop-shadow animate-[wiggle_2.5s_ease-in-out_infinite] group-hover:scale-110 group-hover:animate-pulse transition-transform"
+                    />
+                  </div>
+                  <CardTitle className={`text-xl font-bold ${member.text} mb-3 font-nunito`}>
+                    {member.name}
+                  </CardTitle>
+                  <div
+                    className={`inline-block ${
+                      member.role.includes("Marketing")
+                        ? "bg-gradient-to-r from-[#FFD166] to-[#FF8C42]"
+                        : "bg-gradient-to-r from-[#C8E6C9] to-[#00897B]"
+                    } text-white px-4 py-2 rounded-full text-base font-bold shadow-md font-nunito tracking-wide`}
+                  >
+                    {member.role}
+                  </div>
+                </CardHeader>
+              </Card>
+            );
+          })}
         </div>
       </div>
       {/* Custom Keyframes for Animations */}
