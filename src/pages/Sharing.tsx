@@ -1,77 +1,14 @@
-
 import { PawPrint, MapPin, Clock, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LoginRequiredModal from "@/components/LoginRequiredModal";
 import PageHeader from "@/components/PageHeader";
 import ItemCard from "@/components/ItemCard";
+import { sharingOffers } from "@/constants/mockData";
 
 const Sharing = () => {
   const navigate = useNavigate();
   const [showLoginModal, setShowLoginModal] = useState(false);
-
-  const sharingOffers = [
-    {
-      id: 1,
-      petName: "Charlie",
-      breed: "Beagle",
-      location: "Banani, Dhaka",
-      duration: "Weekend trip",
-      reason: "Owner traveling for work",
-      owner: "Rashida Akter",
-      status: "Available"
-    },
-    {
-      id: 2,
-      petName: "Fluffy",
-      breed: "British Shorthair",
-      location: "Uttara, Dhaka",
-      duration: "3 days",
-      reason: "Family emergency",
-      owner: "Mohammad Ali",
-      status: "Available"
-    },
-    {
-      id: 3,
-      petName: "Daisy",
-      breed: "Golden Retriever Puppy",
-      location: "Mymensingh",
-      duration: "2 hours morning",
-      reason: "Owner works early shifts",
-      owner: "Sadia Rahman",
-      status: "Available"
-    },
-    {
-      id: 4,
-      petName: "Tiger",
-      breed: "German Shepherd",
-      location: "Sylhet",
-      duration: "Evening walks",
-      reason: "Owner has mobility issues",
-      owner: "Aminul Islam",
-      status: "Available"
-    },
-    {
-      id: 5,
-      petName: "Mittens",
-      breed: "Persian Mix",
-      location: "Chittagong",
-      duration: "Daily playtime",
-      reason: "Owner working long hours",
-      owner: "Nasreen Sultana",
-      status: "Temporarily Shared"
-    },
-    {
-      id: 6,
-      petName: "Bruno",
-      breed: "Labrador",
-      location: "Comilla",
-      duration: "Full weekend",
-      reason: "Owner traveling to village",
-      owner: "Rafiq Ahmed",
-      status: "Available"
-    }
-  ];
 
   const handleApplyToHelp = () => {
     setShowLoginModal(true);

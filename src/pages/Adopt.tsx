@@ -1,77 +1,14 @@
-
 import { Dog, Cat, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LoginRequiredModal from "@/components/LoginRequiredModal";
 import PageHeader from "@/components/PageHeader";
 import ItemCard from "@/components/ItemCard";
+import { pets } from "@/constants/mockData";
 
 const Adopt = () => {
   const navigate = useNavigate();
   const [showLoginModal, setShowLoginModal] = useState(false);
-
-  const pets = [
-    {
-      id: 1,
-      name: "Buddy",
-      breed: "Golden Retriever",
-      age: "2 years",
-      location: "Dhanmondi, Dhaka",
-      description: "Friendly and energetic dog, great with kids",
-      owner: "Ahmed Hassan",
-      type: "dog"
-    },
-    {
-      id: 2,
-      name: "Mimi",
-      breed: "Persian Cat",
-      age: "1.5 years",
-      location: "Gulshan, Dhaka",
-      description: "Calm and affectionate, perfect lap cat",
-      owner: "Fatima Khan",
-      type: "cat"
-    },
-    {
-      id: 3,
-      name: "Rocky",
-      breed: "German Shepherd",
-      age: "3 years",
-      location: "Mymensingh",
-      description: "Loyal guard dog, well-trained",
-      owner: "Rashed Ahmed",
-      type: "dog"
-    },
-    {
-      id: 4,
-      name: "Whiskers",
-      breed: "Bengali Cat",
-      age: "6 months",
-      location: "Sylhet",
-      description: "Playful kitten, loves to explore",
-      owner: "Nazma Begum",
-      type: "cat"
-    },
-    {
-      id: 5,
-      name: "Max",
-      breed: "Labrador Mix",
-      age: "4 years",
-      location: "Chittagong",
-      description: "Active and loving, great running partner",
-      owner: "Karim Rahman",
-      type: "dog"
-    },
-    {
-      id: 6,
-      name: "Luna",
-      breed: "Siamese Cat",
-      age: "2 years",
-      location: "Rangpur",
-      description: "Elegant and intelligent, loves attention",
-      owner: "Salma Khatun",
-      type: "cat"
-    }
-  ];
 
   const handleContactOwner = () => {
     setShowLoginModal(true);
