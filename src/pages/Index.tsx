@@ -1,10 +1,11 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { PawPrint, AlertTriangle, Heart, Minus, Plus, HelpCircle, Facebook, Instagram, Twitter, Github, MapPin, GraduationCap, Dog, Search, Stethoscope, ShoppingBag, Users } from "lucide-react";
+import { PawPrint, AlertTriangle, Heart, Minus, Plus, HelpCircle, Facebook, Instagram, Twitter, Github, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import PawkoChatbot from "@/components/PawkoChatbot";
@@ -12,8 +13,8 @@ import CountdownSection from "@/components/CountdownSection";
 import HelpSection from "@/components/HelpSection";
 import HeroSection from "@/components/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection";
-import TeamSection from "@/components/TeamSection";
-import PawketLogo from "@/components/PawketLogo";
+import OptimizedTeamSection from "@/components/OptimizedTeamSection";
+import { useDebounce, useOptimizedIntersectionObserver } from "@/hooks/usePerformance";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -26,41 +27,41 @@ const Index = () => {
   const [showNewsletterModal, setShowNewsletterModal] = useState<boolean>(false);
   
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+  
+  // Debounce FAQ answer for better performance
+  const debouncedFaqAnswer = useDebounce(currentFaqAnswer, 100);
+
+  // Optimized intersection observer
+  const { observe, disconnect } = useOptimizedIntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const sectionId = entry.target.getAttribute('data-section');
+        if (sectionId) {
+          setVisibleSections(prev => {
+            const newSet = new Set(prev);
+            if (entry.isIntersecting) {
+              newSet.add(sectionId);
+            } else {
+              newSet.delete(sectionId);
+            }
+            return newSet;
+          });
+        }
+      });
+    }
+  );
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const sectionId = entry.target.getAttribute('data-section');
-          if (sectionId) {
-            setVisibleSections(prev => {
-              const newSet = new Set(prev);
-              if (entry.isIntersecting) {
-                newSet.add(sectionId);
-              } else {
-                newSet.delete(sectionId);
-              }
-              return newSet;
-            });
-          }
-        });
-      },
-      { 
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      }
-    );
-
     Object.values(sectionRefs.current).forEach(ref => {
-      if (ref) observer.observe(ref);
+      if (ref) observe(ref);
     });
 
-    return () => observer.disconnect();
-  }, []);
+    return () => disconnect();
+  }, [observe, disconnect]);
 
-  // Fixed typewriter effect for FAQ answers
+  // Optimized typewriter effect with better performance
   useEffect(() => {
-    if (currentFaqAnswer && openFaq !== null) {
+    if (debouncedFaqAnswer && openFaq !== null) {
       setIsTyping(true);
       setTypewriterText("");
       
@@ -68,8 +69,8 @@ const Index = () => {
       const startTyping = setTimeout(() => {
         let i = 0;
         const typeInterval = setInterval(() => {
-          if (i <= currentFaqAnswer.length) {
-            setTypewriterText(currentFaqAnswer.substring(0, i));
+          if (i <= debouncedFaqAnswer.length) {
+            setTypewriterText(debouncedFaqAnswer.substring(0, i));
             i++;
           } else {
             setIsTyping(false);
@@ -82,7 +83,7 @@ const Index = () => {
 
       return () => clearTimeout(startTyping);
     }
-  }, [currentFaqAnswer, openFaq]);
+  }, [debouncedFaqAnswer, openFaq]);
 
   const setSectionRef = (sectionId: string) => (el: HTMLElement | null) => {
     sectionRefs.current[sectionId] = el;
@@ -99,7 +100,8 @@ const Index = () => {
     }
   };
 
-  const handleFaqToggle = (index: number, answer: string) => {
+  // Debounced FAQ toggle for better performance
+  const handleFaqToggle = useDebounce((index: number, answer: string) => {
     if (openFaq === index) {
       setOpenFaq(null);
       setCurrentFaqAnswer("");
@@ -108,7 +110,7 @@ const Index = () => {
       setOpenFaq(index);
       setCurrentFaqAnswer(answer);
     }
-  };
+  }, 150);
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -201,7 +203,8 @@ const Index = () => {
                       : 'translate-x-12 opacity-0'
                 }`}
                 style={{ 
-                  transitionDelay: visibleSections.has('coming-soon') ? `${index * 100}ms` : '0ms' 
+                  transitionDelay: visibleSections.has('coming-soon') ? `${index * 100}ms` : '0ms',
+                  willChange: 'transform, opacity'
                 }}
               >
                 <div className="absolute top-4 right-4 bg-gradient-to-r from-[#FFD166] to-[#FFA500] text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
@@ -226,7 +229,7 @@ const Index = () => {
         </div>
       </section>
 
-      
+      {/* About, Mission, Vision sections */}
       <section 
         id="about-pawket" 
         className={`relative py-20 px-6 sm:px-8 lg:px-12 bg-gradient-to-r from-blue-50 to-indigo-50 transition-all duration-500 ease-out ${
@@ -335,7 +338,7 @@ const Index = () => {
       {/* Help Section */}
       <HelpSection />
 
-      {/* FAQ Section */}
+      {/* Optimized FAQ Section */}
       <section 
         id="faq" 
         className={`py-20 px-6 sm:px-8 lg:px-12 bg-gray-50 transition-all duration-500 ease-out ${
@@ -451,8 +454,8 @@ const Index = () => {
         </a>
       </section>
 
-      {/* Team Section */}
-      <TeamSection visibleSections={visibleSections} setSectionRef={setSectionRef} />
+      {/* Optimized Team Section */}
+      <OptimizedTeamSection visibleSections={visibleSections} setSectionRef={setSectionRef} />
 
       {/* Footer Section */}
       <footer 
