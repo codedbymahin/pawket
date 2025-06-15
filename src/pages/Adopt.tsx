@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { ArrowLeft, Dog, Cat, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import ImageGallery from "@/components/ImageGallery";
 
 const Adopt = () => {
   const navigate = useNavigate();
@@ -109,6 +110,11 @@ const Adopt = () => {
             <Card key={pet.id} className="bg-white/90 backdrop-blur-sm border-2 border-blue-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 rounded-3xl">
               <div onClick={() => handleCardClick(pet.id)} className="cursor-pointer">
                 <CardHeader className="text-center px-8 pt-8">
+                  <ImageGallery 
+                    images={[]} 
+                    alt={pet.name}
+                    className="mb-4"
+                  />
                   <div className="flex justify-center mb-4">
                     <div className="p-4 rounded-full shadow-lg bg-gradient-to-br from-blue-400 to-cyan-500">
                       {pet.type === "dog" ? (

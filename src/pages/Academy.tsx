@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { GraduationCap, Heart, Thermometer, Utensils, Stethoscope, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import PawketLogo from "@/components/PawketLogo";
+import InteractiveFAQ from "@/components/InteractiveFAQ";
 
 const Academy = () => {
   const navigate = useNavigate();
@@ -67,6 +68,49 @@ const Academy = () => {
     }
   ];
 
+  const petCareFAQs = [
+    {
+      question: "How often should I feed my dog?",
+      answer: "Adult dogs should typically be fed twice a day - once in the morning and once in the evening. Puppies under 6 months may need 3-4 meals per day. Always follow the feeding guidelines on your dog food package and consult with your vet for personalized advice.",
+      category: "Nutrition"
+    },
+    {
+      question: "What vaccines does my cat need in Bangladesh?",
+      answer: "In Bangladesh, core vaccines for cats include rabies, FVRCP (feline viral rhinotracheitis, calicivirus, and panleukopenia). Your vet may also recommend FeLV (feline leukemia) depending on your cat's lifestyle. Kittens need a series of vaccinations starting at 6-8 weeks.",
+      category: "Health"
+    },
+    {
+      question: "How do I keep my pet cool in Bangladesh's hot weather?",
+      answer: "Provide plenty of fresh water, ensure good ventilation, avoid walking during the hottest parts of the day (10am-4pm), use fans or AC when possible, and never leave pets in vehicles. Consider cooling mats and frozen treats for extra relief.",
+      category: "Weather"
+    },
+    {
+      question: "What should I do if my pet gets lost in Dhaka?",
+      answer: "Immediately contact local animal shelters, post on social media groups like 'Lost and Found Pets Bangladesh', put up posters in your neighborhood, inform local vets, and check with the city corporation. Having a collar with ID tags greatly increases chances of recovery.",
+      category: "Safety"
+    },
+    {
+      question: "How often should I groom my pet?",
+      answer: "Dogs typically need bathing every 4-6 weeks, but this varies by breed and lifestyle. Cats usually groom themselves but may need occasional baths. Brush regularly (daily for long-haired breeds), trim nails monthly, and clean ears weekly.",
+      category: "Grooming"
+    },
+    {
+      question: "What human foods are toxic to pets?",
+      answer: "Never give pets chocolate, onions, garlic, grapes, raisins, avocado, caffeine, alcohol, or xylitol (artificial sweetener). Also avoid spicy foods, bones that can splinter, and anything with high salt content. When in doubt, stick to pet food.",
+      category: "Nutrition"
+    },
+    {
+      question: "How do I introduce a new pet to my current pet?",
+      answer: "Take it slow! Keep them separated initially, let them smell each other's scents, feed them on opposite sides of a door, gradually allow supervised meetings, and ensure each pet has their own space. The process can take several weeks.",
+      category: "Behavior"
+    },
+    {
+      question: "When should I take my pet to the vet?",
+      answer: "Regular check-ups annually for healthy adult pets, twice yearly for seniors. Emergency signs include difficulty breathing, repeated vomiting, lethargy, loss of appetite for 24+ hours, difficulty urinating, or any sudden behavior changes.",
+      category: "Health"
+    }
+  ];
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#FAF3E0' }}>
       {/* Header Section */}
@@ -116,7 +160,7 @@ const Academy = () => {
       {/* Academy Cards Grid */}
       <div className="px-4 sm:px-6 lg:px-8 pb-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
             {academyCards.map((card) => (
               <Card 
                 key={card.id}
@@ -151,6 +195,13 @@ const Academy = () => {
               </Card>
             ))}
           </div>
+
+          {/* Interactive FAQ Section */}
+          <InteractiveFAQ
+            title="Pet Care Questions & Answers"
+            faqs={petCareFAQs}
+            className="mb-8"
+          />
         </div>
       </div>
 
