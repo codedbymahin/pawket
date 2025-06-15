@@ -24,7 +24,7 @@ import AcademyHeader from "@/components/AcademyHeader";
 import AcademyNavigationTabs from "@/components/AcademyNavigationTabs";
 import { academyCards, petCareFAQs } from "@/constants/academyData";
 
-const iconMap: Record<string, React.FC<{ size?: number; className?: string }>> = {
+const iconMap = {
   Utensils,
   Stethoscope,
   Thermometer,
@@ -82,7 +82,7 @@ const Academy = () => {
           {activeSection === "overview" && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
               {academyCards.map((card) => {
-                const IconComponent = iconMap[card.icon];
+                const IconComponent = iconMap[card.icon as keyof typeof iconMap];
                 return (
                   <Card
                     key={card.id}
