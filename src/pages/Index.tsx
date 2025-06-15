@@ -58,24 +58,29 @@ const Index = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Typewriter effect for FAQ answers
+  // Fixed typewriter effect for FAQ answers
   useEffect(() => {
     if (currentFaqAnswer && openFaq !== null) {
       setIsTyping(true);
       setTypewriterText("");
       
-      let i = 0;
-      const typeInterval = setInterval(() => {
-        if (i < currentFaqAnswer.length) {
-          setTypewriterText(prev => prev + currentFaqAnswer.charAt(i));
-          i++;
-        } else {
-          setIsTyping(false);
-          clearInterval(typeInterval);
-        }
-      }, 30); // Typing speed
+      // Add a small delay before starting the typing animation
+      const startTyping = setTimeout(() => {
+        let i = 0;
+        const typeInterval = setInterval(() => {
+          if (i <= currentFaqAnswer.length) {
+            setTypewriterText(currentFaqAnswer.substring(0, i));
+            i++;
+          } else {
+            setIsTyping(false);
+            clearInterval(typeInterval);
+          }
+        }, 25); // Slightly faster typing speed for better UX
 
-      return () => clearInterval(typeInterval);
+        return () => clearInterval(typeInterval);
+      }, 100); // Small delay to ensure proper state initialization
+
+      return () => clearTimeout(startTyping);
     }
   }, [currentFaqAnswer, openFaq]);
 
@@ -98,6 +103,7 @@ const Index = () => {
     if (openFaq === index) {
       setOpenFaq(null);
       setCurrentFaqAnswer("");
+      setTypewriterText("");
     } else {
       setOpenFaq(index);
       setCurrentFaqAnswer(answer);
@@ -116,7 +122,7 @@ const Index = () => {
     {
       icon: <AlertTriangle size={32} className="text-red-400" />,
       title: "Emergency Help",
-      description: "Request urgent assistance for medical emergency and more. (Coming Soon)"
+      description: "Request urgent assistance for medical emergencies and more. (Coming Soon)"
     },
     {
       icon: <Heart size={32} className="text-pink-400" />,
@@ -220,7 +226,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* About, Mission, Vision sections remain unchanged */}
       
       <section 
         id="about-pawket" 
@@ -373,7 +378,7 @@ const Index = () => {
                     <CardContent className="pt-0 pb-6 pl-11">
                       <p className="text-gray-600 leading-relaxed font-['Nunito',sans-serif]">
                         {openFaq === index ? typewriterText : item.answer}
-                        {openFaq === index && isTyping && <span className="animate-pulse">|</span>}
+                        {openFaq === index && isTyping && <span className="animate-pulse text-[#00AEEF]">|</span>}
                       </p>
                     </CardContent>
                   </CollapsibleContent>
