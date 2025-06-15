@@ -24,7 +24,7 @@ const PetCareTips = () => {
         setCurrentTipIndex((prevIndex) => (prevIndex + 1) % tips.length);
         setIsVisible(true);
       }, 300);
-    }, 2000);
+    }, 5000); // Changed from 2000 to 5000 (5 seconds)
 
     return () => clearInterval(interval);
   }, [tips.length]);
@@ -37,14 +37,14 @@ const PetCareTips = () => {
             <Lightbulb size={24} className="text-white" />
           </div>
         </div>
-        <CardTitle className="text-lg font-bold" style={{ color: '#333333' }}>
+        <CardTitle className="text-lg font-bold font-poppins" style={{ color: '#333333' }}>
           Pet Care Tip
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-0 pb-6">
         <div className="min-h-[60px] flex items-center justify-center">
           <p 
-            className={`text-gray-700 text-sm leading-relaxed text-center transition-all duration-300 ease-in-out font-['Nunito',sans-serif] ${
+            className={`text-gray-700 text-sm leading-relaxed text-center transition-all duration-300 ease-in-out font-nunito ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
             }`}
           >
