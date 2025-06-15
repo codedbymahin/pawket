@@ -92,24 +92,6 @@ const FounderRibbon: React.FC = () => (
   </div>
 );
 
-/** Background geometric shapes */
-const BackgroundShapes: React.FC<{ scrollY: number }> = ({ scrollY }) => (
-  <>
-    <div 
-      className="absolute top-20 left-10 w-32 h-32 rounded-full bg-gradient-to-br from-blue-200/20 to-purple-200/20 blur-xl animate-pulse"
-      style={{ transform: `translateY(${scrollY * 0.1}px)` }}
-    />
-    <div 
-      className="absolute bottom-40 right-20 w-24 h-24 rounded-full bg-gradient-to-br from-yellow-200/20 to-orange-200/20 blur-lg animate-pulse delay-1000"
-      style={{ transform: `translateY(${scrollY * 0.15}px)` }}
-    />
-    <div 
-      className="absolute top-1/2 left-1/3 w-16 h-16 rounded-full bg-gradient-to-br from-green-200/20 to-teal-200/20 blur-md animate-pulse delay-500"
-      style={{ transform: `translateY(${scrollY * 0.08}px)` }}
-    />
-  </>
-);
-
 const TEAM = [
   {
     name: "Md Sifat Al Mahin",
@@ -188,14 +170,22 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
       data-section="our-team"
       ref={setSectionRef("our-team")}
       style={{
-        background: `
-          radial-gradient(circle at ${mousePosition.x * 0.1}% ${mousePosition.y * 0.1}%, rgba(0,174,239,0.05) 0%, transparent 50%),
-          linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #f1f5f9 50%, #e7f3ff 75%, #f8fafc 100%)
-        `
+        background: `linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #f1f5f9 50%, #e7f3ff 75%, #f8fafc 100%)`
       }}
     >
       {/* Background geometric shapes with parallax */}
-      <BackgroundShapes scrollY={scrollY} />
+      <div 
+        className="absolute top-20 left-10 w-32 h-32 rounded-full bg-gradient-to-br from-blue-200/20 to-purple-200/20 blur-xl animate-pulse"
+        style={{ transform: `translateY(${scrollY * 0.1}px)` }}
+      />
+      <div 
+        className="absolute bottom-40 right-20 w-24 h-24 rounded-full bg-gradient-to-br from-yellow-200/20 to-orange-200/20 blur-lg animate-pulse delay-1000"
+        style={{ transform: `translateY(${scrollY * 0.15}px)` }}
+      />
+      <div 
+        className="absolute top-1/2 left-1/3 w-16 h-16 rounded-full bg-gradient-to-br from-green-200/20 to-teal-200/20 blur-md animate-pulse delay-500"
+        style={{ transform: `translateY(${scrollY * 0.08}px)` }}
+      />
 
       {/* Enhanced decorative floating paw prints with parallax */}
       <PawPrintTiny 
@@ -214,9 +204,9 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
       <div className="max-w-5xl mx-auto relative">
         <div className="text-center mb-20">
           <h2 className="text-4xl sm:text-5xl font-bold text-[#26356A] mb-6 font-nunito tracking-tight">
-            <span className="inline-block animate-[typewriter_2s_steps(40,end)]">Meet Our Team</span>
+            <span className="inline-block">Meet Our Team</span>
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed font-nunito animate-fade-in delay-500">
+          <p className="text-xl text-gray-600 leading-relaxed font-nunito">
             The passionate minds behind Pawket
           </p>
         </div>
@@ -232,13 +222,10 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
                           ${visibleSections.has("our-team") ? "animate-fade-in" : ""}`}
               style={{
                 boxShadow: "0 0 60px 0 rgba(255,215,0,0.12), 0 8px 32px 4px rgba(33,150,243,0.14)",
-                borderImage: "linear-gradient(110deg, #00AEEF 30%, #FFD700 65%) 1",
                 borderWidth: "3px",
                 borderStyle: "solid",
-                background: `
-                  radial-gradient(circle at ${mousePosition.x * 0.001}% ${mousePosition.y * 0.001}%, rgba(255,215,0,0.1) 0%, transparent 70%),
-                  linear-gradient(120deg, #e0f7fa 0%, #ffffff 57%, #fffde4 100%)
-                `
+                borderImage: "linear-gradient(110deg, #00AEEF 30%, #FFD700 65%) 1",
+                background: "linear-gradient(120deg, #e0f7fa 0%, #ffffff 57%, #fffde4 100%)"
               }}
             >
               <FounderRibbon />
@@ -266,7 +253,7 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
                   />
                 </div>
                 
-                <CardTitle className={`text-2xl md:text-3xl font-bold ${TEAM[0].text} mb-3 font-nunito group-hover:animate-[glow_1s_ease-in-out] animate-[reveal_0.8s_ease-out]`}>
+                <CardTitle className={`text-2xl md:text-3xl font-bold ${TEAM[0].text} mb-3 font-nunito group-hover:animate-[glow_1s_ease-in-out]`}>
                   {TEAM[0].name}
                 </CardTitle>
                 
@@ -297,18 +284,14 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
                   ${visibleSections.has("our-team") ? "animate-fade-in" : ""}
                 `}
                 style={{
-                  background: `
-                    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.95) 100%),
-                    ${member.role.includes("Marketing") 
-                      ? "linear-gradient(115deg, #fffbe6 60%, #fff7ec 90%)" 
-                      : "linear-gradient(115deg, #f0fdfa 60%, #e6fffa 90%)"
-                    }
-                  `,
+                  borderWidth: "2.5px",
+                  borderStyle: "solid",
                   borderImage: member.role.includes("Marketing")
                     ? "linear-gradient(90deg, #FFD166 60%, #FF8C42 100%) 1"
                     : "linear-gradient(110deg, #C8E6C9 35%, #00897B 90%) 1",
-                  borderWidth: "2.5px",
-                  borderStyle: "solid",
+                  background: member.role.includes("Marketing") 
+                    ? "linear-gradient(115deg, #fffbe6 60%, #fff7ec 90%)" 
+                    : "linear-gradient(115deg, #f0fdfa 60%, #e6fffa 90%)",
                   transitionDelay: `${(idx + 1) * 150}ms`,
                 }}
               >
@@ -328,7 +311,7 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
                     />
                   </div>
                   
-                  <CardTitle className={`text-xl font-bold ${member.text} mb-3 font-nunito group-hover:animate-[glow_0.8s_ease-in-out] animate-[reveal_1s_ease-out]`}>
+                  <CardTitle className={`text-xl font-bold ${member.text} mb-3 font-nunito group-hover:animate-[glow_0.8s_ease-in-out]`}>
                     {member.name}
                   </CardTitle>
                   
@@ -368,14 +351,6 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
           0% { text-shadow: none; }
           50% { text-shadow: 0 0 20px rgba(255,215,0,0.6); }
           100% { text-shadow: none; }
-        }
-        @keyframes reveal {
-          0% { opacity: 0; transform: translateY(20px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes typewriter {
-          from { width: 0; }
-          to { width: 100%; }
         }
       `}</style>
     </section>
