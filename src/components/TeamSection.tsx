@@ -5,6 +5,7 @@ import {
   CardTitle,
   CardContent,
 } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Lightbulb, Megaphone, Truck } from "lucide-react";
 import React, { useState, useRef } from "react";
 
@@ -26,13 +27,13 @@ const CrownIcon: React.FC<{ className?: string }> = ({ className }) => (
     width="40"
     height="40"
     viewBox="0 0 48 48"
-    fill="gold"
+    fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle cx="10" cy="20" r="4" fill="#FDE68A" />
-    <circle cx="38" cy="20" r="4" fill="#FDE68A" />
-    <circle cx="24" cy="10" r="5" fill="#FFD700" />
-    <path d="M8 20 L24 12 L40 20 L31 38 L17 38 Z" fill="#FFC700" stroke="#F6C000" strokeWidth="2" />
+    <circle cx="10" cy="20" r="4" fill="#87CEEB" />
+    <circle cx="38" cy="20" r="4" fill="#87CEEB" />
+    <circle cx="24" cy="10" r="5" fill="#00AEEF" />
+    <path d="M8 20 L24 12 L40 20 L31 38 L17 38 Z" fill="#0099CC" stroke="#0077AA" strokeWidth="2" />
   </svg>
 );
 
@@ -41,7 +42,7 @@ const SpotlightOverlay: React.FC<{ mousePos: { x: number; y: number } }> = ({ mo
   <div 
     className="absolute inset-0 opacity-20 rounded-3xl pointer-events-none transition-opacity duration-300"
     style={{
-      background: `radial-gradient(circle 400px at ${mousePos.x}px ${mousePos.y}px, rgba(255,215,0,0.3) 0%, transparent 70%)`
+      background: `radial-gradient(circle 400px at ${mousePos.x}px ${mousePos.y}px, rgba(0,174,239,0.3) 0%, transparent 70%)`
     }}
   />
 );
@@ -76,9 +77,9 @@ const TEAM = [
     name: "Md Sifat Al Mahin",
     role: "Founder & Core Ideator of Pawket",
     icon: Lightbulb,
-    iconColor: "from-[#00AEEF] via-[#42b1ff] to-[#FFD700]",
-    cardBg: "from-[#FFFDE4] via-[#e7f3ff] to-[#D0E6FF]",
-    border: "bg-gradient-to-br from-[#00AEEF] via-[#42b1ff] to-[#FFD700]",
+    iconColor: "from-[#00AEEF] via-[#42b1ff] to-[#0099CC]",
+    cardBg: "from-[#E7F3FF] via-[#e7f3ff] to-[#D0E6FF]",
+    border: "bg-gradient-to-br from-[#00AEEF] via-[#42b1ff] to-[#0099CC]",
     text: "text-[#26356A]",
     special: true,
   },
@@ -191,16 +192,16 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
               ref={founderCardRef}
               className={`relative z-10 w-full max-w-xl lg:max-w-2xl border-0 shadow-[0_8px_32px_4px_rgba(33,150,243,0.14)] 
                           backdrop-blur-sm bg-white/90 rounded-3xl transition-all duration-500 transform-gpu
-                          hover:shadow-[0_20px_60px_8px_rgba(255,215,0,0.2)] cursor-pointer
+                          hover:shadow-[0_20px_60px_8px_rgba(0,174,239,0.2)] cursor-pointer
                           ${TEAM[0].border} group animate-breathe
                           ${cardAppear(0)}
                           ${visibleSections.has("our-team") ? "animate-fade-in" : ""}`}
               style={{
-                borderImage: "linear-gradient(110deg, #00AEEF 30%, #FFD700 65%) 1",
+                borderImage: "linear-gradient(110deg, #00AEEF 30%, #0099CC 65%) 1",
                 borderWidth: "3px",
                 borderStyle: "solid",
                 transitionDelay: "0ms",
-                background: "linear-gradient(120deg, #e0f7fa 0%, #ffffff 57%, #fffde4 100%)",
+                background: "linear-gradient(120deg, #e0f7fa 0%, #ffffff 57%, #e7f3ff 100%)",
               }}
               onMouseMove={(e) => handleMouseMove(e, 0)}
               onMouseLeave={handleMouseLeave}
@@ -209,23 +210,32 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
               {/* Spotlight effect */}
               {hoveredCard === 0 && <SpotlightOverlay mousePos={mousePos} />}
               
+              {/* Founder Badge */}
+              <div className="absolute -top-2 -right-2 z-30">
+                <Badge 
+                  className="bg-gradient-to-r from-[#00AEEF] to-[#0099CC] text-white px-4 py-2 text-sm font-bold shadow-lg border-2 border-white rounded-full"
+                >
+                  FOUNDER
+                </Badge>
+              </div>
+              
               {/* Enhanced floating crown */}
               <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-20 animate-[crown-float_4s_ease-in-out_infinite] pointer-events-none">
                 <CrownIcon className="drop-shadow-2xl filter brightness-110" />
               </div>
               
-              {/* Golden particles */}
-              <div className="absolute top-4 left-8 w-2 h-2 rounded-full bg-[#FFD700]/60 animate-[golden-float_3s_ease-in-out_infinite]" />
-              <div className="absolute top-12 right-12 w-1.5 h-1.5 rounded-full bg-[#FFD700]/40 animate-[golden-float_4s_ease-in-out_infinite]" style={{ animationDelay: '1s' }} />
-              <div className="absolute bottom-8 left-16 w-1 h-1 rounded-full bg-[#FFD700]/50 animate-[golden-float_2.5s_ease-in-out_infinite]" style={{ animationDelay: '2s' }} />
+              {/* Blue particles */}
+              <div className="absolute top-4 left-8 w-2 h-2 rounded-full bg-[#00AEEF]/60 animate-[blue-float_3s_ease-in-out_infinite]" />
+              <div className="absolute top-12 right-12 w-1.5 h-1.5 rounded-full bg-[#00AEEF]/40 animate-[blue-float_4s_ease-in-out_infinite]" style={{ animationDelay: '1s' }} />
+              <div className="absolute bottom-8 left-16 w-1 h-1 rounded-full bg-[#0099CC]/50 animate-[blue-float_2.5s_ease-in-out_infinite]" style={{ animationDelay: '2s' }} />
               
               <CardHeader className="text-center pb-8 pt-16">
                 {/* Enhanced animated avatar */}
                 <div
                   className={`w-28 h-28 mx-auto mb-5 rounded-full flex items-center justify-center shadow-xl 
-                    bg-gradient-to-br ${TEAM[0].iconColor} border-4 border-white ring-4 ring-yellow-200/50 
-                    transition-all duration-500 group-hover:shadow-[0_0_40px_8px_rgba(255,215,0,0.4)] 
-                    group-hover:ring-yellow-300/70 group-hover:scale-110`}
+                    bg-gradient-to-br ${TEAM[0].iconColor} border-4 border-white ring-4 ring-blue-200/50 
+                    transition-all duration-500 group-hover:shadow-[0_0_40px_8px_rgba(0,174,239,0.4)] 
+                    group-hover:ring-blue-300/70 group-hover:scale-110`}
                 >
                   <FounderIcon
                     size={44}
@@ -235,11 +245,11 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
                 </div>
                 <CardTitle
                   className={`text-2xl md:text-3xl font-bold ${TEAM[0].text} mb-3 font-nunito 
-                    transition-all duration-300 group-hover:text-[#FFD700] group-hover:scale-105`}
+                    transition-all duration-300 group-hover:text-[#00AEEF] group-hover:scale-105`}
                 >
                   {TEAM[0].name}
                 </CardTitle>
-                <div className="inline-block bg-gradient-to-r from-[#00AEEF] via-[#42b1ff] to-[#FFD700] text-white px-5 py-2 rounded-full text-base font-bold shadow-lg ring-2 ring-[#FFD700]/30 mt-2 font-nunito tracking-wide hover:shadow-xl transition-shadow duration-300">
+                <div className="inline-block bg-gradient-to-r from-[#00AEEF] via-[#42b1ff] to-[#0099CC] text-white px-5 py-2 rounded-full text-base font-bold shadow-lg ring-2 ring-[#00AEEF]/30 mt-2 font-nunito tracking-wide hover:shadow-xl transition-shadow duration-300">
                   {TEAM[0].role}
                 </div>
               </CardHeader>
@@ -334,7 +344,7 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
           50% { transform: translateX(-50%) translateY(-8px) rotate(2deg); }
         }
         
-        @keyframes golden-float {
+        @keyframes blue-float {
           0%, 100% { transform: translateY(0px) scale(1); opacity: 0.6; }
           50% { transform: translateY(-10px) scale(1.2); opacity: 1; }
         }
