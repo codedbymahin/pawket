@@ -206,7 +206,7 @@ const Index = () => {
               </div>
               <div className="flex items-baseline space-x-2">
                 {/* Swap text with wordmark */}
-                <WordmarkLogo height={56} className="h-14 sm:h-16 lg:h-20" />
+                <WordmarkLogo className="h-14 sm:h-16 lg:h-20" />
                 <span className="text-lg sm:text-xl lg:text-2xl font-light text-gray-500 italic">
                   (Demo)
                 </span>
