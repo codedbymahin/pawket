@@ -1,6 +1,18 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { GraduationCap, Heart, Thermometer, Utensils, Stethoscope, ArrowLeft, BookOpen, Award, AlertTriangle, Sparkles } from "lucide-react";
+import {
+  GraduationCap,
+  Heart,
+  Thermometer,
+  Utensils,
+  Stethoscope,
+  ArrowLeft,
+  BookOpen,
+  Award,
+  AlertTriangle,
+  Sparkles
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import InteractiveFAQ from "@/components/InteractiveFAQ";
@@ -11,6 +23,13 @@ import PetNameGenerator from "@/components/PetNameGenerator";
 import AcademyHeader from "@/components/AcademyHeader";
 import AcademyNavigationTabs from "@/components/AcademyNavigationTabs";
 import { academyCards, petCareFAQs } from "@/constants/academyData";
+
+const iconMap: Record<string, React.FC<{ size?: number; className?: string }>> = {
+  Utensils,
+  Stethoscope,
+  Thermometer,
+  Heart
+};
 
 const Academy = () => {
   const navigate = useNavigate();
@@ -45,7 +64,7 @@ const Academy = () => {
           </Button>
         </div>
 
-        <AcademyHeader 
+        <AcademyHeader
           title="Pawket Academy"
           subtitle="Learn the fundamentals of responsible pet ownership in Bangladesh"
         />
@@ -62,62 +81,65 @@ const Academy = () => {
         <div className="max-w-7xl mx-auto">
           {activeSection === "overview" && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
-              {academyCards.map((card) => (
-                <Card 
-                  key={card.id}
-                  className={`${card.cardBg} ${card.borderColor} border-2 hover:shadow-xl transform hover:scale-105 transition-all duration-500 rounded-3xl overflow-hidden backdrop-blur-sm bg-opacity-90 h-full`}
-                  style={{ backgroundColor: '#F8F9FA' }}
-                >
-                  <CardHeader className="text-center pb-4 px-6 pt-6">
-                    <div className="flex justify-center mb-4">
-                      <div className={`${card.bgGradient} p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300`}>
-                        {card.icon}
-                      </div>
-                    </div>
-                    <CardTitle className="text-lg font-bold mb-3 font-poppins" style={{ color: '#333333' }}>
-                      {card.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-0 pb-6 px-6">
-                    <div className="space-y-3">
-                      {card.tips.map((tip: string, index: number) => (
-                        <div key={index} className="flex items-start space-x-2">
-                          <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#00AEEF' }}></div>
-                          <p className="text-gray-700 text-sm leading-relaxed font-nunito">
-                            {tip}
-                          </p>
+              {academyCards.map((card) => {
+                const IconComponent = iconMap[card.icon];
+                return (
+                  <Card
+                    key={card.id}
+                    className={`${card.cardBg} ${card.borderColor} border-2 hover:shadow-xl transform hover:scale-105 transition-all duration-500 rounded-3xl overflow-hidden backdrop-blur-sm bg-opacity-90 h-full`}
+                    style={{ backgroundColor: '#F8F9FA' }}
+                  >
+                    <CardHeader className="text-center pb-4 px-6 pt-6">
+                      <div className="flex justify-center mb-4">
+                        <div className={`${card.bgGradient} p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300`}>
+                          {IconComponent ? <IconComponent size={32} className="text-white" /> : null}
                         </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                      </div>
+                      <CardTitle className="text-lg font-bold mb-3 font-poppins" style={{ color: '#333333' }}>
+                        {card.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0 pb-6 px-6">
+                      <div className="space-y-3">
+                        {card.tips.map((tip: string, index: number) => (
+                          <div key={index} className="flex items-start space-x-2">
+                            <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#00AEEF' }}></div>
+                            <p className="text-gray-700 text-sm leading-relaxed font-nunito">
+                              {tip}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           )}
 
           {activeSection === "quiz" && (
-            <PetCareQuiz 
+            <PetCareQuiz
               title="Test Your Pet Knowledge & Discover Personality"
               className="mb-8"
             />
           )}
 
           {activeSection === "names" && (
-            <PetNameGenerator 
+            <PetNameGenerator
               title="Pet Name Generator"
               className="mb-8"
             />
           )}
 
           {activeSection === "breeds" && (
-            <BreedGuide 
+            <BreedGuide
               title="Pet Breed Guide for Bangladesh"
               className="mb-8"
             />
           )}
 
           {activeSection === "emergency" && (
-            <EmergencyGuide 
+            <EmergencyGuide
               title="Pet Emergency First Aid Guide"
               className="mb-8"
             />

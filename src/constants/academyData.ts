@@ -1,11 +1,9 @@
 
-import { Utensils, Stethoscope, Thermometer, Heart } from "lucide-react";
-
 export const academyCards = [
   {
     id: 1,
     title: "Nutrition Basics",
-    icon: <Utensils size={32} className="text-white" />,
+    icon: "Utensils",
     bgGradient: "bg-gradient-to-br from-green-400 via-emerald-500 to-green-600",
     cardBg: "bg-gradient-to-br from-green-50 to-emerald-50",
     borderColor: "border-green-200",
@@ -18,7 +16,7 @@ export const academyCards = [
   {
     id: 2,
     title: "Health Monitoring",
-    icon: <Stethoscope size={32} className="text-white" />,
+    icon: "Stethoscope",
     bgGradient: "bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600",
     cardBg: "bg-gradient-to-br from-blue-50 to-sky-50",
     borderColor: "border-blue-200",
@@ -31,7 +29,7 @@ export const academyCards = [
   {
     id: 3,
     title: "Temperature Safety",
-    icon: <Thermometer size={32} className="text-white" />,
+    icon: "Thermometer",
     bgGradient: "bg-gradient-to-br from-orange-400 via-amber-500 to-yellow-500",
     cardBg: "bg-gradient-to-br from-orange-50 to-yellow-50",
     borderColor: "border-orange-200",
@@ -44,7 +42,7 @@ export const academyCards = [
   {
     id: 4,
     title: "Love & Bonding",
-    icon: <Heart size={32} className="text-white" />,
+    icon: "Heart",
     bgGradient: "bg-gradient-to-br from-pink-400 via-rose-400 to-red-400",
     cardBg: "bg-gradient-to-br from-pink-50 to-rose-50",
     borderColor: "border-pink-200",
