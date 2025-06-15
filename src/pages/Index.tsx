@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { PawPrint, Dog, Heart, Search, Stethoscope, ShoppingBag, AlertTriangle, Users, Minus, Plus, HelpCircle, Facebook, Instagram, Twitter, Github, MapPin } from "lucide-react";
+import { PawPrint, Dog, Heart, Search, Stethoscope, ShoppingBag, AlertTriangle, Users, Minus, Plus, HelpCircle, Facebook, Instagram, Twitter, Github, MapPin, GraduationCap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import PawkoChatbot from "@/components/PawkoChatbot";
@@ -114,32 +114,44 @@ const Index = () => {
       icon: <Dog size={32} className="text-[#00AEEF]" />,
       title: "Pet Adoption",
       description: "Connect with loving families and help pets find homes.",
-      bgColor: "bg-blue-50"
+      bgColor: "bg-blue-50",
+      path: "/adopt",
     },
     {
       icon: <PawPrint size={32} className="text-[#FFD166]" />,
       title: "Pet Sharing",
       description: "Temporarily share your pet with other pet parents when you travel.",
-      bgColor: "bg-amber-50"
+      bgColor: "bg-amber-50",
+      path: "/sharing",
     },
     {
       icon: <Search size={32} className="text-[#00AEEF]" />,
       title: "Lost & Found",
       description: "Report or discover lost pets in your community.",
-      bgColor: "bg-green-50"
+      bgColor: "bg-green-50",
+      path: "/lost-found",
     },
     {
       icon: <Stethoscope size={32} className="text-green-500" />,
       title: "Virtual Vet",
       description: "Instantly consult with expert vets through online chat.",
-      bgColor: "bg-emerald-50"
+      bgColor: "bg-emerald-50",
+      path: "/vet",
     },
     {
       icon: <ShoppingBag size={32} className="text-[#FFD166]" />,
       title: "Pet Shop",
       description: "Buy pet food, clothes, toys & accessories easily.",
-      bgColor: "bg-purple-50"
-    }
+      bgColor: "bg-purple-50",
+      path: "/shop",
+    },
+    {
+      icon: <GraduationCap size={32} className="text-purple-500" />,
+      title: "Pawket Academy",
+      description: "Learn essential pet care with our expert guides.",
+      bgColor: "bg-indigo-50",
+      path: "/academy",
+    },
   ];
 
   const comingSoon = [
@@ -269,8 +281,9 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <Card 
-                key={index} 
-                className={`hover:shadow-2xl transition-all duration-700 ease-in-out border-0 shadow-lg ${feature.bgColor} rounded-2xl transform hover:scale-105 hover:-translate-y-2 ${
+                key={index}
+                onClick={() => navigate(feature.path)}
+                className={`cursor-pointer hover:shadow-2xl transition-all duration-700 ease-in-out border-0 shadow-lg ${feature.bgColor} rounded-2xl transform hover:scale-105 hover:-translate-y-2 ${
                   visibleSections.has('what-we-offer') 
                     ? 'opacity-100 translate-y-0' 
                     : 'opacity-0 translate-y-8'
