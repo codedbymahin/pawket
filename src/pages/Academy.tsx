@@ -1,13 +1,18 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { GraduationCap, Heart, Thermometer, Utensils, Stethoscope, ArrowLeft } from "lucide-react";
+import { GraduationCap, Heart, Thermometer, Utensils, Stethoscope, ArrowLeft, BookOpen, Award, AlertTriangle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import PawketLogo from "@/components/PawketLogo";
 import InteractiveFAQ from "@/components/InteractiveFAQ";
+import PetCareQuiz from "@/components/PetCareQuiz";
+import BreedGuide from "@/components/BreedGuide";
+import EmergencyGuide from "@/components/EmergencyGuide";
 
 const Academy = () => {
   const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState("overview");
 
   const handleBackToDashboard = () => {
     navigate("/dashboard");
@@ -111,6 +116,14 @@ const Academy = () => {
     }
   ];
 
+  const navigationTabs = [
+    { id: "overview", label: "Overview", icon: <BookOpen size={16} /> },
+    { id: "quiz", label: "Pet Care Quiz", icon: <Award size={16} /> },
+    { id: "breeds", label: "Breed Guide", icon: <Heart size={16} /> },
+    { id: "emergency", label: "Emergency Guide", icon: <AlertTriangle size={16} /> },
+    { id: "faq", label: "FAQ", icon: <GraduationCap size={16} /> }
+  ];
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#FAF3E0' }}>
       {/* Header Section */}
@@ -155,53 +168,95 @@ const Academy = () => {
             </p>
           </div>
         </div>
+
+        {/* Navigation Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-6">
+          {navigationTabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveSection(tab.id)}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                activeSection === tab.id
+                  ? "bg-[#00AEEF] text-white"
+                  : "bg-white text-gray-600 hover:bg-gray-100"
+              }`}
+            >
+              {tab.icon}
+              <span>{tab.label}</span>
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Academy Cards Grid */}
+      {/* Content Section */}
       <div className="px-4 sm:px-6 lg:px-8 pb-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
-            {academyCards.map((card) => (
-              <Card 
-                key={card.id}
-                className={`${card.cardBg} ${card.borderColor} border-2 hover:shadow-xl transform hover:scale-105 transition-all duration-500 rounded-3xl overflow-hidden backdrop-blur-sm bg-opacity-90 h-full`}
-                style={{ backgroundColor: '#F8F9FA' }}
-              >
-                <CardHeader className="text-center pb-4 px-6 pt-6">
-                  {/* Icon */}
-                  <div className="flex justify-center mb-4">
-                    <div className={`${card.bgGradient} p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300`}>
-                      {card.icon}
-                    </div>
-                  </div>
-                  
-                  <CardTitle className="text-lg font-bold mb-3 font-poppins" style={{ color: '#333333' }}>
-                    {card.title}
-                  </CardTitle>
-                </CardHeader>
-                
-                <CardContent className="pt-0 pb-6 px-6">
-                  <div className="space-y-3">
-                    {card.tips.map((tip, index) => (
-                      <div key={index} className="flex items-start space-x-2">
-                        <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#00AEEF' }}></div>
-                        <p className="text-gray-700 text-sm leading-relaxed font-nunito">
-                          {tip}
-                        </p>
+          {activeSection === "overview" && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
+              {academyCards.map((card) => (
+                <Card 
+                  key={card.id}
+                  className={`${card.cardBg} ${card.borderColor} border-2 hover:shadow-xl transform hover:scale-105 transition-all duration-500 rounded-3xl overflow-hidden backdrop-blur-sm bg-opacity-90 h-full`}
+                  style={{ backgroundColor: '#F8F9FA' }}
+                >
+                  <CardHeader className="text-center pb-4 px-6 pt-6">
+                    {/* Icon */}
+                    <div className="flex justify-center mb-4">
+                      <div className={`${card.bgGradient} p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300`}>
+                        {card.icon}
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    </div>
+                    
+                    <CardTitle className="text-lg font-bold mb-3 font-poppins" style={{ color: '#333333' }}>
+                      {card.title}
+                    </CardTitle>
+                  </CardHeader>
+                  
+                  <CardContent className="pt-0 pb-6 px-6">
+                    <div className="space-y-3">
+                      {card.tips.map((tip, index) => (
+                        <div key={index} className="flex items-start space-x-2">
+                          <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: '#00AEEF' }}></div>
+                          <p className="text-gray-700 text-sm leading-relaxed font-nunito">
+                            {tip}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
 
-          {/* Interactive FAQ Section */}
-          <InteractiveFAQ
-            title="Pet Care Questions & Answers"
-            faqs={petCareFAQs}
-            className="mb-8"
-          />
+          {activeSection === "quiz" && (
+            <PetCareQuiz 
+              title="Test Your Pet Care Knowledge"
+              className="mb-8"
+            />
+          )}
+
+          {activeSection === "breeds" && (
+            <BreedGuide 
+              title="Pet Breed Guide for Bangladesh"
+              className="mb-8"
+            />
+          )}
+
+          {activeSection === "emergency" && (
+            <EmergencyGuide 
+              title="Pet Emergency First Aid Guide"
+              className="mb-8"
+            />
+          )}
+
+          {activeSection === "faq" && (
+            <InteractiveFAQ
+              title="Pet Care Questions & Answers"
+              faqs={petCareFAQs}
+              className="mb-8"
+            />
+          )}
         </div>
       </div>
 
