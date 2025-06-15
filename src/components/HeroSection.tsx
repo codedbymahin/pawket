@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { PawPrint } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -45,10 +44,7 @@ const HeroSection = () => {
 
           <div className="space-y-3">
             <p className="text-xl sm:text-2xl font-semibold text-[#333333] leading-relaxed font-['Nunito',sans-serif]">
-              Bangladesh's First All-in-one Pet Solution
-            </p>
-            <p className="text-xl sm:text-2xl font-semibold text-[#333333] italic font-['Nunito',sans-serif]">
-              in Your Pocket
+              Bangladesh's First All-in-one Pet Solution in Your Pocket
             </p>
           </div>
 
