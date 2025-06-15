@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -92,19 +91,6 @@ const Dashboard = () => {
       emoji: "🛍️",
       available: true,
       highlight: "bg-orange-100"
-    },
-    {
-      id: "academy",
-      title: "Pawket Academy",
-      description: "Learn essential pet care in under a minute",
-      icon: <GraduationCap size={40} className="text-white" />,
-      bgGradient: "bg-gradient-to-br from-purple-400 via-purple-500 to-indigo-500",
-      cardBg: "bg-gradient-to-br from-purple-50 to-indigo-50",
-      borderColor: "border-purple-200",
-      buttonText: "Start Learning →",
-      emoji: "🎓",
-      available: true,
-      highlight: "bg-purple-100"
     },
     {
       id: "emergency",
