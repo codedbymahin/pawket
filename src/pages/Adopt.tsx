@@ -1,14 +1,24 @@
+
 import { Dog, Cat, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LoginRequiredModal from "@/components/LoginRequiredModal";
 import PageHeader from "@/components/PageHeader";
 import ItemCard from "@/components/ItemCard";
 import { pets } from "@/constants/mockData";
+import SkeletonCard from "@/components/SkeletonCard";
 
 const Adopt = () => {
   const navigate = useNavigate();
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500); // Simulate loading for 1.5 seconds
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleContactOwner = () => {
     setShowLoginModal(true);
@@ -33,29 +43,34 @@ const Adopt = () => {
       {/* Enhanced Pet Listings */}
       <div className="px-4 sm:px-6 lg:px-8 pb-24 pt-8">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {pets.map((pet) => (
-            <ItemCard
-              key={pet.id}
-              id={pet.id}
-              onClick={handleCardClick}
-              category="adopt"
-              title={pet.name}
-              subtitle={`${pet.breed} • ${pet.age}`}
-              icon={
-                pet.type === "dog" ? (
-                  <Dog size={48} className="text-white" />
-                ) : (
-                  <Cat size={48} className="text-white" />
-                )
-              }
-              details={[
-                { icon: MapPin, text: pet.location, colorClass: 'text-cyan-500' },
-              ]}
-              description={`${pet.description}. Owner: ${pet.owner}`}
-              buttonText="Contact Owner"
-              onButtonClick={handleContactOwner}
-            />
-          ))}
+          {loading
+            ? Array.from({ length: 6 }).map((_, index) => <SkeletonCard key={index} />)
+            : pets.length > 0
+            ? pets.map((pet) => (
+                <ItemCard
+                  key={pet.id}
+                  id={pet.id}
+                  onClick={handleCardClick}
+                  category="adopt"
+                  title={pet.name}
+                  subtitle={`${pet.breed} • ${pet.age}`}
+                  icon={
+                    pet.type === "dog" ? (
+                      <Dog size={48} className="text-white" />
+                    ) : (
+                      <Cat size={48} className="text-white" />
+                    )
+                  }
+                  details={[{ icon: MapPin, text: pet.location, colorClass: 'text-cyan-500' }]}
+                  description={`${pet.description}. Owner: ${pet.owner}`}
+                  buttonText="Contact Owner"
+                  onButtonClick={handleContactOwner}
+                />
+              ))
+            : <div className="col-span-full text-center py-16">
+                <p className="text-xl text-gray-600">No pets found for adoption at the moment. 🐾</p>
+              </div>
+          }
         </div>
       </div>
 

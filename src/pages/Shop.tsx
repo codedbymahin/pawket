@@ -2,18 +2,27 @@
 import { Button } from "@/components/ui/button";
 import { Star, BarChart3 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ImageGallery from "@/components/ImageGallery";
 import ProductComparison from "@/components/ProductComparison";
 import LoginRequiredModal from "@/components/LoginRequiredModal";
 import PageHeader from "@/components/PageHeader";
 import { products } from "@/constants/mockData";
 import ItemCard from "@/components/ItemCard";
+import SkeletonCard from "@/components/SkeletonCard";
 
 const Shop = () => {
   const navigate = useNavigate();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showComparison, setShowComparison] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleBuyNow = () => {
     setShowLoginModal(true);
@@ -46,35 +55,42 @@ const Shop = () => {
       {/* Enhanced Product Listings */}
       <div className="px-4 sm:px-6 lg:px-8 pb-24 pt-8">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {products.map((product) => (
-            <ItemCard
-              key={product.id}
-              id={product.id}
-              onClick={() => handleCardClick(product.id)}
-              category="shop"
-              title={product.name}
-              subtitle={`${product.brand} • ${product.category}`}
-              image={
-                <ImageGallery 
-                  images={[]} 
-                  alt={product.name}
+          {loading
+            ? Array.from({ length: 8 }).map((_, index) => <SkeletonCard key={index} />)
+            : products.length > 0
+            ? products.map((product) => (
+                <ItemCard
+                  key={product.id}
+                  id={product.id}
+                  onClick={() => handleCardClick(product.id)}
+                  category="shop"
+                  title={product.name}
+                  subtitle={`${product.brand} • ${product.category}`}
+                  image={
+                    <ImageGallery 
+                      images={[]} 
+                      alt={product.name}
+                    />
+                  }
+                  details={[
+                    { icon: Star, text: `${product.rating}`, colorClass: 'text-yellow-500 fill-current' },
+                  ]}
+                  description={product.description}
+                  price={product.price}
+                  originalPrice={product.originalPrice}
+                  badge={{
+                    text: product.inStock ? 'In Stock' : 'Out of Stock',
+                    variant: product.inStock ? 'available' : 'unavailable',
+                  }}
+                  buttonText={product.inStock ? "Buy Now" : "Sold Out"}
+                  onButtonClick={handleBuyNow}
+                  buttonDisabled={!product.inStock}
                 />
-              }
-              details={[
-                { icon: Star, text: `${product.rating}`, colorClass: 'text-yellow-500 fill-current' },
-              ]}
-              description={product.description}
-              price={product.price}
-              originalPrice={product.originalPrice}
-              badge={{
-                text: product.inStock ? 'In Stock' : 'Out of Stock',
-                variant: product.inStock ? 'available' : 'unavailable',
-              }}
-              buttonText={product.inStock ? "Buy Now" : "Sold Out"}
-              onButtonClick={handleBuyNow}
-              buttonDisabled={!product.inStock}
-            />
-          ))}
+              ))
+            : <div className="col-span-full text-center py-16">
+                <p className="text-xl text-gray-600">No products found. 🐾</p>
+              </div>
+          }
         </div>
       </div>
 

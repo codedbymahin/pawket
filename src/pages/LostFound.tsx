@@ -1,15 +1,25 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, MapPin, Clock, Phone, Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { lostFoundListings as listings } from "@/data/profileData";
+import SkeletonCard from "@/components/SkeletonCard";
 
 const LostFound = () => {
   const navigate = useNavigate();
   const [showGuestModal, setShowGuestModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleBack = () => {
     navigate("/dashboard");
@@ -74,72 +84,79 @@ const LostFound = () => {
       <div className="px-4 sm:px-6 lg:px-8 pb-24">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {listings.map((pet) => (
-              <Card 
-                key={pet.id}
-                className="rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 border-2"
-                style={{ backgroundColor: '#F8F9FA' }}
-              >
-                <div onClick={() => handleCardClick(pet.id, pet.status)} className="cursor-pointer">
-                  <CardHeader className="pb-4 px-8 pt-8">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="text-5xl">{pet.image}</div>
-                      <Badge 
-                        variant="outline"
-                        className={`px-4 py-2 text-sm font-semibold rounded-full ${
-                          pet.status === 'Lost' 
-                            ? 'bg-red-100 text-red-700 border-red-200' 
-                            : 'bg-green-100 text-green-700 border-green-200'
-                        }`}
-                      >
-                        {pet.status}
-                      </Badge>
-                    </div>
-                    
-                    <CardTitle className="text-2xl font-bold font-poppins" style={{ color: '#333333' }}>
-                      {pet.petName}
-                    </CardTitle>
-                    <CardDescription className="text-gray-600 text-base font-nunito">
-                      {pet.breed} • {pet.type}
-                    </CardDescription>
-                  </CardHeader>
-                  
-                  <CardContent className="space-y-4 px-8">
-                    <div className="space-y-4">
-                      <div className="flex items-center text-base text-gray-600">
-                        <MapPin size={18} className="mr-3 text-blue-500" />
-                        <span className="font-nunito">Last seen: {pet.lastSeen}</span>
-                      </div>
-                      
-                      <div className="flex items-center text-base text-gray-600">
-                        <Clock size={18} className="mr-3 text-orange-500" />
-                        <span className="font-nunito">{pet.date}</span>
-                      </div>
-                      
-                      <div className="flex items-center text-base text-gray-600">
-                        <Eye size={18} className="mr-3 text-purple-500" />
-                        <span className="font-nunito">Contact: {pet.ownerName}</span>
-                      </div>
-                    </div>
-                    
-                    <p className="text-sm text-gray-700 leading-relaxed font-nunito">
-                      {pet.description}
-                    </p>
-                  </CardContent>
-                </div>
-                
-                <CardContent className="pt-0 pb-8 px-8">
-                  <Button 
-                    onClick={handleContactClick}
-                    className="w-full text-white font-semibold py-3 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 font-poppins"
-                    style={{ background: 'linear-gradient(135deg, #00AEEF, #0099CC)' }}
+            {loading
+              ? Array.from({ length: 6 }).map((_, index) => <SkeletonCard key={index} />)
+              : listings.length > 0
+              ? listings.map((pet) => (
+                  <Card 
+                    key={pet.id}
+                    className="rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 border-2"
+                    style={{ backgroundColor: '#F8F9FA' }}
                   >
-                    <Phone size={18} className="mr-2" />
-                    Contact {pet.status === 'Lost' ? 'Owner' : 'Finder'}
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
+                    <div onClick={() => handleCardClick(pet.id, pet.status)} className="cursor-pointer">
+                      <CardHeader className="pb-4 px-8 pt-8">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="text-5xl">{pet.image}</div>
+                          <Badge 
+                            variant="outline"
+                            className={`px-4 py-2 text-sm font-semibold rounded-full ${
+                              pet.status === 'Lost' 
+                                ? 'bg-red-100 text-red-700 border-red-200' 
+                                : 'bg-green-100 text-green-700 border-green-200'
+                            }`}
+                          >
+                            {pet.status}
+                          </Badge>
+                        </div>
+                        
+                        <CardTitle className="text-2xl font-bold font-poppins" style={{ color: '#333333' }}>
+                          {pet.petName}
+                        </CardTitle>
+                        <CardDescription className="text-gray-600 text-base font-nunito">
+                          {pet.breed} • {pet.type}
+                        </CardDescription>
+                      </CardHeader>
+                      
+                      <CardContent className="space-y-4 px-8">
+                        <div className="space-y-4">
+                          <div className="flex items-center text-base text-gray-600">
+                            <MapPin size={18} className="mr-3 text-blue-500" />
+                            <span className="font-nunito">Last seen: {pet.lastSeen}</span>
+                          </div>
+                          
+                          <div className="flex items-center text-base text-gray-600">
+                            <Clock size={18} className="mr-3 text-orange-500" />
+                            <span className="font-nunito">{pet.date}</span>
+                          </div>
+                          
+                          <div className="flex items-center text-base text-gray-600">
+                            <Eye size={18} className="mr-3 text-purple-500" />
+                            <span className="font-nunito">Contact: {pet.ownerName}</span>
+                          </div>
+                        </div>
+                        
+                        <p className="text-sm text-gray-700 leading-relaxed font-nunito">
+                          {pet.description}
+                        </p>
+                      </CardContent>
+                    </div>
+                    
+                    <CardContent className="pt-0 pb-8 px-8">
+                      <Button 
+                        onClick={handleContactClick}
+                        className="w-full text-white font-semibold py-3 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 font-poppins"
+                        style={{ background: 'linear-gradient(135deg, #00AEEF, #0099CC)' }}
+                      >
+                        <Phone size={18} className="mr-2" />
+                        Contact {pet.status === 'Lost' ? 'Owner' : 'Finder'}
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))
+              : <div className="col-span-full text-center py-16">
+                  <p className="text-xl text-gray-600">No lost or found pets reported. 🐾</p>
+                </div>
+            }
           </div>
         </div>
       </div>
