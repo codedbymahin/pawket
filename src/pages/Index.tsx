@@ -4,9 +4,12 @@ import { Separator } from "@/components/ui/separator";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { PawPrint, Dog, Heart, Search, Stethoscope, ShoppingBag, AlertTriangle, Users, ChevronDown, MapPin, Clock, Shield, Plus, Minus, Facebook, Instagram, Twitter, Github, HelpCircle } from "lucide-react";
+import { PawPrint, Dog, Heart, Search, Stethoscope, ShoppingBag, AlertTriangle, Users, Minus, Plus, HelpCircle, Facebook, Instagram, Twitter, Github, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+import PawkoChatbot from "@/components/PawkoChatbot";
+import CountdownSection from "@/components/CountdownSection";
+import HelpSection from "@/components/HelpSection";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -176,6 +179,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#fdfcfb] to-[#f3f6f9] font-sans">
+
+      {/* Countdown Timer Section (App Launch) */}
+      <CountdownSection />
+
       {/* Updated Hero Section with gradient background */}
       <section className="relative bg-gradient-to-br from-[#fdfcfb] via-[#f7f8fc] to-[#f3f6f9] py-16 px-6 sm:px-8 lg:px-12">
         {/* Decorative paw prints for background */}
@@ -454,6 +461,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Help Section */}
+      <HelpSection />
+
       {/* FAQ Section with enhanced styling and typewriter effect */}
       <section 
         id="faq" 
@@ -556,6 +566,18 @@ const Index = () => {
             </div>
           </form>
         </div>
+      </section>
+
+      {/* Survey CTA in footer */}
+      <section className="text-center my-10">
+        <a
+          href="https://forms.gle/WhBDKy8DLKqM7XxK8"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block font-poppins bg-[#00AEEF] hover:bg-[#0099CC] text-white px-7 py-3 rounded-2xl font-semibold shadow transition-all"
+        >
+          Help us build Pawket with your voice — Take the Survey
+        </a>
       </section>
 
       <section 
@@ -725,6 +747,15 @@ const Index = () => {
                 <p>Thanks for joining the Pawket family.</p>
                 <p>You'll now receive the latest pet care tips, feature updates, and early access news — all with a touch of love.</p>
                 <p className="font-semibold text-[#00AEEF]">Stay pawsome!</p>
+                {/* Extra CTA for survey */}
+                <a
+                  href="https://forms.gle/WhBDKy8DLKqM7XxK8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block mt-2 font-poppins bg-[#FFD166] hover:bg-[#eeca50] text-[#705000] px-7 py-3 rounded-2xl font-semibold shadow transition-all"
+                >
+                  Take Our Quick Survey
+                </a>
               </div>
             </DialogDescription>
           </DialogHeader>
@@ -738,6 +769,9 @@ const Index = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Floating Pawko Chatbot */}
+      <PawkoChatbot />
     </div>
   );
 };

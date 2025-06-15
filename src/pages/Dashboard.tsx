@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -7,6 +6,7 @@ import { PawPrint, Dog, Cat, Search, ShoppingBag, Heart, AlertTriangle, UserRoun
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PetCareTips from "@/components/PetCareTips";
+import PawkoChatbot from "@/components/PawkoChatbot";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -252,6 +252,15 @@ const Dashboard = () => {
                 <CardTitle className="text-xl font-bold font-poppins" style={{ color: '#333333' }}>
                   💙 Why Pawket?
                 </CardTitle>
+                {/* Survey CTA in dashboard Why Pawket section */}
+                <a
+                  href="https://forms.gle/WhBDKy8DLKqM7XxK8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block mt-2 font-poppins bg-[#00AEEF] hover:bg-[#0099CC] text-white px-6 py-2 rounded-2xl font-semibold shadow transition-all text-base"
+                >
+                  Take The Survey
+                </a>
               </CardHeader>
               <CardContent className="pt-0 pb-8 px-8">
                 <p className="text-gray-700 text-sm leading-relaxed text-center font-nunito">
@@ -317,6 +326,9 @@ const Dashboard = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Floating Pawko Chatbot */}
+      <PawkoChatbot />
     </div>
   );
 };
