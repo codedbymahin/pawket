@@ -1,4 +1,3 @@
-
 import {
   Card,
   CardHeader,
@@ -175,7 +174,7 @@ const TeamSection = ({ visibleSections, setSectionRef }: TeamSectionProps) => {
         <div className="text-center mb-20">
           <h2 
             className={`text-4xl sm:text-5xl font-bold text-[#26356A] mb-6 font-nunito tracking-tight transition-all duration-1000 ${
-              visibleSections.has("our-team") ? "animate-typewriter" : ""
+              visibleSections.has("our-team") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
             }`}
           >
             Meet Our Team
