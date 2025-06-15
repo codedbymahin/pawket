@@ -1,8 +1,9 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { PawPrint, Dog, Cat, Search, ShoppingBag, Heart, AlertTriangle, UserRound, ArrowLeft, Home, User } from "lucide-react";
+import { PawPrint, Dog, Cat, Search, ShoppingBag, Heart, AlertTriangle, UserRound, ArrowLeft, Home, User, GraduationCap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PetCareTips from "@/components/PetCareTips";
@@ -91,6 +92,19 @@ const Dashboard = () => {
       emoji: "🛍️",
       available: true,
       highlight: "bg-orange-100"
+    },
+    {
+      id: "academy",
+      title: "Pawket Academy",
+      description: "Learn essential pet care in under a minute",
+      icon: <GraduationCap size={40} className="text-white" />,
+      bgGradient: "bg-gradient-to-br from-purple-400 via-purple-500 to-indigo-500",
+      cardBg: "bg-gradient-to-br from-purple-50 to-indigo-50",
+      borderColor: "border-purple-200",
+      buttonText: "Start Learning →",
+      emoji: "🎓",
+      available: true,
+      highlight: "bg-purple-100"
     },
     {
       id: "emergency",
@@ -236,6 +250,9 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* Pawket Academy Section */}
+      <PawketAcademy />
+
       {/* Enhanced Section: Pet Care Tip & Why Pawket */}
       <div className="px-4 sm:px-6 lg:px-8 pb-8">
         <div className="max-w-7xl mx-auto">
@@ -273,9 +290,6 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-
-      {/* Pawket Academy Section */}
-      <PawketAcademy />
 
       {/* Sticky Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-200 rounded-t-3xl shadow-lg z-50">
