@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, ShoppingCart, Star, BarChart3 } from "lucide-react";
+import { ShoppingCart, Star, BarChart3 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ImageGallery from "@/components/ImageGallery";
 import ProductComparison from "@/components/ProductComparison";
 import LoginRequiredModal from "@/components/LoginRequiredModal";
+import PageHeader from "@/components/PageHeader";
 
 const Shop = () => {
   const navigate = useNavigate();
@@ -121,32 +122,23 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-yellow-50 to-amber-50">
-      {/* Enhanced Header */}
-      <div className="bg-gradient-to-br from-orange-100 to-yellow-100 p-8">
+      <PageHeader
+        title="Pet Store Products"
+        subtitle="Everything your pet needs, delivered to your door"
+        backPath="/dashboard"
+        gradientFrom="from-orange-100"
+        gradientTo="to-yellow-100"
+        titleGradientFrom="from-orange-600"
+        titleGradientTo="to-amber-600"
+      >
         <Button
-          variant="ghost"
-          onClick={() => navigate("/dashboard")}
-          className="mb-6 text-gray-600 hover:text-gray-800 hover:bg-white/60 rounded-xl transition-all duration-300"
+          onClick={() => setShowComparison(true)}
+          className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold rounded-2xl px-6 py-3 shadow-lg hover:shadow-xl transition-all duration-300"
         >
-          <ArrowLeft size={20} className="mr-2" />
-          Back to Dashboard
+          <BarChart3 size={20} className="mr-2" />
+          Compare Products
         </Button>
-        
-        <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold font-poppins bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent mb-4">
-            Pet Store Products
-          </h1>
-          <p className="text-gray-600 text-xl font-nunito mb-6">Everything your pet needs, delivered to your door</p>
-          
-          <Button
-            onClick={() => setShowComparison(true)}
-            className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold rounded-2xl px-6 py-3 shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            <BarChart3 size={20} className="mr-2" />
-            Compare Products
-          </Button>
-        </div>
-      </div>
+      </PageHeader>
 
       {/* Enhanced Product Listings */}
       <div className="px-4 sm:px-6 lg:px-8 pb-24 pt-8">

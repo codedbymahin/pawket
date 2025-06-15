@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, UserRound, MapPin, Star, Clock } from "lucide-react";
+import { UserRound, MapPin, Star, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LoginRequiredModal from "@/components/LoginRequiredModal";
+import PageHeader from "@/components/PageHeader";
 
 const Vet = () => {
   const navigate = useNavigate();
@@ -88,24 +89,15 @@ const Vet = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
-      {/* Enhanced Header */}
-      <div className="bg-gradient-to-br from-green-100 to-emerald-100 p-8">
-        <Button
-          variant="ghost"
-          onClick={() => navigate("/dashboard")}
-          className="mb-6 text-gray-600 hover:text-gray-800 hover:bg-white/60 rounded-xl transition-all duration-300"
-        >
-          <ArrowLeft size={20} className="mr-2" />
-          Back to Dashboard
-        </Button>
-        
-        <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold font-poppins bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-4">
-            Professional Veterinarians
-          </h1>
-          <p className="text-gray-600 text-xl font-nunito">Professional veterinary care from home</p>
-        </div>
-      </div>
+      <PageHeader
+        title="Professional Veterinarians"
+        subtitle="Professional veterinary care from home"
+        backPath="/dashboard"
+        gradientFrom="from-green-100"
+        gradientTo="to-emerald-100"
+        titleGradientFrom="from-green-600"
+        titleGradientTo="to-emerald-600"
+      />
 
       {/* Enhanced Vet Listings */}
       <div className="px-4 sm:px-6 lg:px-8 pb-24 pt-8">

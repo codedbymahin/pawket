@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, PawPrint, MapPin, Clock, User } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, Badge } from "@/components/ui/card";
+import { PawPrint, MapPin, Clock, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LoginRequiredModal from "@/components/LoginRequiredModal";
+import PageHeader from "@/components/PageHeader";
 
 const Sharing = () => {
   const navigate = useNavigate();
@@ -83,24 +83,15 @@ const Sharing = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-50 via-emerald-50 to-green-50">
-      {/* Enhanced Header */}
-      <div className="bg-gradient-to-br from-teal-100 to-emerald-100 p-8">
-        <Button
-          variant="ghost"
-          onClick={() => navigate("/dashboard")}
-          className="mb-6 text-gray-600 hover:text-gray-800 hover:bg-white/60 rounded-xl transition-all duration-300"
-        >
-          <ArrowLeft size={20} className="mr-2" />
-          Back to Dashboard
-        </Button>
-        
-        <div className="text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold font-poppins bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent mb-4">
-            Pet Sharing Opportunities
-          </h1>
-          <p className="text-gray-600 text-xl font-nunito">Help neighbors care for their beloved pets</p>
-        </div>
-      </div>
+      <PageHeader
+        title="Pet Sharing Opportunities"
+        subtitle="Help neighbors care for their beloved pets"
+        backPath="/dashboard"
+        gradientFrom="from-teal-100"
+        gradientTo="to-emerald-100"
+        titleGradientFrom="from-teal-600"
+        titleGradientTo="to-emerald-600"
+      />
 
       {/* Enhanced Sharing Listings */}
       <div className="px-4 sm:px-6 lg:px-8 pb-24 pt-8">
