@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -163,7 +162,7 @@ const Sharing = () => {
                   className="w-full bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-semibold rounded-2xl py-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-poppins"
                   disabled={offer.status === 'Temporarily Shared'}
                 >
-                  {offer.status === 'Available' ? 'Apply to Help' : 'Currently Shared'}
+                  {offer.status === 'Available' ? 'Offer to Help' : 'Currently Shared'}
                 </Button>
               </CardContent>
             </Card>

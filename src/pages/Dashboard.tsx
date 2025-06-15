@@ -48,7 +48,7 @@ const Dashboard = () => {
       bgGradient: "bg-gradient-to-br from-teal-400 via-teal-500 to-emerald-500",
       cardBg: "bg-gradient-to-br from-teal-50 to-emerald-50",
       borderColor: "border-teal-200",
-      buttonText: "Find Caregivers →",
+      buttonText: "Find Pet Helpers →",
       emoji: "🐾",
       available: true,
       highlight: "bg-teal-100"

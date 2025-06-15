@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -7,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { PawPrint, ArrowLeft, Lock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import PawketLogo from "@/components/PawketLogo";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -44,12 +44,10 @@ const Login = () => {
           <Card className="border-0 shadow-xl rounded-3xl" style={{ backgroundColor: '#FFFFFF' }}>
             <CardHeader className="text-center space-y-4 pb-6 pt-8">
               <div className="flex justify-center">
-                <div className="p-4 rounded-full shadow-lg" style={{ background: 'linear-gradient(135deg, #00AEEF, #0099CC)' }}>
-                  <PawPrint size={28} className="text-white" />
-                </div>
+                <PawketLogo size={60} />
               </div>
               <CardTitle className="text-2xl font-bold" style={{ color: '#00AEEF' }}>
-                Welcome to Pawket Demo
+                Welcome to Pawket <span className="text-lg font-medium">(Demo)</span>
               </CardTitle>
               <CardDescription className="text-gray-600 text-center leading-relaxed">
                 Explore all features in Guest Mode. Full login is restricted to early-access demo users only.
