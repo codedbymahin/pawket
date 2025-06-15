@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { UserRound, MapPin, Star, Clock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LoginRequiredModal from "@/components/LoginRequiredModal";
 import PageHeader from "@/components/PageHeader";
+import ItemCard from "@/components/ItemCard";
 
 const Vet = () => {
   const navigate = useNavigate();
@@ -83,7 +83,7 @@ const Vet = () => {
     setShowLoginModal(true);
   };
 
-  const handleCardClick = (vetId: number) => {
+  const handleCardClick = (vetId: number | string) => {
     navigate(`/vet/${vetId}`);
   };
 
@@ -103,57 +103,24 @@ const Vet = () => {
       <div className="px-4 sm:px-6 lg:px-8 pb-24 pt-8">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {vets.map((vet) => (
-            <Card key={vet.id} className="bg-white/90 backdrop-blur-sm border-2 border-green-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 rounded-3xl">
-              <div onClick={() => handleCardClick(vet.id)} className="cursor-pointer">
-                <CardHeader className="text-center px-8 pt-8">
-                  <div className="flex justify-center mb-4">
-                    <div className="p-4 rounded-full shadow-lg bg-gradient-to-br from-green-400 to-emerald-500">
-                      <UserRound size={48} className="text-white" />
-                    </div>
-                  </div>
-                  <CardTitle className="text-2xl font-bold text-gray-800 font-poppins">
-                    {vet.name}
-                  </CardTitle>
-                  <CardDescription className="text-gray-600 text-base font-nunito">
-                    {vet.specialty}
-                  </CardDescription>
-                </CardHeader>
-                
-                <CardContent className="space-y-4 px-8">
-                  <div className="flex items-center text-gray-600 text-base">
-                    <MapPin size={18} className="mr-3 text-emerald-500" />
-                    <span className="font-nunito">{vet.location}</span>
-                  </div>
-                  
-                  <div className="flex items-center text-gray-600 text-base">
-                    <Clock size={18} className="mr-3 text-green-500" />
-                    <span className="font-nunito">{vet.availability}</span>
-                  </div>
-                  
-                  <div className="flex items-center text-gray-600 text-base">
-                    <Star size={18} className="mr-3 text-yellow-500 fill-current" />
-                    <span className="font-nunito">{vet.rating} • {vet.experience} experience</span>
-                  </div>
-                  
-                  <p className="text-gray-700 text-sm leading-relaxed font-nunito">
-                    {vet.description}
-                  </p>
-                  
-                  <div className="text-lg font-bold text-green-600 text-center bg-green-50 p-3 rounded-2xl font-poppins">
-                    Consultation: {vet.consultation}
-                  </div>
-                </CardContent>
-              </div>
-              
-              <CardContent className="pt-0 pb-8 px-8">
-                <Button 
-                  onClick={handleBookAppointment}
-                  className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-semibold rounded-2xl py-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-poppins"
-                >
-                  Book Appointment
-                </Button>
-              </CardContent>
-            </Card>
+            <ItemCard
+              key={vet.id}
+              id={vet.id}
+              onClick={handleCardClick}
+              category="vet"
+              title={vet.name}
+              subtitle={vet.specialty}
+              icon={<UserRound size={48} className="text-white" />}
+              details={[
+                { icon: MapPin, text: vet.location, colorClass: 'text-emerald-500' },
+                { icon: Clock, text: vet.availability, colorClass: 'text-green-500' },
+                { icon: Star, text: `${vet.rating} • ${vet.experience} experience`, colorClass: 'text-yellow-500 fill-current' },
+              ]}
+              description={vet.description}
+              footerText={`Consultation: ${vet.consultation}`}
+              buttonText="Book Appointment"
+              onButtonClick={handleBookAppointment}
+            />
           ))}
         </div>
       </div>
