@@ -23,20 +23,28 @@ const CountdownSection: React.FC = () => {
   }, [time.expired]);
 
   return (
-    <section className="mx-auto max-w-2xl rounded-3xl px-6 py-10 mb-12 bg-gradient-to-br from-[#fcfbf7] to-[#f4fafd] shadow-lg text-center font-nunito">
-      <div className="text-3xl md:text-4xl font-bold text-[#00AEEF] mb-2 flex items-center justify-center gap-2">
+    <section className="mx-auto max-w-2xl rounded-3xl px-4 sm:px-6 py-8 sm:py-10 mb-10 bg-gradient-to-br from-[#fcfbf7] to-[#f4fafd] shadow-lg text-center font-nunito">
+      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#00AEEF] mb-2 flex items-center justify-center gap-2">
         <span role="img" aria-label="hourglass">⏳</span> Pawket Mobile App Launching In:
       </div>
-      <div className="font-poppins flex justify-center items-center gap-4 text-2xl md:text-3xl font-semibold my-6">
-        <span className="bg-white rounded-xl shadow px-4 py-2">{String(time.days).padStart(2, "0")} Days</span>
-        <span className="text-xl md:text-2xl text-gray-400">:</span>
-        <span className="bg-white rounded-xl shadow px-4 py-2">{String(time.hours).padStart(2, "0")} Hours</span>
-        <span className="text-xl md:text-2xl text-gray-400">:</span>
-        <span className="bg-white rounded-xl shadow px-4 py-2">{String(time.minutes).padStart(2, "0")} Minutes</span>
-        <span className="text-xl md:text-2xl text-gray-400">:</span>
-        <span className="bg-white rounded-xl shadow px-4 py-2">{String(time.seconds).padStart(2, "0")} Seconds</span>
+      <div className="font-poppins flex flex-wrap justify-center items-center gap-2 sm:gap-4 text-lg sm:text-2xl md:text-3xl font-semibold my-6 max-w-full w-full min-w-0">
+        <span className="bg-white rounded-xl shadow px-3 py-2 sm:px-4 sm:py-2 w-20 sm:w-24 text-center flex-shrink-0">
+          {String(time.days).padStart(2, "0")}<span className="block text-xs sm:text-sm font-normal text-gray-400">Days</span>
+        </span>
+        <span className="text-xl sm:text-2xl text-gray-400">:</span>
+        <span className="bg-white rounded-xl shadow px-3 py-2 sm:px-4 sm:py-2 w-20 sm:w-24 text-center flex-shrink-0">
+          {String(time.hours).padStart(2, "0")}<span className="block text-xs sm:text-sm font-normal text-gray-400">Hours</span>
+        </span>
+        <span className="text-xl sm:text-2xl text-gray-400">:</span>
+        <span className="bg-white rounded-xl shadow px-3 py-2 sm:px-4 sm:py-2 w-20 sm:w-24 text-center flex-shrink-0">
+          {String(time.minutes).padStart(2, "0")}<span className="block text-xs sm:text-sm font-normal text-gray-400">Minutes</span>
+        </span>
+        <span className="text-xl sm:text-2xl text-gray-400">:</span>
+        <span className="bg-white rounded-xl shadow px-3 py-2 sm:px-4 sm:py-2 w-20 sm:w-24 text-center flex-shrink-0">
+          {String(time.seconds).padStart(2, "0")}<span className="block text-xs sm:text-sm font-normal text-gray-400">Seconds</span>
+        </span>
       </div>
-      <div className="my-6 text-lg text-[#059] font-nunito">
+      <div className="my-6 text-base sm:text-lg text-[#059] font-nunito">
         Want early access to our app?
       </div>
       <a
