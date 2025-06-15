@@ -8,6 +8,7 @@ import { useState } from "react";
 import PetCareTips from "@/components/PetCareTips";
 import PawkoChatbot from "@/components/PawkoChatbot";
 import PawketLogo from "@/components/PawketLogo";
+import PawketAcademy from "@/components/PawketAcademy";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -272,6 +273,9 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
+      {/* Pawket Academy Section */}
+      <PawketAcademy />
 
       {/* Sticky Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-200 rounded-t-3xl shadow-lg z-50">
