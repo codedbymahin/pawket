@@ -13,6 +13,9 @@ import HelpSection from "@/components/HelpSection";
 import HeroSection from "@/components/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import TeamSection from "@/components/TeamSection";
+import StatsSection from "@/components/StatsSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import FloatingElements from "@/components/FloatingElements";
 import PawketLogo from "@/components/PawketLogo";
 
 const Index = () => {
@@ -155,7 +158,9 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#fdfcfb] to-[#f3f6f9] font-sans">
+    <div className="min-h-screen bg-gradient-to-b from-[#fdfcfb] to-[#f3f6f9] font-sans relative">
+      {/* Floating Elements */}
+      <FloatingElements />
 
       {/* Hero Section */}
       <HeroSection />
@@ -165,6 +170,9 @@ const Index = () => {
 
       {/* What We Offer Section */}
       <FeaturesSection visibleSections={visibleSections} setSectionRef={setSectionRef} />
+
+      {/* Stats Section */}
+      <StatsSection visibleSections={visibleSections} setSectionRef={setSectionRef} />
 
       {/* Coming Soon Section */}
       <section 
@@ -331,6 +339,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <TestimonialsSection visibleSections={visibleSections} setSectionRef={setSectionRef} />
 
       {/* Help Section */}
       <HelpSection />
