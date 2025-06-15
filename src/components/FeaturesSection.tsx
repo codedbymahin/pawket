@@ -1,7 +1,5 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dog, PawPrint, Search, Stethoscope, ShoppingBag, GraduationCap } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 interface FeaturesSectionProps {
   visibleSections: Set<string>;
@@ -9,7 +7,6 @@ interface FeaturesSectionProps {
 }
 
 const FeaturesSection = ({ visibleSections, setSectionRef }: FeaturesSectionProps) => {
-  const navigate = useNavigate();
 
   const features = [
     {
@@ -81,8 +78,7 @@ const FeaturesSection = ({ visibleSections, setSectionRef }: FeaturesSectionProp
           {features.map((feature, index) => (
             <Card 
               key={index}
-              onClick={() => navigate(feature.path)}
-              className={`cursor-pointer hover:shadow-2xl transition-all duration-700 ease-in-out border-0 shadow-lg ${feature.bgColor} rounded-2xl transform hover:scale-105 hover:-translate-y-2 ${
+              className={`transition-all duration-700 ease-in-out border-0 shadow-lg ${feature.bgColor} rounded-2xl ${
                 visibleSections.has('what-we-offer') 
                   ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-8'
