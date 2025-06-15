@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Academy from "./pages/Academy";
 import Adopt from "./pages/Adopt";
 import Sharing from "./pages/Sharing";
 import Vet from "./pages/Vet";
