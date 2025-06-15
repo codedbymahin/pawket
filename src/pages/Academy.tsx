@@ -1,7 +1,6 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { GraduationCap, Heart, Thermometer, Utensils, Stethoscope, ArrowLeft, BookOpen, Award, AlertTriangle } from "lucide-react";
+import { GraduationCap, Heart, Thermometer, Utensils, Stethoscope, ArrowLeft, BookOpen, Award, AlertTriangle, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PawketLogo from "@/components/PawketLogo";
@@ -9,6 +8,7 @@ import InteractiveFAQ from "@/components/InteractiveFAQ";
 import PetCareQuiz from "@/components/PetCareQuiz";
 import BreedGuide from "@/components/BreedGuide";
 import EmergencyGuide from "@/components/EmergencyGuide";
+import PetNameGenerator from "@/components/PetNameGenerator";
 
 const Academy = () => {
   const navigate = useNavigate();
@@ -118,7 +118,8 @@ const Academy = () => {
 
   const navigationTabs = [
     { id: "overview", label: "Overview", icon: <BookOpen size={16} /> },
-    { id: "quiz", label: "Pet Care Quiz", icon: <Award size={16} /> },
+    { id: "quiz", label: "Pet Quiz", icon: <Award size={16} /> },
+    { id: "names", label: "Name Generator", icon: <Sparkles size={16} /> },
     { id: "breeds", label: "Breed Guide", icon: <Heart size={16} /> },
     { id: "emergency", label: "Emergency Guide", icon: <AlertTriangle size={16} /> },
     { id: "faq", label: "FAQ", icon: <GraduationCap size={16} /> }
@@ -231,7 +232,14 @@ const Academy = () => {
 
           {activeSection === "quiz" && (
             <PetCareQuiz 
-              title="Test Your Pet Care Knowledge"
+              title="Test Your Pet Knowledge & Discover Personality"
+              className="mb-8"
+            />
+          )}
+
+          {activeSection === "names" && (
+            <PetNameGenerator 
+              title="Pet Name Generator"
               className="mb-8"
             />
           )}
