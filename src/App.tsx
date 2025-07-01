@@ -13,6 +13,7 @@ import Sharing from "./pages/Sharing";
 import Vet from "./pages/Vet";
 import Shop from "./pages/Shop";
 import LostFound from "./pages/LostFound";
+import Courier from "./pages/Courier";
 import PetProfile from "./pages/PetProfile";
 import VetProfile from "./pages/VetProfile";
 import ProductProfile from "./pages/ProductProfile";
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/vet" element={<Vet />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/lost-found" element={<LostFound />} />
+          <Route path="/courier" element={<Courier />} />
           <Route path="/pet/:type/:id" element={<PetProfile />} />
           <Route path="/vet/:id" element={<VetProfile />} />
           <Route path="/product/:id" element={<ProductProfile />} />

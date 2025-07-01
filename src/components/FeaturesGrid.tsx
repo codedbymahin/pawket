@@ -1,5 +1,5 @@
 
-import { Dog, Cat, Search, ShoppingBag, Heart, AlertTriangle, UserRound, PawPrint } from "lucide-react";
+import { Dog, Cat, Search, ShoppingBag, Heart, AlertTriangle, UserRound, PawPrint, Truck } from "lucide-react";
 import FeatureCard from "./FeatureCard";
 
 interface FeaturesGridProps {
@@ -72,6 +72,19 @@ const FeaturesGrid = ({ onFeatureClick }: FeaturesGridProps) => {
       emoji: "🛍️",
       available: true,
       highlight: "bg-orange-100"
+    },
+    {
+      id: "courier",
+      title: "Pet Courier",
+      description: "Safe transport for pets during adoption, moving, or travel.",
+      icon: <Truck size={40} className="text-white" />,
+      bgGradient: "bg-gradient-to-br from-cyan-400 via-cyan-500 to-sky-500",
+      cardBg: "bg-gradient-to-br from-cyan-50 to-sky-50",
+      borderColor: "border-cyan-200",
+      buttonText: "Book Transport →",
+      emoji: "🚚",
+      available: true,
+      highlight: "bg-cyan-100"
     },
     {
       id: "emergency",

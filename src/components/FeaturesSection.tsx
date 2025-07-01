@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dog, PawPrint, Search, Stethoscope, ShoppingBag, GraduationCap } from "lucide-react";
+import { Dog, PawPrint, Search, Stethoscope, ShoppingBag, GraduationCap, Truck } from "lucide-react";
 
 interface FeaturesSectionProps {
   visibleSections: Set<string>;
@@ -37,6 +37,13 @@ const FeaturesSection = ({ visibleSections, setSectionRef }: FeaturesSectionProp
       description: "Instantly consult with expert vets through online chat.",
       bgColor: "bg-emerald-50",
       path: "/vet",
+    },
+    {
+      icon: <Truck size={32} className="text-[#00AEEF]" />,
+      title: "Pet Courier",
+      description: "Safe and reliable pet transportation for adoption, relocation, and travel needs.",
+      bgColor: "bg-cyan-50",
+      path: "/courier",
     },
     {
       icon: <ShoppingBag size={32} className="text-[#FFD166]" />,
