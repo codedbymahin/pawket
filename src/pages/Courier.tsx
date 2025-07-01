@@ -59,8 +59,11 @@ const Courier = () => {
       <PageHeader
         title="Pet Courier"
         subtitle="Safe and reliable transportation for your beloved pets"
-        icon={<Truck size={32} className="text-white" />}
-        bgGradient="bg-gradient-to-br from-cyan-400 via-cyan-500 to-sky-500"
+        backPath="/dashboard"
+        gradientFrom="from-cyan-400"
+        gradientTo="to-sky-500"
+        titleGradientFrom="from-cyan-600"
+        titleGradientTo="to-sky-600"
       />
 
       <div className="px-4 sm:px-6 lg:px-8 py-8">
@@ -207,7 +210,6 @@ const Courier = () => {
       <LoginRequiredModal 
         isOpen={showLoginModal}
         onClose={() => setShowLoginModal(false)}
-        feature="Pet Courier"
       />
     </div>
   );
