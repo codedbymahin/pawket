@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +8,9 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 import { BookingData } from "./BookingWizard";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 interface BookingSummaryStepProps {
   formData: BookingData;
@@ -16,6 +18,9 @@ interface BookingSummaryStepProps {
 }
 
 const BookingSummaryStep = ({ formData, onBooking }: BookingSummaryStepProps) => {
+  const { user } = useAuth();
+  const { toast } = useToast();
+
   const calculatePrice = () => {
     let basePrice = 800;
     
@@ -29,6 +34,51 @@ const BookingSummaryStep = ({ formData, onBooking }: BookingSummaryStepProps) =>
     }
     
     return basePrice;
+  };
+
+  const handleBooking = async () => {
+    if (!user) {
+      onBooking(); // This will show the login modal
+      return;
+    }
+
+    try {
+      const bookingData = {
+        user_id: user.id,
+        pet_type: formData.petType,
+        pet_breed: formData.petBreed,
+        pet_age: formData.petAge,
+        pet_weight: formData.petWeight ? parseFloat(formData.petWeight) : null,
+        special_needs: formData.specialNeeds,
+        from_location: formData.fromLocation,
+        to_location: formData.toLocation,
+        service_date: formData.date?.toISOString().split('T')[0],
+        time_slot: formData.timeSlot,
+        service_type: formData.serviceType,
+        price: calculatePrice(),
+        status: 'pending'
+      };
+
+      const { error } = await supabase
+        .from('courier_bookings')
+        .insert(bookingData);
+
+      if (error) throw error;
+
+      toast({
+        title: "Booking confirmed!",
+        description: "Your pet courier booking has been successfully created.",
+      });
+
+      // You could redirect to dashboard or show success modal here
+      
+    } catch (error: any) {
+      toast({
+        title: "Booking failed",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
   };
 
   const getDeliveryTime = () => {
@@ -269,11 +319,11 @@ const BookingSummaryStep = ({ formData, onBooking }: BookingSummaryStepProps) =>
 
           {/* Book Button */}
           <Button
-            onClick={onBooking}
+            onClick={handleBooking}
             className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-poppins rounded-xl py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
           >
             <Phone size={20} className="mr-2" />
-            Complete Booking - ৳{calculatePrice()}
+            {user ? `Complete Booking - ৳${calculatePrice()}` : 'Sign In to Book'}
           </Button>
         </div>
       </div>
