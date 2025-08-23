@@ -2,16 +2,16 @@
 import { useState } from "react";
 import PageHeader from "@/components/PageHeader";
 import BottomNavigation from "@/components/BottomNavigation";
+import LoginRequiredModal from "@/components/LoginRequiredModal";
 import BookingWizard from "@/components/courier/BookingWizard";
 import TrustIndicators from "@/components/courier/TrustIndicators";
 import FloatingPetElements from "@/components/courier/FloatingPetElements";
-import AuthModal from "@/components/auth/AuthModal";
 
 const Courier = () => {
-  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleBooking = () => {
-    setShowAuthModal(true);
+    setShowLoginModal(true);
   };
 
   return (
@@ -42,9 +42,9 @@ const Courier = () => {
 
       <BottomNavigation />
       
-      <AuthModal 
-        isOpen={showAuthModal}
-        onClose={() => setShowAuthModal(false)}
+      <LoginRequiredModal 
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
       />
     </div>
   );
