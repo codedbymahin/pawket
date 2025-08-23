@@ -12,8 +12,10 @@ export interface Product {
   brand: string;
   rating: number;
   in_stock: boolean;
+  is_published: boolean;
   image_urls: string[];
   created_at: string;
+  seller_id?: string;
 }
 
 export const useProducts = () => {

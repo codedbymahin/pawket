@@ -13,6 +13,7 @@ interface PageHeaderProps {
   titleGradientTo: string;
   backButtonText?: string;
   children?: React.ReactNode;
+  rightElement?: React.ReactNode;
 }
 
 const PageHeader = ({ 
@@ -24,7 +25,8 @@ const PageHeader = ({
   titleGradientFrom,
   titleGradientTo,
   backButtonText = "Back to Dashboard",
-  children 
+  children,
+  rightElement
 }: PageHeaderProps) => {
   const navigate = useNavigate();
 
@@ -32,14 +34,19 @@ const PageHeader = ({
 
   return (
     <div className={`bg-gradient-to-br ${gradientFrom} ${gradientTo} p-8`}>
-      <Button
-        variant="ghost"
-        onClick={() => navigate(backPath)}
-        className="mb-6 text-gray-600 hover:text-gray-800 hover:bg-white/60 rounded-xl transition-all duration-300"
-      >
-        <ArrowLeft size={20} className="mr-2" />
-        {backButtonText}
-      </Button>
+      <div className="flex items-center justify-between mb-6">
+        <Button
+          variant="ghost"
+          onClick={() => navigate(backPath)}
+          className="text-gray-600 hover:text-gray-800 hover:bg-white/60 rounded-xl transition-all duration-300"
+        >
+          <ArrowLeft size={20} className="mr-2" />
+          {backButtonText}
+        </Button>
+        {rightElement && (
+          <div>{rightElement}</div>
+        )}
+      </div>
       
       <div className="text-center">
         <h1 className={titleClasses}>
